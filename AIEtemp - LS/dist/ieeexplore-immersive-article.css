@@ -1,0 +1,21 @@
+.icon-back-to-top-arrow {
+    background-image: url("../image/sprite.1658863316627.png");
+    background-position: -325px -487px;
+    width:30px;
+    height:15px;
+}
+
+.backToTopButton {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background-color: #069;
+    opacity: .7;
+    position: fixed !important;
+    right: 10px;
+    bottom: 10px;
+    z-index: 100;
+    border: none;
+}
