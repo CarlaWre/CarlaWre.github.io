@@ -2,8 +2,8 @@
 var mf_Q = [JSON.parse(JSON.stringify(mf_data[0]))]
 var mf_R = [JSON.parse(JSON.stringify(mf_data[0]))]
 
-mf_Q.variable = "medium"
-mf_R.variable = "medium"
+mf_Q.variable = "Almost all"
+mf_R.variable = "Medium"
 
 // initiate the respective drag behaviour for lines and points
 let point_Q_drag = d3.drag()
@@ -371,7 +371,7 @@ function mf_definition(ls) {
         var inp = document.createElement("input");
         inp.type = "text";
         inp.id = 'variable_' + ls
-        inp.value = "Medium"//window.displayed_mf[index].variable
+        inp.value = ls == "Q" ? mf_Q.variable : mf_R.variable // "Medium"//window.displayed_mf[index].variable
         inp.style.width = "143px";
         selected_div.appendChild(inp);
 

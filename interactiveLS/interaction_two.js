@@ -1,5 +1,5 @@
 /* displays the second interactive element about the membership function definition */
-var displayed_mf = [JSON.parse(JSON.stringify(mf_data[0])), JSON.parse(JSON.stringify(mf_data[0])), JSON.parse(JSON.stringify(mf_data[0]))]
+var displayed_mf = [JSON.parse(JSON.stringify(mf_data[0])), JSON.parse(JSON.stringify(mf_data[1])), JSON.parse(JSON.stringify(mf_data[2]))]
 for (var i=0; i<displayed_mf.length; i++) {
     displayed_mf[i].id = i;
     displayed_mf[i].visible = false;
@@ -7,7 +7,7 @@ for (var i=0; i<displayed_mf.length; i++) {
 }
 displayed_mf[0].visible = true
 
-// console.log(displayed_mf)
+var neutral_colour = "rgb(170,170,170)"
 
 // initiate the respective drag behaviour for lines and points
 let point_drag = d3.drag()
@@ -35,7 +35,7 @@ var svg = d3.select("#mfDisplay")
 // add legend
 var legend = svg
     .append("g")
-    .attr("id", "legend_svg")
+    .attr("id", "legend_upper")
     .attr("transform", "translate(" + margin.left + "," + itemHeight + ")" );
 
 // base setup for the upper svg holding the mf selection
@@ -85,10 +85,17 @@ var lineGenerator = d3.line()
 var colour_2 = d3.scaleOrdinal(d3.schemeCategory10);
 
 // base setup for the lower svg holding the scatter plot with mf
-var lower = d3.select("#scatter_mf")
+var svg_l = d3.select("#scatter_mf")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+
+var legend_lower = svg_l
+    .append("g")
+    .attr("id", "legend_lower")
+    .attr("transform", "translate(" + margin.left + "," + itemHeight + ")");
+
+var lower = svg_l
     .append("g")
     .attr("id", "lower")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -111,43 +118,68 @@ lower.append("g")
     .attr('value', 'pw')
     .call(d3.axisLeft(iris_y));
 
-// lower.append("text")
-//     .attr('class', 'iris_yaxis_label')
-//     .attr("text-anchor", "end")
-//     .attr("transform", "rotate(-90)")
-//     .attr("y", -margin.left + 20)
-//     .attr("x", -height / 2)
-//     .text(feat_names.find(obj => obj.id === y_feat).name)
+lower.append("text")
+    .attr('class', 'iris_yaxis_label')
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left + 20)
+    .attr("x", -height / 2)
+    .text(feat_names.find(obj => obj.id === y_feat).name)
+
+// lower legend
+legend_lower
+    .append("text")
+    .attr("x", 1.5*itemHeight)
+    .attr("y", itemHeight/2)
+    .attr("fill", neutral_colour)
+    .text("mf value: 0 ")
+    .attr('font-size', 12)
+
+legend_lower.append("text")
+    .attr("x", (width - (2*itemHeight) ) )
+    .attr("y", itemHeight/2)
+    .attr("fill", neutral_colour)
+    .text("1 ")
+    .attr('font-size', 12)
+
+legend_lower.selectAll("legendentries")
+    .data(Array.from({ length: (5 - 1) / 0.4 + 1 },
+        (value, index) => 1 + index * 0.4))
+    .enter()
+    .append("circle")
+    .attr("cx", function (d, i) { return 100 + 20*i})
+    .attr("cy", itemHeight/3)
+    .attr("r", function (d) { return d; } )
+    .attr("fill", neutral_colour)
 
 // draw everything
 update_mf_display()
 update_scatter_display()
-
-
-// make sure that the last mf is at the bottom, then the middle one and the fist is always on top
-// d3.select("#group_1").raise()
-// d3.select("#group_0").raise()
 
 function update_scatter_display() {
     // update the axis
     iris_y.domain([eval(y_feat+"_min"), eval(y_feat+"_max")])
     iris_x.domain([eval(x_feat+"_min"), eval(x_feat+"_max")])
 
+    // get selected mf
+    // console.log(document.getElementById("scatter_mf_selector").value)
+    var selection = document.getElementById("scatter_mf_selector") == null ? 0 : document.getElementById("scatter_mf_selector").value
+
     d3.select("#lower").selectAll("circle")
         .data(iris)
         .join("circle")
             .attr("cx", function (d) { return iris_x(eval("d." + x_feat)); })
             .attr("cy", function (d) { return iris_y(eval("d." + y_feat)); })
-            .attr("r", function(d) { return calculate_mf_radius(d); })
-            .style("fill", function (d) { return colour_2(d.class); })
+            .attr("r", function(d) { return calculate_mf_radius(d, selection); })
+            .attr("fill", function () { return colour_2(window.displayed_mf[selection].id); })
 
 }
 
-function calculate_mf_radius(d) {
+function calculate_mf_radius(d, selection) {
     var value = d[x_feat]
     var map_value = mapping(value, eval(x_feat+"_min"), eval(x_feat+"_max"), 0, 100)
-    var x_coords = window.displayed_mf[0].points.map(v => parseInt(v.x))
-    var mf_value = calc_mf_value(window.displayed_mf[0].type, [map_value, ...x_coords ])
+    var x_coords = window.displayed_mf[selection].points.map(v => parseInt(v.x))
+    var mf_value = calc_mf_value(window.displayed_mf[selection].type, [map_value, ...x_coords ])
     var final_radius = mapping(mf_value, 0,1,1,5)
 
     return final_radius
@@ -167,7 +199,7 @@ function update_mf_display() {
         .attr("d", function (d) { return lineGenerator(d.line);})
         .attr("id", function (d) { return "line_" + d.id})
         .attr("fill", "none")
-        .attr("stroke", function (d) { return colour(d.id); })
+        .attr("stroke", function (d) { return colour_2(d.id); })
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 1.5)
@@ -179,7 +211,7 @@ function update_mf_display() {
     groups.select("path")
         .attr("d", function (d) { return lineGenerator(d.line); })
         .attr("id", function (d) { return "line_" + d.id })
-        .attr("stroke", function (d) { return colour(d.id); })
+        .attr("stroke", function (d) { return colour_2(d.id); })
         .attr('opacity', function (d) { return d.visible ? 1 : 0 })
         .attr('cursor', function (d) { return d.visible ? 'move' : 'standard' })
 
@@ -191,7 +223,7 @@ function update_mf_display() {
         .attr("cy", function (d) { return y(d.y); })
         .attr("r", 5)
         .attr("id", function (d, i) { return (this.parentNode.__data__.id+"_"+i)})
-        .attr("fill", function () { return colour(this.parentNode.__data__.id); })
+        .attr("fill", function () { return colour_2(this.parentNode.__data__.id); })
         .attr('opacity', function () { return this.parentNode.__data__.visible ? 1 : 0})
         .attr('cursor', function () { return this.parentNode.__data__.visible ? 'pointer' : 'standard'} )
 
@@ -202,7 +234,7 @@ function update_mf_display() {
         .attr("cy", function (d) { return y(d.y); })
         .attr("r", 5)
         .attr("id", function (d, i) { return (this.parentNode.__data__.id+"_"+i)})
-        .attr("fill", function () { return colour(this.parentNode.__data__.id); })
+        .attr("fill", function () { return colour_2(this.parentNode.__data__.id); })
         .attr('opacity', function () { return this.parentNode.__data__.visible ? 1 : 0})
         .attr('cursor', function () { return this.parentNode.__data__.visible ? 'pointer' : 'standard'} )
         .call(point_drag)
@@ -212,7 +244,7 @@ function update_mf_display() {
     mergeEnter.exit().remove();
 
     // legend
-    var legend = d3.select("#legend_svg").selectAll(".legend")
+    var legend = d3.select("#legend_upper").selectAll(".legend")
         .data(window.displayed_mf)
 
     var legendEnter = legend.enter().append("g")
@@ -223,14 +255,14 @@ function update_mf_display() {
     legendEnter.append("rect")
         .attr("width", itemHeight/2)
         .attr("height", itemHeight/2)
-        .attr("fill", function (d) { return colour(d.id); })
+        .attr("fill", function (d) { return colour_2(d.id); })
         .attr('opacity', function (d) { return d.visible ? 1 : 0} )
 
     // text enter
     legendEnter.append("text")
         .attr("x", itemHeight/3*2)
         .attr("y", itemHeight/2)
-        .attr("fill", function(d) { return colour(d.id); })
+        .attr("fill", function(d) { return colour_2(d.id); })
         .attr('opacity', function (d) { return d.visible ? 1 : 0} )
         .text(function(d) { return d.variable})
         .attr('font-size', 12)
@@ -244,7 +276,6 @@ function update_mf_display() {
         .attr('opacity', function (d) { return d.visible ? 1 : 0} )
         .text(function(d) { return d.variable})
 
-    // update_scatter_display()
 }
 
 
@@ -338,6 +369,24 @@ function get_div_pos(source) {
     }
 }
 
+function update_scatter_dropdown() {
+    // update whether you can select the option
+    for (var i=0; i<window.displayed_mf.length; i++) {
+        if (window.displayed_mf[i].visible == false) {
+            $("#scatter_mf_selector option[value='"+ i +"']").attr("disabled", true)
+        } else {
+            $("#scatter_mf_selector option[value='"+ i +"']").attr("disabled", false)
+        }
+    }
+
+    // check whether a now unselectable option is still selected
+    var selected_option = parseInt(document.getElementById("scatter_mf_selector").value)
+    if (window.displayed_mf[selected_option].visible == false) {
+        // goes back to unremovable default mf
+        document.getElementById("scatter_mf_selector").value = 0
+    }
+}
+
 function add_linguistic_definition(index) {
     /* create new block of linguistic variable definitions */
 
@@ -352,6 +401,7 @@ function add_linguistic_definition(index) {
                     window.displayed_mf[get_div_pos(e.target)+1].visible = true
                     add_linguistic_definition(get_div_pos(e.target)+1)
                     update_mf_display()
+                    update_scatter_dropdown()
                 }
 
             }
@@ -377,6 +427,7 @@ function add_linguistic_definition(index) {
                 // reset the parameters of the mf ???
 
                 update_mf_display()
+                update_scatter_dropdown()
             }
         })
 

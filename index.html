@@ -1,26 +1,28 @@
-<!--
-  Copyright 2018 The Distill Template Authors
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <!doctype html>
+<html lang="en">
 
 <head>
-  <script src="dist/template.v2.js"></script>
-  <link rel="stylesheet" href="dist/ieeexplore-immersive-article.css">
+  <!-- Required meta tags for IEEE Xplore immersive article -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="An interactive article on Linguistic Summaries.">
   <meta charset="utf8">
-  <script type="text/javascript" src="jquery-3.5.1.js"></script>
+  <title>
+    Lingusitic Summaries
+  </title>
+
+  <!-- Stylesheet for IEEE Xplore immersive article -->
+  <link rel="stylesheet" href="fonts/stylesheet.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- MathJax javascript library and implementation file/s -->
+  <script type="text/javascript" async
+    src="https://xploreqa.ieee.org/xploreAssets/MathJax-274/MathJax.js?config=default">
+    </script>
+
+  <!-- Javascript files for the interactive part -->
+  <script type="text/javascript"
+    src="https://xploreqa.ieee.org/assets/vendor/jquery/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="d3.js"></script>
   <script type="text/javascript" src="interactiveLS/global_vars.js"></script>
   <script type="text/javascript" src="interactiveLS/interaction_one.js"></script>
@@ -28,628 +30,588 @@
   <script type="text/javascript" src="interactiveLS/interaction_three.js"></script>
   <script type="text/javascript" src="interactiveLS/static_one.js"></script>
   <script type="text/javascript" src="interactiveLS/static_two.js"></script>
-  <title>LS Explained</title>
+
 </head>
 
 <body>
-
-  <button id="backToTopButton" class="backToTopButton">
-    <i class="icon--min icon-back-to-top-arrow"></i>
-  </button>
-
-
-  <distill-header></distill-header>
-  <d-front-matter>
-    <script id='distill-front-matter' type="text/json">{
-    "title": "Bare Demo of Interactive Articles for the IEEE Computational Intelligence Magazine",
-    "description": "This paper describes the ",
-    "published": "Jun 20, 2022",
-    "authors": [
-      {
-        "author":"Alexander Dockhorn",
-        "authorURL":"https://adockhorn.github.io/",
-        "affiliations": [{"name": "Leibniz University Hannover"}]
-      },
-      {
-        "author":"John Doe",
-        "authorURL":"https://www.ieee.org//",
-        "affiliations": [{"name": "IEEE"}]
-      },
-      {
-        "author":"Jane Doe",
-        "authorURL":"https://www.ieee.org//",
-        "affiliations": [{"name": "IEEE"}]
-      }
-    ],
-    "katex": {
-      "delimiters": [
-        {"left": "$$", "right": "$$", "display": false}
-      ]
-    },
-    "toc":true
-  }</script>
-  </d-front-matter>
-  <d-title>
-    <p>This and the index.html file define the components of your paper [title, text, heads, etc.].
-      <b>CRITICAL:</b> Do Not Use Symbols, Special Characters, Footnotes, or Math in Paper Title or Abstract.</p>
-  </d-title>
-  <d-byline></d-byline>
-
-
-  <d-article>
-
-    <script type="module">
-      // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
-      //Get the button:
-      let mybutton = document.getElementById("backToTopButton");
-
-      // When the user scrolls down 20px from the top of the document, show the button
-      window.onscroll = function() {scrollFunction()};
-
-      function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          mybutton.style.display = "flex";
-        } else {
-          mybutton.style.display = "none";
-        }
-      }
-
-      // When the user clicks on the button, scroll to the top of the document
-      mybutton.onclick = function(event) {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-      }
-      </script>
-
-
-    <d-contents id="toc" class="toc" style="background-color: #e8e8e8;
-                                padding: 0.3cm 0.3cm 0.3cm 0.3cm;">
-      <nav id="nav">
-        <h3 style="font-size: 12pt; font-weight: bold; color: #333300; font-family: Arial, Helvetica, sans-serif; margin: 0;">Contents</h3>
-      </nav>
-    </d-contents>
-
-
-
-    <script type="module">
-
-      function romanize (num) {
-        //Credits to Steven Levithan and his blog: http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
-        if (isNaN(num))
-          return NaN;
-        var digits = String(+num).split(""),
-                key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
-                  "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
-                  "","I","II","III","IV","V","VI","VII","VIII","IX"],
-                roman = "",
-                i = 3;
-        while (i--)
-          roman = (key[+digits.pop() + (i * 10)] || "") + roman;
-        return Array(+digits.join("") + 1).join("M") + roman;
-      }
-
-
-      $("distill-header")[0].style.display = "none";
-      $("distill-footer")[0].style.display = "none";
-      window.addEventListener('load', function() {
-        var toc = document.getElementById("nav");
-
-        // get headers and markers
-        let elements = [];
-        let tocItems = document.getElementsByTagName("H2");
-        //console.log(tocItems);
-        let linkItems = document.getElementsByClassName("marker");
-        let article = document.getElementById("root");
-        //console.log(linkItems);
-
-        for (let i=0, max=tocItems.length; i < max; i++) {
-          // Do something with the element here
-          tocItems[i].textContent = romanize(i+1) + ". " + tocItems[i].textContent;
-          elements[i] = {"element": tocItems[i], "index": Array.prototype.indexOf.call(article.children, tocItems[i])};
-        }
-        for (let i=0, max=linkItems.length; i < max; i++) {
-          // Do something with the element here
-          elements[tocItems.length+i] = {"element": linkItems[i], "index": Array.prototype.indexOf.call(article.children, linkItems[i])};
-        }
-
-        //sort them in order of appearance
-        elements.sort((a, b) => a["index"] - b["index"]);
-        //console.log(elements);
-
-        //console.log("nToCEntries: " + tocItems.length);
-        let i;
-        let previous_header = toc;
-        for (i = 0; i < elements.length; i++) {
-          let item = elements[i]["element"];
-          if (item.tagName === "H2") {
-            //console.log("h2");
-            //item.style.backgroundColor = "#EEEEEE";
-            if (i > 0){
-              let gap = document.createElement("span");
-              gap.innerText = " | ";
-              toc.appendChild(gap);
-            }
-            let entry = document.createElement("span");
-            let link = document.createElement("a");
-            // console.log(item.innerHTML);
-            //console.log(item.innerText);
-            link.innerText = item.innerText;
-            link.href = "#" + item.innerText;
-            item.id = item.innerText;
-            entry.appendChild(link);
-            previous_header = entry;
-            toc.appendChild(entry);
-          }
-          /*
-          else {
-            //console.log("marker");
-            let list = document.createElement("ul");
-            list.style.marginBottom = "unset";
-            let entry = document.createElement("li");
-            let link = document.createElement("a");
-            // console.log(item.innerHTML);
-            //console.log(item.innerText);
-            link.innerText = item.innerText;
-            link.href = "#" + item.innerText;
-            item.id = item.innerText;
-            entry.appendChild(link);
-            list.appendChild(entry);
-            previous_header.appendChild(list);
-          }*/
-
-        }
-      })
-    </script>
-
-    <div id="root">
-      <h2>Introduction</h2>
-      <div>
-        <p>
-          This demo file is intended to serve as a "starter file" for IEEE Computational Intelligence
-          Magazine papers produced under html using interactive.html version 0.1 and later.
-          I wish you the best of success.
+  <!-- Article with large top spacing -->
+  <article class="mt-lg">
+    <header>
+      <!-- Page container -->
+      <div class="container">
+        <!-- Page title -->
+        <h1>
+          Linguistic Summaries
+        </h1>
+        <!-- Subheading -->
+        <p class="subhead">
+          Possible subtitle
         </p>
-        <p style="text-align: right">
-          Alexander Dockhorn<br>
-          June 30, 2022
-        </p>
-      </div>
-
-      <h2>Ease of Use</h2>
-      <a class="marker" href="#MaintainingIntegrity"><span>Maintaining the Integrity of the Specifications</span></a>
-      <p id="MaintainingIntegrity">
-        The index.html file is used to format your interactive paper and style the text. All margins,
-        column widths, line spaces, and text fonts are prescribed; please do not
-        alter them. You may note peculiarities. For example, the limited width of the article. This measurement
-        and others are deliberate, using specifications that anticipate your paper
-        as one part of the entire computational intelligence magazine and its online pendant on IEEE Xplore,
-        and not as an independent document. Please do not revise any of the current designations.
-      </p>
-
-      <a class="marker" href="#Prepare"><span>Prepare Your Paper Before Styling</span></a>
-      <p id="Prepare">
-        Before you begin to format your paper, first write and save the content as a
-        separate text file. Complete all content and organizational editing before
-        formatting. Please note sections <a href="#Abbreviations">Abbrevations and Acronyms</a>-
-        <a href="#SCM">Some Common Mistakes</a> below for more information on
-        proofreading, spelling and grammar.
-      </p>
-
-      <p>
-        Keep your text and graphic files separate until after the text has been
-        formatted and styled. Do not number text heads, this will be done during the
-        transfer to IEEEXplore for you.
-      </p>
-
-      <p>
-        In addition to html styling tags, you can use footnotes<d-footnote>This is a footnote</d-footnote>.
-      </p>
-
-      <a class="marker" href="#Abbreviations"><span>Abbreviations and Acronyms</span></a>
-      <p id="Abbreviations">
-        Define abbreviations and acronyms the first time they are used in the text,
-        even after they have been defined in the abstract. Abbreviations such as
-        IEEE, SI, MKS, CGS, ac, dc, and rms do not have to be defined. Do not use
-        abbreviations in the title or heads unless they are unavoidable.
-      </p>
-
-      <a class="marker" href="#Units"><span>Units</span></a>
-      <ul id="Units">
-        <li> Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as "3.5-inch disk drive".</li>
-        <li> Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.</li>
-        <li> Do not mix complete spellings and abbreviations of units: <d-math>Wb/m^2</d-math> or "webers per square meter", not <d-math>webers/m^2</d-math>. Spell out units when they appear in text: ". . . a few henries", not ". . . a few H".</li>
-        <li> Use a zero before decimal points: "0.25", not ".25". </li>
-        <li> Use <d-math>cm^3</d-math>, not <d-math>cc</d-math>.</li>
-      </ul>
-
-      <a class="marker" href="#Equations"><span>Equations</span></a>
-      <p id="Equations">
-        The interactive article does not require to number equations, however they can be
-        linked using the tag &lta href="#id"&gt &lt/a&gt and a corresponding id of the element to be linked.
-        To make your equations more compact, you may use the solidus (~/~), the exp function, or
-        appropriate exponents. Italicize Roman symbols for quantities and variables,
-        but not Greek symbols. Use a long dash rather than a hyphen for a minus
-        sign. Punctuate equations with commas or periods when they are part of a
-        sentence, as in:
-      </p>
-      <d-math block>
-        a+b=\gamma .
-      </d-math>
-
-      <p>
-        Be sure that the symbols in your equation have been defined before or immediately following
-        the equation. To define inline equations you can either use surround them with double-$ symbol as in $$1+1=2$$
-        or use the d-math tag, as in <d-math>2-1=1</d-math>.
-      </p>
-
-
-      <a class="marker" href="#FiguresTables"><span>Figures and Tables</span></a>
-      <p id="FiguresTables">
-        Place figures and tables at the top and
-        bottom of columns. Avoid placing them in the middle of columns. Large
-        figures and tables may span across both columns. Figure captions should be
-        below the figures; table heads should appear above the tables. Insert
-        figures and tables after they are cited in the text. Use the abbreviation
-        "Fig. 1", even at the beginning of a sentence.
-      </p>
-
-
-      <div>
-        <div class="caption">
-          <b>Table 1:</b><br> This is an example of a table caption.
+        <!-- Header info general wrapper -->
+        <div class="header-info">
+          <!-- Header left info box -->
+          <div class="header-left box">
+            <!-- Header authors section -->
+            <div class="header-authors">
+              <h2>Authors</h2>
+              <ul>
+                <li>Anna Wilbik | Maastricht University</li>
+                <li>Carla Wrede | Maastricht University</li>
+                <li>Daniel Sánchez Fernández | Universidad de Granada</li>
+                <li>Nicolás Marín Ruiz | Universidad de Granada</li>
+              </ul>
+            </div>
+            <!-- Published info section -->
+            <div class="header-published">
+              <h2>Published</h2>
+              <p>Dec. 1, 2023</p>
+            </div>
+          </div>
+          <!-- Header legend section -->
+          <div class="header-legend">
+            <svg class="click-icon" data-name="Click"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.62 122.88">
+              <title>Click</title>
+              <path
+                d="M40.59,14.63a3.36,3.36,0,0,1-1,2.39l0,0a3.39,3.39,0,0,1-4.77,0,3.42,3.42,0,0,1-1-2.4V3.39A3.4,3.4,0,0,1,37.2,0a3.34,3.34,0,0,1,2.39,1,3.39,3.39,0,0,1,1,2.4V14.63Zm25,76.65a1.89,1.89,0,0,1,3.77,0V99.9a1.89,1.89,0,1,1-3.77,0V91.28ZM54.46,87.47a1.89,1.89,0,0,1,3.77,0V99.9a1.89,1.89,0,1,1-3.77,0V87.47Zm-28-7.63a1.92,1.92,0,0,1-.35-.23q-5.24-4.24-10.44-8.53a8.36,8.36,0,0,0-3.57-1.79,3.54,3.54,0,0,0-2,.09A2,2,0,0,0,9,70.49a6.9,6.9,0,0,0-.4,3.24,12.47,12.47,0,0,0,1.11,4,26.49,26.49,0,0,0,2.92,4.94l17.68,26.74a2.37,2.37,0,0,1,.36,1,15.28,15.28,0,0,0,1.87,6.4,2.89,2.89,0,0,0,2.57,1.46c9,0,18.62-.34,27.53,0a8.33,8.33,0,0,0,4.69-1.51,15,15,0,0,0,4.29-5l.34-.57c3.4-5.87,6.71-11.57,7-18.33L78.85,85l0-.33,0-1.84c.06-5.74.16-14.54-4.62-15.4H71.14c.09,2.46,0,5-.18,7.3-.08,1.36-.15,2.63-.15,3.79a2.31,2.31,0,1,1-4.62,0c0-1.1.08-2.52.17-4,.32-5.73.75-13.38-3.24-14.14h-3a2.2,2.2,0,0,1-.58-.07,69.07,69.07,0,0,1-.13,8.29c-.07,1.36-.15,2.63-.15,3.79a2.31,2.31,0,1,1-4.61,0c0-1.1.08-2.52.16-4,.33-5.73.76-13.38-3.24-14.14h-3a2,2,0,0,1-.6-.08V66a2.31,2.31,0,1,1-4.61,0V42c0-4-1.64-6.55-3.73-7.61a5.32,5.32,0,0,0-4.71-.06l-.1.06c-2.07,1-3.69,3.59-3.69,7.7v42a2.31,2.31,0,1,1-4.62,0V79.84Zm44.14-17a2.49,2.49,0,0,1,.61-.08h3.19a2.33,2.33,0,0,1,.53.06c8.73,1.4,8.61,12.65,8.52,20,0,3.4.14,6.78.18,10.17-.39,7.91-4,14.1-7.67,20.47l-.32.55A19.49,19.49,0,0,1,70,120.55a12.88,12.88,0,0,1-7.29,2.32H35.17a7.23,7.23,0,0,1-6.44-3.5,19,19,0,0,1-2.56-7.88L8.94,85.42A31,31,0,0,1,5.5,79.58,16.88,16.88,0,0,1,4,74a11.42,11.42,0,0,1,.8-5.42,6.54,6.54,0,0,1,3.55-3.49A8.05,8.05,0,0,1,13,64.76a13.19,13.19,0,0,1,5.61,2.77L26.45,74V42.09c0-6.1,2.73-10,6.22-11.82l.15-.06a9.81,9.81,0,0,1,4.33-1,10,10,0,0,1,4.49,1.07C45.16,32.06,47.91,36,47.91,42v7.6a2.41,2.41,0,0,1,.6-.08H51.7a2.33,2.33,0,0,1,.53.06c3.82.61,5.73,3.16,6.63,6.47a2.25,2.25,0,0,1,1.23-.36h3.18a2.26,2.26,0,0,1,.53.06c4.07.65,6,3.49,6.79,7.11ZM14.63,37A3.33,3.33,0,0,1,17,38a3.39,3.39,0,0,1-2.39,5.79H3.39a3.36,3.36,0,0,1-2.39-1A3.4,3.4,0,0,1,3.39,37ZM23,20.55a3.39,3.39,0,0,1-2.4,5.79,3.4,3.4,0,0,1-2.4-1l-7.91-7.94a3.42,3.42,0,0,1-1-2.4,3.39,3.39,0,0,1,5.79-2.4L23,20.55ZM59.2,43.81a3.41,3.41,0,0,1-3.4-3.4A3.41,3.41,0,0,1,59.2,37H70.43a3.35,3.35,0,0,1,2.4,1,3.4,3.4,0,0,1-2.4,5.79ZM55.62,24.74a3.39,3.39,0,0,1-4.8-4.8l7.91-8a3.39,3.39,0,0,1,4.8,4.8l-7.91,8Z" />
+            </svg>
+            <p>Indicates interactive elements</p>
+          </div>
         </div>
-        <table style="margin: auto auto">
-          <tr>
-            <th style="width: 150px">Column 1</th>
-            <th style="width: 250px; text-align: center">Column 2 of fixed width</th>
-            <th style="width: 250px; text-align: left">Column 3 aligned left</th>
-          </tr>
-          <tr>
-            <td>Data 1,1</td>
-            <td style="text-align:center">Data 1,2</td>
-            <td style="text-align:center">a very very very very very long centered text</td>
-          </tr>
-          <tr>
-            <td>$$1\times 1 = 1$$</td>
-            <td style="text-align:center">$$\pi$$</td>
-            <td style="text-align:right">$$\binom{n}{k} =\prod _{j=1}^{k}{\frac {n+1-j}{j}}$$</td>
-          </tr>
-        </table>
+        <!-- Box of anchored links -->
+        <div class="contents box">
+          <h2>Contents:</h2>
+          <ul>
+            <li>
+              <a href="#introduction">Introduction</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#running example">Running Example</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#linguistic variable">Linguistic Variable</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#linguistic quantifier">Linguistic Quantifier</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#linguistic summary">Linguistic Summary</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#applications">Applications</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#conclusion">Conclusion</a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </header>
 
-      <div class="l-body" style="width: 100%">
-        <img src="image/fig1.png" alt="Alternative text in case the image cannot be loaded." style="margin: auto auto; width: max-content; display: block"/>
-        <div class="caption"><b>Figure 1:</b><br> Example of a figure caption.</div>
-      </div>
+<!--    [<a href="#ref_1">1</a>]-->
 
-      <p>
-        <b>Figure Labels:</b> Use words rather than symbols or abbreviations
-        when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity
-        "Magnetization", or "Magnetization, $$M$$", not just "$$M$$". If including
-        units in the label, present them within parentheses. Do not label axes only
-        with units. In the example, write "Magnetization ($$A/m$$)" or "Magnetization
-        $$\{A[m(1)]\}$$", not just "$$A/m$$". Do not label axes with a ratio of
-        quantities and units. For example, write "Temperature ($$K$$)", not
-        "Temperature/$$K$$".
-      </p>
-
-      <a class="marker" href="#InteractiveCode"><span>Interactive Figures and Code</span></a>
-      <p id="InteractiveCode">
-        Note, that in contrast to classical papers,
-        the webarticle can include animations, videos, sounds, etc..
-        Due to technical constraints, it will not be possible to embed iframes!
-      </p>
-
-      <p>
-        Finally, you can freely use javascript libraries as long as they can
-        be included self-contained in the files you submit. Meaning, scripts cannot be
-        imported using an url. This should ensure a consistent presentation of the
-        article. Interactive components can be embedded as figure. and should be formatted as such.
-        Libraries such as d3.js<d-cite bibtex-key="d3js"></d-cite> and three.js<d-cite bibtex-key="threejs"></d-cite>
-        may be helpful in producing interactive
-        visualizations, but do not let your own creativity be limited by these recommendations.
-      </p>
-
-      <!--      -->
-      <!--      -->
-      <!--      -->
-      <!--      -->
-      <!--      -->
-
-      <div class="l-interactive" style="margin-bottom: 20px">
-        <table>
-          <tr>
-            <td><img src="image/icon_pointer.png" alt="Interactive Element" style="width: 32px; height: 32px"></td>
-            <td><div class="interactiveopener">Interactive Block 1.</div>
-            </td>
-          </tr>
-        </table>
-
-        <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>
-        <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>
-        <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>
-        <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>
-
-        <button class="axis_switch" type="button">Switch axes</button>
-
-        <div id="irisScatter" style="width: 420px; margin: auto auto 10px;"></div>
-
-        <div class="caption"><b>Figure X:</b><br> Scatterplot of iris data set. Different species are separated by colour. </div>
-      </div>
-      <script type="module" src="interactiveLS/interaction_one.js"></script>
-
-
-      <!--      -->
-      <!--      -->
-      <!--      -->
-
-      <div class="l-static" style="margin-bottom: 20px">
-        <div id="static_one" style="width: 420px; margin: auto auto 10px;"></div>
-        <div class="caption"><b>Figure X:</b><br>Representation of the linguistic variable sepal length.</div>
-      </div>
-      <script type="module" src="interactiveLS/static_one.js"></script>
-
-      <!--      -->
-      <!--      -->
-      <!--      -->
-
-      <div class="l-interactive" style="margin-bottom: 20px">
-        <table>
-          <tr>
-            <td><img src="image/icon_pointer.png" alt="Interactive Element" style="width: 32px; height: 32px"></td>
-            <td><div class="interactiveopener">Interactive Block 2.</div>
-            </td>
-          </tr>
-        </table>
-
+    <!-- Content container with large top spacing -->
+    <div class="container mt-lg">
+      <!-- Anchor ID -->
+      <section id="introduction">
+        <!-- Section title -->
+        <h2>I. Introduction</h2>
+        <p>
+          Recent developments in ICT technology enable more and more data to be collected.
+          According to Forbes [<a href="#ref_1">1</a>], already back in 2018 around 90% of the world’s data
+          was generated in the span of only two years.
+          The sources of this are varying, with individuals creating parts of this data more as a byproduct
+          of social media usage. Contrastingly in industries, the data collection process is purposefully accelerated,
+          especially with the rise of Internet of Things (IoT) technologies. Companies and organizations see
+          a potential in these large amounts of data to be used to support decision-making processes.
+          For this, more data mining and knowledge discovery methods are deployed in companies.
+          The level of insight from this varies per company but can be classified into one of four categories
+          that have been proposed by Gartner to distinguish the level of analytics:
+          descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics
+          [<a href="#ref_2">2</a>].
+        </p>
+        <div class="static">
+          <img src="pics/gartner-model.png" alt="Gartner analytics model" style="margin: auto auto; width: max-content; display: block"/>
+          <div class="caption"><b>Figure 1:</b><br> Gartner analytics model. Taken from https://computd.nl/demystification/4-levels-of-data-maturity/, cite this correctly[<a href="#ref_?">?</a>]</div>
+        </div>
         <p></p>
+        <p>
+          The basic level, requiring the least data maturity is descriptive analytics.
+          The aim is to provide a description of current or past processes and give an elementary understanding
+          of the data, so that the user can make the best decision themselves.
+          This data description can include statistics (numbers), visualizations (e.g., plots) and verbalizations
+          (e.g., linguistic summaries).
+          The next level of diagnostic analytics then tries to find a reason for the situation as ascertained
+          in the previous level.
+          Predictive analytics deals with using the accumulated historical data to make predictions for the future.
+          Finally, the last level of prescriptive analytics aims to use the predictions from the previous models
+          and apply actions such that a desired outcome can be achieved.
+        </p>
+        <p>
+          While there are many possible ways to describe data or results, this paper focuses on linguistic summaries.
+          Linguistic summaries are template-based sentences in (semi-)natural language that capture the essence
+          of the data. In the following, we explain the concept of linguistic summaries,
+          their building blocks and how they can be evaluated automatically.
+          Moreover, they can not only be used for the descriptive analytics,
+          but also for the later stages in the analytics model, as showcased in the application section.
+        </p>
+      </section>
 
-        <div id="linguistic_definitions"></div>
-        <script>add_linguistic_definition(0)</script>
+      <section id="running example">
+        <h2>II. Running Example</h2>
+        <p>
+          As the running example, let us use the iris data set<d-cite bibtex-key=""></d-cite>. This data set contains 150 data points,
+          describing one of three possible plant types Iris Setosa, Iris Virginica and Iris Versicolor.
+          Every flower type is represented 50 times, and a single iris flower can be characterized by four attributes,
+          namely the length and the width of both sepals and petals, measured in centimeters.
+          An example of each plant type can be seen in Figure 2.
+        </p>
+        <div class="static">
+          <img src="pics/Iris_setosa.jpg" alt="Iris setosa" style="margin: auto auto; width: 30%; display: inline-flex"/>
+          <img src="pics/Iris_virginica.jpg" alt="Iris virginica" style="margin: auto auto; width: 30%; display: inline-flex"/>
+          <img src="pics/Iris_versicolor.jpg" alt="Iris versicolor" style="margin: auto auto; width: 30%; display: inline-flex"/>
+          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower: Iris setosa, Iris virginica, and Iris versicolor.<d-footnote>Taken from https://en.wikipedia.org/wiki/Iris_flower_data_set, cite this correctly</d-footnote></div>
+        </div>
+        <p></p>
+        <p>
+          The figure below shows the scatter plot of this data set. You may select the variables for the axis.
+        </p>
+        <div class="framed">
+          <div class="inside">
+            <div class="eyebrow">
+              Interactive Block 1. + descr
+            </div>
 
-        <div id="mfDisplay" style="width: 420px; margin: auto auto 10px;"></div>
+            <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>
+            <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>
+            <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>
+            <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>
 
-        <div id="scatter_mf" style="width: 420px; margin: auto auto 10px;"></div>
+            <button class="axis_switch" type="button">Switch axes</button>
 
-        <div class="caption"><b>Figure X:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
-      </div>
-      <script type="module" src="interactiveLS/interaction_two.js"></script>
+            <div id="irisScatter" style="width: 320px; margin: auto auto 10px;"></div>
+
+            <div class="caption"><b>Figure 3:</b><br>Scatterplot of iris data set. Different species are separated by colour. </div>
 
 
-      <!--      -->
-      <!--      -->
-      <!--      -->
+            <script type="module" src="interactiveLS/interaction_one.js"></script>
+          </div>
+        </div>
 
-      <div class="l-static" style="margin-bottom: 20px">
-<!--        <div id="static_two" style="width: 420px; margin: auto auto 10px;">-->
+      </section>
+
+
+      <section id="linguistic variable">
+        <h2>III. Linguistic Variable</h2>
+        <p class="inline-math">
+          The key concepts of the linguistic summaries and fuzzy set theory<d-cite bibtex-key=""></d-cite> are the
+          linguistic variable and the linguistic value.
+
+          Formally, according to Klir and Yuan<d-cite bibtex-key=""></d-cite>, a linguistic variable is defined as
+          a quintuple (v,T,X,g,m), where v is the name of the variable, T is the set of linguistic terms of v,
+          X is the universal set representing the range of v, g is a syntactic rule for generating linguistic terms,
+          and m is a semantic rule that assigns to each linguistic term $$ t∈T $$ its meaning, m(t), which is a fuzzy set on X.
+
+          Let us consider the iris data set and the linguistic variable sepal length. In this case, linguistic terms
+          may be small, medium and large. X is a set [4.3, 7.9], as this is the range of the sepal length.
+          Each of the linguistic terms is mapped to a fuzzy set. Figure 4 illustrates the structure of the linguistic
+          variable sepal length.
+        </p>
+        <div class="static">
+          <div id="static_one" style="width: 320px; margin: auto auto 10px;"></div>
+          <div class="caption"><b>Figure 4:</b><br>Representation of the linguistic variable sepal length.</div>
+          <script type="module" src="interactiveLS/static_one.js"></script>
+        </div>
+        <p></p>
+        <p>
+          The linguistic term with a corresponding fuzzy set is called often a linguistic variable.
+          In the interactive part below, you can define linguistic variables for the iris data set.
+          The scatterplot below highlights the points belonging to the set described by the defined linguistic value.
+          Note that you may use different membership functions to define your fuzzy set:
+          namely triangular, trapezoidal, Z-shaped and S-shaped.
+        </p>
+        <div class="framed">
+          <div class="inside">
+            <div class="eyebrow">
+              Interactive Block 2. + descr
+            </div>
+
+            <div id="linguistic_definitions"></div>
+            <script>add_linguistic_definition(0)</script>
+
+            <div id="mfDisplay" style="width: 420px; margin: auto auto 10px;"></div>
+
+            <select id="scatter_mf_selector" onchange="update_scatter_display()">
+              <option value="0"> Blue membership function </option>
+              <option disabled value="1"> Orange membership function </option>
+              <option disabled value="2"> Green membership function </option>
+            </select>
+
+            <div id="scatter_mf" style="width: 320px; margin: auto auto 10px;"></div>
+
+            <div class="caption"><b>Figure 5:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
+
+            <script type="module" src="interactiveLS/interaction_two.js"></script>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="linguistic quantifier">
+        <h2>IV. Linguistic quantifier</h2>
+        <p class="inline-math">
+          A special kind of linguistic variable, essential in linguistic summaries is a (linguistic) quantifier.
+          Linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
+          absolute quantifiers and relative quantifiers. Absolute quantifiers are defined over numbers,
+          $$\R$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
+          exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 6 shows examples of both
+          absolute quantifiers (a) and relative quantifiers (b).
+        </p>
+        <div class="static">
           <div id="static_two_absolute" style="display: inline-block; width: 50%; float: left"></div>
           <div id="static_two_relative" style="display: inline-block; width: 50%; float: right"></div>
-<!--        </div>-->
-        <div class="caption" style="clear: both"><b>Figure X:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
-      </div>
-      <script type="module" src="interactiveLS/static_two.js"></script>
-
-
-      <!--      -->
-      <!--      -->
-      <!--      -->
-
-      <script type="module" src="interactiveLS/interaction_three.js"></script>
-      <div class="l-interactive" style="margin-bottom: 20px">
-        <table>
-          <tr>
-            <td><img src="image/icon_pointer.png" alt="Interactive Element" style="width: 32px; height: 32px"></td>
-            <td><div class="interactiveopener">Interactive Block 3.</div>
-            </td>
-          </tr>
-        </table>
-
-        <b>Choose your summarizer P:</b>
-
-        <div>
-          <input type="radio" class="summmarizer_radio" id="setosa" name="summmarizer_radio" value="Iris Setosa" onchange="update_ls()" checked="checked"> Iris Setosa <br>
-          <input type="radio" class="summmarizer_radio" id="versicolor" name="summmarizer_radio" value="Iris Versicolor" onchange="update_ls()"> Iris Versicolor <br>
-          <input type="radio" class="summmarizer_radio" id="virginica" name="summmarizer_radio" value="Iris Virginica" onchange="update_ls()"> Iris Virginica <br>
-        </div>
-
-        <b>Choose your quantifer Q:</b>
-
-        <div id="Q"></div>
-        <div id="draw_Q" style="width: 420px; margin: auto auto 10px;"></div>
-
-        <b>Choose your qualifier R:</b>
-
-        <div>
-          <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()" checked="checked"> Petal width <br>
-          <input type="radio" class="featureR" id="pl_sum" name="featureR" value="petal length" onchange="update_ls()"> Petal length <br>
-          <input type="radio" class="featureR" id="sw_sum" name="featureR" value="sepal width" onchange="update_ls()"> Sepal width <br>
-          <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()"> Sepal length <br>
+          <div class="caption" style="clear: both"><b>Figure 6:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
+          <script type="module" src="interactiveLS/static_two.js"></script>
         </div>
         <p></p>
-        <div id="R"></div>
-        <div id="draw_R" style="width: 420px; margin: auto auto 10px;">
+        <p>
+          Now, we will define a linguistic summary.
+        </p>
+      </section>
 
+
+      <section id="linguistic summary">
+        <h2>V. Linguistic Summary</h2>
+
+        <h3>What is a linguistic summary?</h3>
+
+        <p>
+          The notion of linguistic summary was introduced by R.R. Yager [Yag82, Yag91] as a fuzzy logic-based
+          approach to the summarization of data. It is very frequently used as a synonym for linguistic
+          description (or as part of it) in the NLG community, see for instance [SRHY03, MS16].
+        </p>
+        <p>
+          Yager’s approach consider linguistic summaries described by means of quantified statements of
+          the form <i>Q [R] y’s are P</i>, where:
+        </p>
+        <ul>
+          <li>Q is a linguistic quantifier (e.g. <i>most</i>).</li>
+          <li>Y’s are the objects (e.g. tuples in a database) over which we want to provide the summary.</li>
+          <li>P is called the <i>summarizer</i>, and corresponds to a fuzzy subset of Y. It is usual that P is
+            induced by some linguistic label defined on the domain of one variable defining some aspect
+            of objects in Y. For instance, if we consider Y to be a set of people and the variable <i>height</i>,
+            and we consider the linguistic label <i>tall</i> defined on the domain of possible heights of people,
+            then P can be defined as <i>the set of tall people</i>, the membership of each person y to P being
+            the membership degree of the height of y to the label <i>tall</i>.</li>
+          <li>R is an optional argument called <i>qualifier</i>, corresponding to a fuzzy subset of Y. It allows to
+            restrict the summary to those objects in Y that satisfy R. As with P, it can be induced by
+            linguistic labels on the domain of variables of objects. Note that, in practice, avoiding the
+            use of a qualifier is equivalent to consider that R=Y.</li>
+        </ul>
+        <p>
+          As an example we can consider the quantified statements <i>Most of the people are tall</i>, where
+          Q is the quantifier <i>most</i>, Y is a set of people (the specific set for which we want to perform the
+          summary), and <i>tall</i> stands for the fuzzy subset of <i>tall people</i> defined on Y. In this case it is R=Y
+          or, if you prefer it, we are avoiding the use of a qualifier R. Another example is <i>Most of the young
+          people are tall</i>, where in this case we have used as qualifier the fuzzy subset of <i>young people</i> within
+          Y.
+        </p>
+        <p>
+          On the basis of these quantified statements, a linguistic summary is defined as a pair comprised
+          of:
+        </p>
+        <ul>
+          <li>A quantified statement of the form <i>Q [R] y’s are P</i>, and</li>
+          <li>A truth value T, corresponding to the accomplishment degree of the quantified statement on
+            the dataset. It represents to which degree the quantified statement is accurate for the data
+            being summarized.</li>
+        </ul>
+        <p>
+          Let’s see how to compute T in the next section.
+        </p>
+
+        <h3>Computing the truth value</h3>
+
+        <p>
+          The computation of T for a given quantified statement defined by Q, Y, R, and P, has been the
+          object of intense research in the fuzzy set community, see [DRSV14] for a review. Two main cases
+          can be considered:
+        </p>
+        <ul>
+          <li>When Q is an absolute quantifier, it refers to the cardinality of the fuzzy set P. Hence, the way
+            to use the qualifier R (when it appears) for restricting the sentence to the objects satisfying
+            R is to combine R and P using a t-norm, obtaining this way the fuzzy set to which Q refers
+            to. In this case, <i>Q [R] y’s are P</i> becomes <i>Q y’s are R ∧ P</i>. For instance, <i>Around 3 young
+            people are tall</i> becomes <i>Around 3 people are young and tall</i>.</li>
+          <li>When Q is a relative quantifier, it refers to the so-called relative cardinality of the fuzzy set
+            P with respect to the fuzzy set R, which is computed by dividing the cardinality of R ∧ P
+            by the cardinality of R (which requires that R is never empty!). Note that when R is not
+            employed we are in the case R=Y and we compute the relative cardinality by dividing the
+            cardinality of P=Y ∧ P by the cardinality of Y.</li>
+        </ul>
+        <p class="inline-math">
+          One of the most widely employed approaches, proposed by L.A. Zadeh and employed in the
+          original studies by Yager [Yag82, Yag91], perform the computation as follows. Let us consider
+          $$Y = {y1, . . . , yn}$$ and the t-norm minimum:
+        </p>
+        <ul>
+          <li>
+            For absolute quantifiers:
+          </li>
+          <li>
+            For relative quantifiers:
+          </li>
+        </ul>
+        <p>
+          It is easy to see that this method computes T in every case as the matching between the
+          quantifier and the appropriate (absolute or relative) cardinality in each case, which is in accordance
+          with the semantics of the quantified statement. Cardinality is computed on the basis of the classical
+          sigma-count (sum of membership degrees).
+        </p>
+        <p class="inline-math">
+          Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
+          satisfy several theoretical properties that are intuitively expected, as shown for instance in [DSM00,
+          DRSV14]. Among the several alternatives available in the literature, we use here method GD,
+          introduced in [DSM00] and which has been also discussed as a suitable method outside fuzzy
+          set theory (Representations by Levels, Gradual Sets) in [RSD18]. Let us consider again $$Y =
+          {y1, . . . , yn}$$ and $$∧ = min$$ as t-norm. The method works as follows:
+        </p>
+        <ul>
+          <li class="inline-math">
+            For absolute quantifiers, let $$Λ = {α1, . . . , αk}$$ be the set of different membership values of
+            $$R ∧ P$$ in Y that are greater than 0, plus the value 1 if $$R ∧ P$$ is not a normal set. Let
+            $$α_{k+1} = \element Λ$$ by convention, and let $$α_i > α_{i+1}$$ for every 1 ≤ $$i$$ ≤ $$k$$. Then
+
+            formula
+
+            where $$(R ∧ P)_{αi}$$ is the alpha-cut of level αi of the fuzzy set (R ∧ P).
+            Note that this method computes the matching between the quantifier and the crisp cardinality
+            in each significant alpha-cut of the set $$R ∧ P$$, defined by Λ. These are then combined into
+            a final degree by a weighted sum in which the weight is computed as the difference between
+            the value alpha employed and the immediately lesser one in Λ.
+          </li>
+          <li>
+            For relative quantifiers, working by alpha-cuts requires that R is a normal set so that we
+            avoid divisions by 0. When it is not, we can normalize it and apply the same scaling factor
+            to the set R ∧ P, which guarantees that the relative cardinalities in each alpha-cut do not
+            vary. Let r = max1≤j≤n R(yj ). Since R ̸= ∅ it is r > 0. Let R∗ be the normalization of
+            R obtained by dividing each membership degree by r, and let RP∗ be the scaling of R ∧ P
+            obtained by dividing each membership degree by r as well. Now, the set of significant levels
+            Λ is obtained as the set of membership values to either R∗ or RP∗ (note that, as R∗ is a normal set, the value 1 is already in Λ). Hence we have again Λ = {α1, . . . , alphak} with
+            αk+1 = 0 ̸∈ Λ by convention, and αi > αi+1 for every 1 ≤ i ≤ k. Then
+
+            formula
+
+            where RP∗
+            αi and R∗αi are the alpha-cuts of level αi of RP∗ and R∗, respectively.
+          </li>
+        </ul>
+        <p class="inline-math">
+          In short, method GD can be seen an aggregation of different crisp evaluations of the quantified
+          statement performed in significant alpha-cuts (i.e., those alpha-cuts for which the cardinality may
+          vary). Computation is $$O(n log n)$$ in the worst case, corresponding to the ordering of membership
+          degrees in the sets Λ.
+        </p>
+
+        <div class="framed">
+          <div class="inside">
+            <div class="eyebrow">
+              Interactive Block 3. + descr
+            </div>
+
+            <b>Choose your summarizer P:</b>
+
+            <div>
+              <input type="radio" class="summmarizer_radio" id="setosa" name="summmarizer_radio" value="Iris Setosa" onchange="update_ls()" checked="checked"> Iris Setosa <br>
+              <input type="radio" class="summmarizer_radio" id="versicolor" name="summmarizer_radio" value="Iris Versicolor" onchange="update_ls()"> Iris Versicolor <br>
+              <input type="radio" class="summmarizer_radio" id="virginica" name="summmarizer_radio" value="Iris Virginica" onchange="update_ls()"> Iris Virginica <br>
+            </div>
+
+            <b>Choose your quantifer Q:</b>
+
+            <div id="Q"></div>
+            <div id="draw_Q" style="width: 420px; margin: auto auto 10px;"></div>
+
+            <b>Choose your qualifier R:</b>
+
+            <div>
+              <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()" checked="checked"> Petal width <br>
+              <input type="radio" class="featureR" id="pl_sum" name="featureR" value="petal length" onchange="update_ls()"> Petal length <br>
+              <input type="radio" class="featureR" id="sw_sum" name="featureR" value="sepal width" onchange="update_ls()"> Sepal width <br>
+              <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()"> Sepal length <br>
+            </div>
+            <p></p>
+            <div id="R"></div>
+            <div id="draw_R" style="width: 420px; margin: auto auto 10px;">
+
+            </div>
+
+            <b>The resulting linguistic summary is:</b>
+
+            <p id="final_ls">Placeholder</p>
+
+            <b>This linguistic summary has a truth value of:</b>
+
+            <p id="truth_value">Placeholder</p>
+
+            <div class="caption"><b>Figure 3:</b><br> Truth value calculation.</div>
+
+            <script type="module" src="interactiveLS/interaction_three.js"></script>
+          </div>
         </div>
+      </section>
 
-        <b>The resulting linguistic summary is:</b>
+      <section id="applications">
+        <h2>VI. Applications</h2>
+        <p>
+          Linguistic summaries have been applied to different type of data:
+        </p>
+        <ul>
+          <li>databases (cf. Kacprzyk et al.~\cite{KacprzykZadrozny2005A,KacprzykYagerZadrozny2001}) [<a href="#ref_">?</a>],</li>
+          <li>time series (Kacprzyk et al.~\cite{KacprzykWilbikZadrozny2008FuzzySets}, Castillo-Ortega et al.~\cite{Castillo-OrtegaMarinSanchez2011a}) [<a href="#ref_">?</a>],</li>
+          <li>standardized texts (cf. Szczepaniak~\cite{SzczepaniakOchelska2006}) [<a href="#ref_">?</a>],</li>
+          <li>videos (cf. Anderson et al.~\cite{AndersonLukeKellerSkubicRantzAud2009,AndersonLukeKellerSkubicRantzAud2009A,AndersonLukeKeller2010}) [<a href="#ref_">?</a>],</li>
+          <li>sensor data~(cf. Ros et al.~\cite{RosAndersonKellerPegalajarDelgadoVilaPopescu2011}, Wilbik et al.~\cite{WilbikKellerAlexander2011,WilbikKellerBezdek2013}) [<a href="#ref_">?</a>],</li>
+          <li>web logs (cf. Zadro\.zny and Kacprzyk~\cite{ZadroznyKacprzyk2007}) [<a href="#ref_">?</a>] and </li>
+          <li>event logs (cf. Wilbik~\cite{WilbikKaymak2014,WilbikDijkman2015,WilbikKaymak2015}) [<a href="#ref_">?</a>].</li>
+        </ul>
+        <p>
+          Moreover, linguistic summaries have found several real-world applications.
+        </p>
+        <p>
+          Strykowski et al. [<a href="#ref_">?</a>] described a use case in commerce, where linguistic summaries
+          were used to identify and communicate the patterns in selling computer parts and weather in a B2C setting.
+          Based on those patterns, the shop was predicting their sales and required personnel.
+        </p>
+        <p>
+          Linguistic summaries are also used to monitor the status of elderly residents in an eldercare facility,
+          TigerPlace in Columbia, Missouri, USA [<a href="#ref_">?</a>]. In this project, motion sensors
+          were placed in the apartments of the elderly residents.
+          The sensors measure the activity level of their residents, that later is turned into linguistic description
+          of activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
+          the change in behavior or adverse health event [<a href="#ref_">?</a>].
+        </p>
+        <p>
+          Linguistic summaries are also used in the agri-food industry, to monitor the climate inside a
+          pigsty [<a href="#ref_">?</a>]. The evaluations with the farmers, proved that linguistic summaries can
+          be easily interpreted and understood by non-technically trained people.
+        </p>
+        <p>
+          Last, but not least, linguistic summaries seem to be good mechanisms for explanations. Initial works showed
+          that the summaries can be used to find an explanation of an anomaly in the process
+          data [<a href="#ref_">?</a>].
+          Moreover, linguistic summaries score highly in users' evaluations
+          in terms of explanation understandability and usefulness [<a href="#ref_">?</a>].
+        </p>
+      </section>
 
-        <p id="final_ls">Placeholder</p>
-
-        <b>This linguistic summary has a truth value of:</b>
-
-        <p id="truth_value">Placeholder</p>
-
-        <div class="caption"><b>Figure 3:</b><br> Truth value calculation.</div>
-      </div>
-
-
-      <!--      -->
-      <!--      -->
-      <!--      -->
-      <!--      -->
-      <!--      -->
-
-
-
-      <p>
-        Note, that we recommend to place the script import just behind the corresponding interactive figure,
-        such that we can easily match them later on.
-      </p>
-
-      <p>
-        The template also allows including codeblocks. Both, python and javascript,
-        include source code highlighting. Please note that the whitespaces will be
-        set as defined in the tags of the codeblock
-      </p>
-      <d-code block language="python">
-    # Python 3: Fibonacci series up to n
-    def fib(n):
-      a, b = 0, 1
-        while a < n:
-          print(a, end=' ')
-          a, b = b, a+b
-      </d-code>
-
-
-
-
-      <h2>Some Common Mistakes</h2>
-      <ul id="SCM">
-        <li>The word "data" is plural, not singular.</li>
-        <li>The subscript for the permeability of vacuum <d-math>\mu_{0}</d-math>, and other common scientific constants, is zero with subscript formatting, not a lowercase letter "o".</li>
-        <li>In American English, commas, semicolons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)</li>
-        <li>A graph within a graph is an "inset", not an "insert". The word alternatively is preferred to the word "alternately" (unless you really mean something that alternates).</li>
-        <li>Do not use the word "essentially" to mean "approximately" or "effectively".</li>
-        <li>In your paper title, if the words "that uses" can accurately replace the word "using", capitalize the "u"; if not, keep using lower-cased.</li>
-        <li>Be aware of the different meanings of the homophones "affect" and "effect", "complement" and "compliment", "discreet" and "discrete", "principal" and "principle".</li>
-        <li>Do not confuse "imply" and "infer".</li>
-        <li>The prefix "non" is not a word; it should be joined to the word it modifies, usually without a hyphen.</li>
-        <li>There is no period after the "et" in the Latin abbreviation "et al.".</li>
-        <li>The abbreviation "i.e." means "that is", and the abbreviation "e.g." means "for example".</li>
-      </ul>
-      <p>
-        An excellent style manual for science writers is <d-cite bibtex-key="b7"></d-cite>.
-      </p>
-
-      <h2>Authors and Affiliations</h2>
-      <p id="Authors">
-        A minimum of one author is required for all articles. Author names
-        should be listed starting from left to right and then moving down to the
-        next line. This is the author sequence that will be used in future citations
-        and by indexing services. Names should not be listed in columns nor group by
-        affiliation. Please keep your affiliations as succinct as possible (for
-        example, do not differentiate among departments of the same organization).
-      </p>
-
-      <h2>Hints and General Advice</h2>
-      <a class="marker" href="#Headings"><span>Identify the Headings</span></a>
-      <p id="Headings">
-        Headings, or heads, are organizational devices that guide the reader through
-        your paper. There are two types: component heads and text heads.
-      </p>
-
-      <p>
-        Component heads identify the different components of your paper and are not
-        topically subordinate to each other. Examples include Acknowledgments and
-        References and, for these, the correct style has been implemented and
-        this template and is defined by the IEEE. Do not make any adjustments. Use
-        "figure caption" for your Figure captions, and "table head" for your
-        table title. Run-in heads, such as "Abstract", will require you to apply a
-        style (in this case, italic) in addition to the style provided by the drop
-        down menu to differentiate the head from the text.
-      </p>
-
-      <p>
-        Text heads organize the topics on a relational, hierarchical basis. For
-        example, the paper title is the primary text head because all subsequent
-        material relates and elaborates on this one topic. If there are two or more
-        sub-topics, the next level head (uppercase Roman numerals) should be used
-        and, conversely, if there are not at least two sub-topics, then no subheads
-        should be introduced.
-      </p>
-
-      <a class="marker" href="#HTML"><span>HTML-Specific Advice</span></a>
-      <p id="HTML">
-        <span style="color:red;"> Not implemented yet:</span>
-        Please use "soft" (e.g., \verb|\eqref{Eq}|) cross references instead
-        of "hard" references (e.g., \verb|(1)|). That will make it possible
-        to combine sections, add equations, or change the order of figures or
-        citations without having to go through the file line by line.
-      </p>
-
-      <p>
-        You can make use of Bibtex but this requires a .bib file
-        to be linked in the reference section. If you use BibTeX to produce a
-        bibliography you must include the .bib files in your submission.
-      </p>
-
-      <p>
-        Similar to LaTeX, using the same id multiple times may result
-        in unintended behavior when linking to said id.
-      </p>
+      <section id="conclusion">
+        <h2>VII. Conclusion</h2>
+      </section>
 
 
-      <a class="marker" href="#Acknowledgment"><span>Acknowledgment</span></a>
-      <p id="Acknowledgment">
+
+      <h3>Acknowledgment</h3>
+      <p id="Acknowledgment" class="inline-math">
         The preferred spelling of the word "acknowledgment" in America is without
         an "e" after the "g". Avoid the stilted expression "one of us (R. B.
         G.) thanks $$\ldots$$". Instead, try "R. B. G. thanks $$\ldots$$". Put sponsor
         acknowledgments in the acknowledgement section in the appendix.
       </p>
 
-      <a class="marker" href="#References"><span>References</span></a>
-      <p id="References">
-        Please number citations consecutively within brackets <d-cite bibtex-key="b1"></d-cite>. The
-        sentence punctuation follows the bracket <d-cite bibtex-key="b2"></d-cite>. Refer simply to the reference
-        number, as in <d-cite bibtex-key="b3"></d-cite>---do not use "Ref. <d-cite bibtex-key="b3"></d-cite>"
-        or "reference <d-cite bibtex-key="b3"></d-cite>" except at
-        the beginning of a sentence: "Reference <d-cite bibtex-key="b3"></d-cite> was the first $$\ldots$$"
+      <h3 id="References">References</h3>
+      <p class="inline-math">
+        Please number citations consecutively within brackets [<a href="#ref_4">4</a>]. The
+        sentence punctuation follows the bracket [<a href="#ref_4">4</a>]. Refer simply to the reference
+        number, as in [<a href="#ref_4">4</a>]---do not use "Ref. [<a href="#ref_4">4</a>]"
+        or "reference [<a href="#ref_4">4</a>]" except at
+        the beginning of a sentence: "Reference [<a href="#ref_4">4</a>] was the first $$\ldots$$"
       </p>
 
-      <p>
-        Number footnotes separately in superscripts. Place the actual footnote at
-        the bottom of the column in which it was cited. Do not put footnotes in the
-        abstract or reference list. Use letters for table footnotes.
-      </p>
 
-      <p>
-        Unless there are six authors or more give all authors' names; do not use
-        "et al.". Papers that have not been published, even if they have been
-        submitted for publication, should be cited as "unpublished" <d-cite bibtex-key="b4"></d-cite>. Papers
-        that have been accepted for publication should be cited as "in press" <d-cite bibtex-key="b5"></d-cite>.
-        Capitalize only the first word in a paper title, except for proper nouns and
-        element symbols.
-      </p>
-
-      <p>
-        For papers published in translation journals, please give the English
-        citation first, followed by the original foreign-language citation <d-cite bibtex-key="b6"></d-cite>.
-      </p>
+      <section class="references">
+        <h2>References</h2>
+        <ol>
+          <li id="ref_1">
+            Data-Driven Documents / d3.js
+            <br>
+            <span>
+              <a href="https://d3js.org/" target="_blank">https://d3js.org/</a>
+            </span>
+          </li>
+          <li id="ref_2">
+            three.js / editor
+            <br>
+            <span>
+              three.js <a href="https://threejs.org/" target="_blank">https://threejs.org/</a>
+            </span>
+          </li>
+          <li id="ref_3">
+            The Technical Writer's Handbook
+            <br>
+            <span>
+              Young, M., 1989. University Science Books.
+            </span>
+          </li>
+          <li id="ref_4">
+            Choosing Representation, Mutation, and Crossover in Genetic Algorithms
+            <span>
+              A. Dockhorn and S. Lucas, IEEE Computational Intelligence Magazine, vol. 17, no. 4, pp. 52-53, 1 Nov. 2022. DOI:<a href="https://ieeexplore.ieee.org/document/9942691" target="_blank">
+              10.1109/MCI.2022.3199626</a>
+            </span>
+          </li>
+          <li id="ref_5">
+            Title of paper if known
+            <span>
+              Elissa, K.. unpublished.
+            </span>
+          </li>
+          <li id="ref_6">
+            Title of paper with only first word capitalized
+            <span>
+              Nicole, R., (in press). J. Name Stand. Abbrev.
+            </span>
+          </li>
+          <li id="ref_7">
+            Electron spectroscopy studies on magneto-optical media and plastic substrate interface
+            <span>
+              Y. Yorozu, M.H. and Tagawa, Y., 1987. , Vol 2, pp. 740--741. IEEE Transl. J. Magn. Japan.
+            </span>
+          </li>
+        </ol>
+      </section>
     </div>
 
-    <div>
-    <p style="color: red">
-      The IEEE interactive article template contains guidance text for composing and formatting of interactive articles.
-      Please ensure that all template text is removed from your article prior to submission.
-      Failure to remove the template text from your paper may result in your paper not being published.
-    </p>
-    </div>
-  </d-article>
+  </article><!-- End of aticle -->
 
-  <d-appendix>
-    <d-acknowledgements>
-      <h3>Contributions</h3>
-      <p>Some text describing who did what.</p>
-      <h4>Sponsors</h4>
-      <p>A description of sponsors.</p>
-    </d-acknowledgements>
+  <!-- Scroll to top button -->
+  <a class="scroll-top" href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 312.36">
+      <path fill="white"
+        d="M0 276.77 253.12 0 512 282.48l-32.65 29.88-226.2-246.83L32.66 306.64z" />
+    </svg>
+  </a>
 
-    <d-footnote-list></d-footnote-list>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let scrollTopBtn = document.querySelector(".scroll-top");
+      window.onscroll = function () { scrollFunction(scrollTopBtn) };
 
-    <d-bibliography src="references.bib"></d-bibliography>
-  </d-appendix>
-
-
-  <distill-footer></distill-footer>
-
+      function scrollFunction(el) {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          el.style.display = "flex";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    });
+  </script>
 </body>
+
+</html>
