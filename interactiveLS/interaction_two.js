@@ -179,7 +179,7 @@ function calculate_mf_radius(d, selection) {
     var value = d[x_feat]
     var map_value = mapping(value, eval(x_feat+"_min"), eval(x_feat+"_max"), 0, 100)
     var x_coords = window.displayed_mf[selection].points.map(v => parseInt(v.x))
-    var mf_value = calc_mf_value(window.displayed_mf[selection].type, [map_value, ...x_coords ])
+    var mf_value = calc_mf_value_absolute(window.displayed_mf[selection].type, [map_value, ...x_coords ])
     var final_radius = mapping(mf_value, 0,1,1,5)
 
     return final_radius
@@ -450,12 +450,27 @@ function add_linguistic_definition(index) {
         // add event listener to parameter textboxes
         document.getElementById("linguistic_definitions").addEventListener("change", function (e) {
             if (e.target.className === 'parameterinput') {
-                // new_value = + parseFloat(e.target.value).toFixed(1)
-                var new_value = parseInt(e.target.value)
-                e.target.value = new_value
                 // check for which mf the change was triggered
-                // go up twice, cause method already exists for this level (could be nicer, I know)
-                div_pos = get_div_pos(e.target)
+                var div_pos = get_div_pos(e.target)
+                // get the total number of parameters for this mf
+                var totalParam = window.displayed_mf[div_pos].points.length - 1
+                // get the index of the parameter that was changed
+                // as there is always a text element before the input box, and the structure of such text is known,
+                // take the 3rd last position, as it holds the index
+                var currParam = parseInt(e.target.previousSibling.wholeText.slice(-3, -2))
+
+                // next, do the boundary check
+                // if the current param is the first, then bound is 0, otherwise it is the value from the next left input
+                var left_bound = (currParam==0) ? 0 : window.displayed_mf[div_pos].points[currParam-1].x
+                // if the current param is the last, then bound is 100, otherwise it is the value from the next right input
+                var right_bound = (currParam==totalParam) ? 100 : window.displayed_mf[div_pos].points[currParam+1].x
+
+
+                var target_value = parseInt(e.target.value)
+                // var new_value = parseInt(e.target.value)
+                var new_value = target_value > right_bound ? right_bound : target_value < left_bound ? left_bound : target_value
+                e.target.value = new_value
+
                 // get changed parameter from html text written before text field
                 var param_pos = parseInt(e.target.previousSibling.data.slice(-3, -2))
                 // now change the x value in the corresponding array/object position

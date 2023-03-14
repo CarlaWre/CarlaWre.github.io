@@ -192,7 +192,41 @@ var mf_data = [
         get line() {return [{x:0, y:1}, ...this.points, {x:100, y:0}];} } ]
     // {type: "Gaussian", points: [{x:33, y:1}, {x:66, y:1}], get line() {return [{x:0, y:0}, ...this.points, {x:100, y:0}];} }]
 
-function calc_mf_value(type, param_array) {
+function convert(feature, value){
+    f_min = d3.min(iris, d => d[feature])
+    f_max = d3.max(iris, d => d[feature])
+
+    return (value/100)*(f_max-f_min)+f_min
+}
+
+function calc_mf_value_relative(type, feature, param_array) {
+    if (type=="Triangular") {
+        var z = param_array[0],
+            a = convert(feature, param_array[1]),
+            b = convert(feature, param_array[2]),
+            c = convert(feature, param_array[3]);
+        return Math.max( Math.min( (z-a)/(b-a), (c-z)/(c-b) ), 0 )
+    } else if (type == "Trapezoidal") {
+        var z = param_array[0],
+            a = convert(feature, param_array[1]),
+            b = convert(feature, param_array[2]),
+            c = convert(feature, param_array[3]),
+            d = convert(feature, param_array[4]);
+        return Math.max( Math.min( (z-a)/(b-a),1,(d-z)/(d-c)), 0 )
+    } else if (type == "S-shaped") {
+        var z = param_array[0],
+            a = convert(feature, param_array[1]),
+            b = convert(feature, param_array[2]);
+        return Math.max( Math.min( (z-a)/(b-a),1), 0 )
+    } else if (type == "Z-shaped") {
+        var z = param_array[0],
+            c = convert(feature, param_array[1]),
+            d = convert(feature, param_array[2]);
+        return Math.max( Math.min( 1,(d-z)/(d-c)), 0 )
+    }
+}
+
+function calc_mf_value_absolute(type, param_array) {
     if (type=="Triangular") {
         var z = param_array[0],
             a = param_array[1],

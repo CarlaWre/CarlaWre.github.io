@@ -124,7 +124,7 @@
         <h2>I. Introduction</h2>
         <p>
           Recent developments in ICT technology enable more and more data to be collected.
-          According to Forbes [<a href="#ref_1">1</a>], already back in 2018 around 90% of the world’s data
+          According to Forbes [<a href="#1-Forbes">1</a>], already back in 2018 around 90% of the world’s data
           was generated in the span of only two years.
           The sources of this are varying, with individuals creating parts of this data more as a byproduct
           of social media usage. Contrastingly in industries, the data collection process is purposefully accelerated,
@@ -134,11 +134,11 @@
           The level of insight from this varies per company but can be classified into one of four categories
           that have been proposed by Gartner to distinguish the level of analytics:
           descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics
-          [<a href="#ref_2">2</a>].
+          [<a href="#2-Gartner">2</a>].
         </p>
         <div class="static">
           <img src="pics/gartner-model.png" alt="Gartner analytics model" style="margin: auto auto; width: max-content; display: block"/>
-          <div class="caption"><b>Figure 1:</b><br> Gartner analytics model. Taken from https://computd.nl/demystification/4-levels-of-data-maturity/, cite this correctly[<a href="#ref_?">?</a>]</div>
+          <div class="caption"><b>Figure 1:</b><br> Gartner analytics model [<a href="#3-Graphic">3</a>]</div>
         </div>
         <p></p>
         <p>
@@ -166,7 +166,7 @@
       <section id="running example">
         <h2>II. Running Example</h2>
         <p>
-          As the running example, let us use the iris data set<d-cite bibtex-key=""></d-cite>. This data set contains 150 data points,
+          As the running example, let us use the iris data set [<a href="#4-FisherIris">4</a>]. This data set contains 150 data points,
           describing one of three possible plant types Iris Setosa, Iris Virginica and Iris Versicolor.
           Every flower type is represented 50 times, and a single iris flower can be characterized by four attributes,
           namely the length and the width of both sepals and petals, measured in centimeters.
@@ -176,7 +176,8 @@
           <img src="pics/Iris_setosa.jpg" alt="Iris setosa" style="margin: auto auto; width: 30%; display: inline-flex"/>
           <img src="pics/Iris_virginica.jpg" alt="Iris virginica" style="margin: auto auto; width: 30%; display: inline-flex"/>
           <img src="pics/Iris_versicolor.jpg" alt="Iris versicolor" style="margin: auto auto; width: 30%; display: inline-flex"/>
-          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower: Iris setosa, Iris virginica, and Iris versicolor.<d-footnote>Taken from https://en.wikipedia.org/wiki/Iris_flower_data_set, cite this correctly</d-footnote></div>
+          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower: Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#5-IrisWiki">5</a>]).
+          </div>
         </div>
         <p></p>
         <p>
@@ -185,15 +186,19 @@
         <div class="framed">
           <div class="inside">
             <div class="eyebrow">
-              Interactive Block 1. + descr
+              Deselect one of the options to change with features you want to display on the scatter plot.
+              You can also switch axes.
             </div>
 
+            <i style="color: darkgray"> Select max 2 features: </i>
+            <br>
             <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>
             <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>
             <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>
             <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>
 
             <button class="axis_switch" type="button">Switch axes</button>
+
 
             <div id="irisScatter" style="width: 320px; margin: auto auto 10px;"></div>
 
@@ -210,16 +215,19 @@
       <section id="linguistic variable">
         <h2>III. Linguistic Variable</h2>
         <p class="inline-math">
-          The key concepts of the linguistic summaries and fuzzy set theory<d-cite bibtex-key=""></d-cite> are the
+          The key concepts of the linguistic summaries and fuzzy set theory [<a href="#6-Zadeh">6</a>] are the
           linguistic variable and the linguistic value.
-
-          Formally, according to Klir and Yuan<d-cite bibtex-key=""></d-cite>, a linguistic variable is defined as
-          a quintuple (v,T,X,g,m), where v is the name of the variable, T is the set of linguistic terms of v,
-          X is the universal set representing the range of v, g is a syntactic rule for generating linguistic terms,
-          and m is a semantic rule that assigns to each linguistic term $$ t∈T $$ its meaning, m(t), which is a fuzzy set on X.
-
+        </p>
+        <p class="inline-math">
+          Formally, according to Klir and Yuan [<a href="#7-KlirYuan">7</a>], a linguistic variable is defined as
+          a quintuple $(v,T,X,g,m)$, where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$,
+          $X$ is the universal set representing the range of $v$, $g$ is a syntactic rule for generating linguistic terms,
+          and $m$ is a semantic rule that assigns to each linguistic term $$ t \in T $$ its meaning, $m(t)$,
+          which is a fuzzy set on $X$.
+        </p>
+        <p class="inline-math">
           Let us consider the iris data set and the linguistic variable sepal length. In this case, linguistic terms
-          may be small, medium and large. X is a set [4.3, 7.9], as this is the range of the sepal length.
+          may be small, medium and large. $X$ is a set [4.3, 7.9], as this is the range of the sepal length.
           Each of the linguistic terms is mapped to a fuzzy set. Figure 4 illustrates the structure of the linguistic
           variable sepal length.
         </p>
@@ -239,7 +247,12 @@
         <div class="framed">
           <div class="inside">
             <div class="eyebrow">
-              Interactive Block 2. + descr
+              You can create your own linguistic variables. Rename them, change the type of the underlying membership
+              function and play around with its definition by either typing in the new values or dragging the points
+              or lines in the figure. You can add up to 3 variables. See in the figure below what kind of impact the
+              defined linguistic variable has on the iris data set. By selecting which of the active linguistic
+              variables you can see how this changes based on different definitions. If you want to see the impact for
+              different features, go back to the previous interaction and adjust the features there.
             </div>
 
             <div id="linguistic_definitions"></div>
@@ -269,7 +282,7 @@
           A special kind of linguistic variable, essential in linguistic summaries is a (linguistic) quantifier.
           Linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
           absolute quantifiers and relative quantifiers. Absolute quantifiers are defined over numbers,
-          $$\R$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
+          $$\mathbb{R}$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
           exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 6 shows examples of both
           absolute quantifiers (a) and relative quantifiers (b).
         </p>
@@ -292,165 +305,227 @@
         <h3>What is a linguistic summary?</h3>
 
         <p>
-          The notion of linguistic summary was introduced by R.R. Yager [Yag82, Yag91] as a fuzzy logic-based
+          The notion of linguistic summary was introduced by R.R. Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>] as a fuzzy logic-based
           approach to the summarization of data. It is very frequently used as a synonym for linguistic
-          description (or as part of it) in the NLG community, see for instance [SRHY03, MS16].
+          description (or as part of it) in the NLG community, see for instance [<a href="#10-SRHY03">10</a>], [<a href="#11-MS16">11</a>].
         </p>
-        <p>
+        <p class="inline-math">
           Yager’s approach consider linguistic summaries described by means of quantified statements of
-          the form <i>Q [R] y’s are P</i>, where:
+          the form <i>$Q$ [$R$] y’s are $P$</i>, where:
         </p>
         <ul>
-          <li>Q is a linguistic quantifier (e.g. <i>most</i>).</li>
-          <li>Y’s are the objects (e.g. tuples in a database) over which we want to provide the summary.</li>
-          <li>P is called the <i>summarizer</i>, and corresponds to a fuzzy subset of Y. It is usual that P is
+          <li class="inline-math">$Q$ is a linguistic quantifier (e.g. <i>most</i>).</li>
+          <li class="inline-math">$Y$’s are the objects (e.g. tuples in a database) over which we want to provide the summary.</li>
+          <li class="inline-math">$P$ is called the <i>summarizer</i>, and corresponds to a fuzzy subset of $Y$. It is usual that $P$ is
             induced by some linguistic label defined on the domain of one variable defining some aspect
-            of objects in Y. For instance, if we consider Y to be a set of people and the variable <i>height</i>,
+            of objects in $Y$. For instance, if we consider $Y$ to be a set of people and the variable <i>height</i>,
             and we consider the linguistic label <i>tall</i> defined on the domain of possible heights of people,
-            then P can be defined as <i>the set of tall people</i>, the membership of each person y to P being
+            then $P$ can be defined as <i>the set of tall people</i>, the membership of each person y to $P$ being
             the membership degree of the height of y to the label <i>tall</i>.</li>
-          <li>R is an optional argument called <i>qualifier</i>, corresponding to a fuzzy subset of Y. It allows to
-            restrict the summary to those objects in Y that satisfy R. As with P, it can be induced by
+          <li class="inline-math">$R$ is an optional argument called <i>qualifier</i>, corresponding to a fuzzy subset of $Y$. It allows to
+            restrict the summary to those objects in $Y$ that satisfy $R$. As with $P$, it can be induced by
             linguistic labels on the domain of variables of objects. Note that, in practice, avoiding the
-            use of a qualifier is equivalent to consider that R=Y.</li>
+            use of a qualifier is equivalent to consider that $R=Y$.</li>
         </ul>
-        <p>
+        <p class="inline-math">
           As an example we can consider the quantified statements <i>Most of the people are tall</i>, where
-          Q is the quantifier <i>most</i>, Y is a set of people (the specific set for which we want to perform the
-          summary), and <i>tall</i> stands for the fuzzy subset of <i>tall people</i> defined on Y. In this case it is R=Y
-          or, if you prefer it, we are avoiding the use of a qualifier R. Another example is <i>Most of the young
+          $Q$ is the quantifier <i>most</i>, $Y$ is a set of people (the specific set for which we want to perform the
+          summary), and <i>tall</i> stands for the fuzzy subset of <i>tall people</i> defined on $Y$. In this case it is $R=Y$
+          or, if you prefer it, we are avoiding the use of a qualifier $R$. Another example is <i>Most of the young
           people are tall</i>, where in this case we have used as qualifier the fuzzy subset of <i>young people</i> within
-          Y.
+          $Y$.
         </p>
         <p>
           On the basis of these quantified statements, a linguistic summary is defined as a pair comprised
           of:
         </p>
         <ul>
-          <li>A quantified statement of the form <i>Q [R] y’s are P</i>, and</li>
-          <li>A truth value T, corresponding to the accomplishment degree of the quantified statement on
+          <li class="inline-math">A quantified statement of the form <i>$Q$ [$R$] y’s are $P$</i>, and</li>
+          <li class="inline-math">A truth value $T$, corresponding to the accomplishment degree of the quantified statement on
             the dataset. It represents to which degree the quantified statement is accurate for the data
             being summarized.</li>
         </ul>
-        <p>
-          Let’s see how to compute T in the next section.
+        <p class="inline-math">
+          Let’s see how to compute $T$ in the next section.
         </p>
 
         <h3>Computing the truth value</h3>
 
-        <p>
-          The computation of T for a given quantified statement defined by Q, Y, R, and P, has been the
-          object of intense research in the fuzzy set community, see [DRSV14] for a review. Two main cases
+        <p class="inline-math">
+          The computation of $T$ for a given quantified statement defined by $Q$, $Y$, $R$, and $P$, has been the
+          object of intense research in the fuzzy set community, see [<a href="#12-DRSV14">12</a>] for a review. Two main cases
           can be considered:
         </p>
         <ul>
-          <li>When Q is an absolute quantifier, it refers to the cardinality of the fuzzy set P. Hence, the way
-            to use the qualifier R (when it appears) for restricting the sentence to the objects satisfying
-            R is to combine R and P using a t-norm, obtaining this way the fuzzy set to which Q refers
-            to. In this case, <i>Q [R] y’s are P</i> becomes <i>Q y’s are R ∧ P</i>. For instance, <i>Around 3 young
+          <li class="inline-math">When $Q$ is an absolute quantifier, it refers to the cardinality of the fuzzy set $P$.
+            Hence, the way to use the qualifier $R$ (when it appears) for restricting the sentence to the objects satisfying
+            $R$ is to combine $R$ and $P$ using a t-norm, obtaining this way the fuzzy set to which $Q$ refers
+            to. In this case, <i>$Q$ [$R$] y’s are $P$</i> becomes <i>$Q$ y’s are $R ∧ P$</i>. For instance, <i>Around 3 young
             people are tall</i> becomes <i>Around 3 people are young and tall</i>.</li>
-          <li>When Q is a relative quantifier, it refers to the so-called relative cardinality of the fuzzy set
-            P with respect to the fuzzy set R, which is computed by dividing the cardinality of R ∧ P
-            by the cardinality of R (which requires that R is never empty!). Note that when R is not
-            employed we are in the case R=Y and we compute the relative cardinality by dividing the
-            cardinality of P=Y ∧ P by the cardinality of Y.</li>
+          <li class="inline-math">When $Q$ is a relative quantifier, it refers to the so-called relative cardinality of the fuzzy set
+            $P$ with respect to the fuzzy set $R$, which is computed by dividing the cardinality of $R ∧ P$
+            by the cardinality of $R$ (which requires that $R$ is never empty!). Note that when $R$ is not
+            employed we are in the case $R=Y$ and we compute the relative cardinality by dividing the
+            cardinality of $P=Y ∧ P$ by the cardinality of $Y$.</li>
         </ul>
         <p class="inline-math">
           One of the most widely employed approaches, proposed by L.A. Zadeh and employed in the
-          original studies by Yager [Yag82, Yag91], perform the computation as follows. Let us consider
-          $$Y = {y1, . . . , yn}$$ and the t-norm minimum:
+          original studies by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>], perform the computation as follows. Let us consider
+          $$Y = {y_1, . . . , y_n}$$ and the t-norm minimum:
         </p>
         <ul>
           <li>
+            <p>
             For absolute quantifiers:
+            </p>
+            <p>
+              $$T_Z=Q \left( \sum_{i=1}^n \min (R(y_i),P(y_i)) \right)$$
+            </p>
+            <p class="inline-math">
+              which, when $R=Y$, becomes
+            </p>
+            <p>
+              $$T_Z=Q \left( \sum_{i=1}^n P(y_i) \right)$$
+            </p>
           </li>
+
           <li>
+            <p>
             For relative quantifiers:
+            </p>
+            <p>
+              $$T_Z=Q \left( \frac{\sum_{i=1}^n \min (R(y_i),P(y_i))}{\sum_{i=1}^n R(y_i)} \right)$$
+            </p>
+            <p class="inline-math">
+              which, when $R=Y$, becomes
+            </p>
+            <p>
+              $$T_Z=Q \left( \frac{\sum_{i=1}^n P(y_i)}{n} \right)$$
+            </p>
           </li>
         </ul>
-        <p>
-          It is easy to see that this method computes T in every case as the matching between the
+        <p class="inline-math">
+          It is easy to see that this method computes $T$ in every case as the matching between the
           quantifier and the appropriate (absolute or relative) cardinality in each case, which is in accordance
           with the semantics of the quantified statement. Cardinality is computed on the basis of the classical
           sigma-count (sum of membership degrees).
         </p>
         <p class="inline-math">
           Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
-          satisfy several theoretical properties that are intuitively expected, as shown for instance in [DSM00,
-          DRSV14]. Among the several alternatives available in the literature, we use here method GD,
-          introduced in [DSM00] and which has been also discussed as a suitable method outside fuzzy
-          set theory (Representations by Levels, Gradual Sets) in [RSD18]. Let us consider again $$Y =
-          {y1, . . . , yn}$$ and $$∧ = min$$ as t-norm. The method works as follows:
+          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#12-DRSV14">12</a>], [<a href="#13-DSM00">13</a>]. Among the several alternatives available in the literature, we use here method GD,
+          introduced in [<a href="#13-DSM00">13</a>] and which has been also discussed as a suitable method outside fuzzy
+          set theory (Representations by Levels, Gradual Sets) in [<a href="#14-RSD18">14</a>]. Let us consider again $$Y =
+          {y_1, . . . , y_n}$$ and $$∧ = min$$ as t-norm. The method works as follows:
         </p>
         <ul>
-          <li class="inline-math">
-            For absolute quantifiers, let $$Λ = {α1, . . . , αk}$$ be the set of different membership values of
-            $$R ∧ P$$ in Y that are greater than 0, plus the value 1 if $$R ∧ P$$ is not a normal set. Let
-            $$α_{k+1} = \element Λ$$ by convention, and let $$α_i > α_{i+1}$$ for every 1 ≤ $$i$$ ≤ $$k$$. Then
-
-            formula
-
-            where $$(R ∧ P)_{αi}$$ is the alpha-cut of level αi of the fuzzy set (R ∧ P).
-            Note that this method computes the matching between the quantifier and the crisp cardinality
-            in each significant alpha-cut of the set $$R ∧ P$$, defined by Λ. These are then combined into
-            a final degree by a weighted sum in which the weight is computed as the difference between
-            the value alpha employed and the immediately lesser one in Λ.
+          <li>
+            <p  class="inline-math">
+              For absolute quantifiers, let $\Lambda=\{\alpha_1,\ldots,\alpha_k\}$ be the set of different membership
+              values of $R \wedge P$ in Y that are greater than 0, plus the value 1 if $R \wedge P$ is not a normal set.
+              Let $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and let $\alpha_i > \alpha_{i+1}$ for every
+              $1 \leq i \leq k$. Then
+            </p>
+            <p>
+              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( Card((R \wedge P)_{\alpha i}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$
+            </p>
+            <p  class="inline-math">
+              where $(R \wedge P)_{\alpha i}$ is the alpha-cut of level $\alpha_i$ of the fuzzy set $(R \wedge P)$.
+            </p>
+            <p class="inline-math">
+              Note that this method computes the matching between the quantifier and the crisp cardinality in each
+              significant alpha-cut of the set $R \wedge P$, defined by $\Lambda$. These are then combined into a final
+              degree by a weighted sum in which the weight is computed as the difference between the value alpha
+              employed and the immediately lesser one in $\Lambda$.
+            </p>
           </li>
           <li>
-            For relative quantifiers, working by alpha-cuts requires that R is a normal set so that we
-            avoid divisions by 0. When it is not, we can normalize it and apply the same scaling factor
-            to the set R ∧ P, which guarantees that the relative cardinalities in each alpha-cut do not
-            vary. Let r = max1≤j≤n R(yj ). Since R ̸= ∅ it is r > 0. Let R∗ be the normalization of
-            R obtained by dividing each membership degree by r, and let RP∗ be the scaling of R ∧ P
-            obtained by dividing each membership degree by r as well. Now, the set of significant levels
-            Λ is obtained as the set of membership values to either R∗ or RP∗ (note that, as R∗ is a normal set, the value 1 is already in Λ). Hence we have again Λ = {α1, . . . , alphak} with
-            αk+1 = 0 ̸∈ Λ by convention, and αi > αi+1 for every 1 ≤ i ≤ k. Then
-
-            formula
-
-            where RP∗
-            αi and R∗αi are the alpha-cuts of level αi of RP∗ and R∗, respectively.
+            <p class="inline-math">
+              For relative quantifiers, working by alpha-cuts requires that $R$ is a normal set so that we avoid
+              divisions by 0. When it is not, we can normalize it and apply the same scaling factor to the set
+              $R \wedge P$, which guarantees that the relative cardinalities in each alpha-cut do not vary.
+              Let $r=\max_{1\leq j \leq n} R(y_j)$. Since $R \neq \emptyset$ it is $r>0$. Let $R^*$ be the normalization
+              of $R$ obtained by dividing each membership degree by $r$, and let $RP^*$ be the scaling of $R \wedge P$
+              obtained by dividing each membership degree by $r$ as well. Now, the set of significant levels $\Lambda$
+              is obtained as the set of membership values to either $R^*$ or $RP^*$ (note that, as $R^*$ is a normal set,
+              the value 1 is already in $\Lambda$). Hence we have again $\Lambda=\{\alpha_1,\ldots,alpha_k\}$ with
+              $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and $\alpha_i > \alpha_{i+1}$ for every $1 \leq i \leq k$.
+              Then
+            </p>
+            <p>
+              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( \frac{Card(RP^*_{\alpha_i})}{Card(R^*_{\alpha_i})}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$
+            </p>
+            <p class="inline-math">
+              where $RP^*_{\alpha_i}$ and $R^*_{\alpha_i}$ are the alpha-cuts of level $\alpha_i$ of $RP^*$ and $R^*$, respectively.
+            </p>
           </li>
         </ul>
         <p class="inline-math">
-          In short, method GD can be seen an aggregation of different crisp evaluations of the quantified
-          statement performed in significant alpha-cuts (i.e., those alpha-cuts for which the cardinality may
-          vary). Computation is $$O(n log n)$$ in the worst case, corresponding to the ordering of membership
-          degrees in the sets Λ.
+          In short, method GD can be seen an aggregation of different crisp evaluations of the quantified statement
+          performed in significant alpha-cuts (i.e., those alpha-cuts for which the cardinality may vary). Computation
+          is $O(n\log n)$ in the worst case, corresponding to the ordering of membership degrees in the sets $\Lambda$.
         </p>
 
         <div class="framed">
           <div class="inside">
             <div class="eyebrow">
-              Interactive Block 3. + descr
+              Define your own linguistic summary here. Choose which summarizer P, quantifier Q and qualifier R you want
+              and it will display you a possible linguistic summary and corresponding truth value.
             </div>
 
-            <b>Choose your summarizer P:</b>
-
+            <b>Select the protoform</b>
             <div>
-              <input type="radio" class="summmarizer_radio" id="setosa" name="summmarizer_radio" value="Iris Setosa" onchange="update_ls()" checked="checked"> Iris Setosa <br>
-              <input type="radio" class="summmarizer_radio" id="versicolor" name="summmarizer_radio" value="Iris Versicolor" onchange="update_ls()"> Iris Versicolor <br>
-              <input type="radio" class="summmarizer_radio" id="virginica" name="summmarizer_radio" value="Iris Virginica" onchange="update_ls()"> Iris Virginica <br>
+              <input type="radio" class="protoform" id="simple_form" name="protoform" value="simple protoform" onchange="quantifier_visibility(this)" checked="checked"> Simple protoform <br>
+              <input type="radio" class="protoform" id="extended_form" name="protoform" value="extended protoform" onchange="quantifier_visibility(this)"> Extended protoform <br>
             </div>
 
-            <b>Choose your quantifer Q:</b>
-
-            <div id="Q"></div>
-            <div id="draw_Q" style="width: 420px; margin: auto auto 10px;"></div>
-
-            <b>Choose your qualifier R:</b>
-
-            <div>
-              <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()" checked="checked"> Petal width <br>
-              <input type="radio" class="featureR" id="pl_sum" name="featureR" value="petal length" onchange="update_ls()"> Petal length <br>
-              <input type="radio" class="featureR" id="sw_sum" name="featureR" value="sepal width" onchange="update_ls()"> Sepal width <br>
-              <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()"> Sepal length <br>
-            </div>
             <p></p>
-            <div id="R"></div>
-            <div id="draw_R" style="width: 420px; margin: auto auto 10px;">
 
+            <div id="div_summarizer">
+              <b>Choose your summarizer P:</b>
+              <div>
+                <input type="radio" class="summmarizer_radio" id="pw_P" name="summmarizer_radio" value="petal width" onchange="quantifier_options(this)" checked="checked"> Petal width <br>
+                <input type="radio" class="summmarizer_radio" id="pl_P" name="summmarizer_radio" value="petal length" onchange="quantifier_options(this)"> Petal length <br>
+                <input type="radio" class="summmarizer_radio" id="sw_P" name="summmarizer_radio" value="sepal width" onchange="quantifier_options(this)"> Sepal width <br>
+                <input type="radio" class="summmarizer_radio" id="sl_P" name="summmarizer_radio" value="sepal length" onchange="quantifier_options(this)"> Sepal length <br>
+              </div>
+              <div id="P"></div>
+              <div id="draw_P" style="width: 420px; margin: auto auto 10px;"></div>
             </div>
+
+            <div id="div_qualifier">
+              <b>Choose your quantifer Q:</b>
+              <div id="Q"></div>
+              <div id="draw_Q" style="width: 420px; margin: auto auto 10px;"></div>
+            </div>
+
+
+            <div id="div_quantifier" style="display: none">
+              <b>Choose your qualifier R:</b>
+              <div id="div_quantifier_radio">
+                <div id="pw_Q" style="display: none">
+                  <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()" checked="checked">
+                  <span> Petal width </span>
+                </div>
+                <div id="pl_Q">
+                  <input type="radio" class="featureR" id="pl_sum" name="featureR" value="petal length" onchange="update_ls()">
+                  <span> Petal length </span>
+                </div>
+                <div id="sw_Q">
+                  <input type="radio" class="featureR" id="sw_sum" name="featureR" value="sepal width" onchange="update_ls()">
+                  <span> Sepal width </span>
+                </div>
+                <div id="sl_Q">
+                  <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()">
+                  <span> Sepal length </span>
+                </div>
+              </div>
+              <div id="R"></div>
+              <div id="draw_R" style="width: 420px; margin: auto auto 10px;"></div>
+            </div>
+
+
+            <p></p>
+
 
             <b>The resulting linguistic summary is:</b>
 
@@ -458,7 +533,8 @@
 
             <b>This linguistic summary has a truth value of:</b>
 
-            <p id="truth_value">Placeholder</p>
+            <p id="truth_value_zadeh">Placeholder</p>
+            <p id="truth_value_gd">Placeholder</p>
 
             <div class="caption"><b>Figure 3:</b><br> Truth value calculation.</div>
 
@@ -473,117 +549,348 @@
           Linguistic summaries have been applied to different type of data:
         </p>
         <ul>
-          <li>databases (cf. Kacprzyk et al.~\cite{KacprzykZadrozny2005A,KacprzykYagerZadrozny2001}) [<a href="#ref_">?</a>],</li>
-          <li>time series (Kacprzyk et al.~\cite{KacprzykWilbikZadrozny2008FuzzySets}, Castillo-Ortega et al.~\cite{Castillo-OrtegaMarinSanchez2011a}) [<a href="#ref_">?</a>],</li>
-          <li>standardized texts (cf. Szczepaniak~\cite{SzczepaniakOchelska2006}) [<a href="#ref_">?</a>],</li>
-          <li>videos (cf. Anderson et al.~\cite{AndersonLukeKellerSkubicRantzAud2009,AndersonLukeKellerSkubicRantzAud2009A,AndersonLukeKeller2010}) [<a href="#ref_">?</a>],</li>
-          <li>sensor data~(cf. Ros et al.~\cite{RosAndersonKellerPegalajarDelgadoVilaPopescu2011}, Wilbik et al.~\cite{WilbikKellerAlexander2011,WilbikKellerBezdek2013}) [<a href="#ref_">?</a>],</li>
-          <li>web logs (cf. Zadro\.zny and Kacprzyk~\cite{ZadroznyKacprzyk2007}) [<a href="#ref_">?</a>] and </li>
-          <li>event logs (cf. Wilbik~\cite{WilbikKaymak2014,WilbikDijkman2015,WilbikKaymak2015}) [<a href="#ref_">?</a>].</li>
+          <li>databases (cf. Kacprzyk et al. [<a href="#15-KacprzykZadrozny2005A">15</a>], [<a href="#16-KacprzykYagerZadrozny2001">16</a>]),</li>
+          <li>time series (Kacprzyk et al. [<a href="#17-KacprzykWilbikZadrozny2008FuzzySets">17</a>], Castillo-Ortega et al. [<a href="#18-Castillo-OrtegaMarinSanchez2011a">18</a>]),</li>
+          <li>standardized texts (cf. Szczepaniak [<a href="#19-SzczepaniakOchelska2006">19</a>]),</li>
+          <li>videos (cf. Anderson et al. [<a href="#20-AndersonLukeKellerSkubicRantzAud2009">20</a>],[<a href="#21-AndersonLukeKellerSkubicRantzAud2009A">21</a>],[<a href="#22-AndersonLukeKeller2010">22</a>]),</li>
+          <li>sensor data (cf. Ros et al. [<a href="#23-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">23</a>], Wilbik et al. [<a href="#24-WilbikKellerAlexander2011">24</a>], [<a href="#25-WilbikKellerBezdek2013">25</a>]),</li>
+          <li>web logs (cf. Zadrozny and Kacprzyk [<a href="#26-ZadroznyKacprzyk2007">26</a>]) and </li>
+          <li>event logs (cf. Wilbik [<a href="#27-WilbikKaymak2014">27</a>],[<a href="#28-WilbikDijkman2015">28</a>],[<a href="#29-WilbikKaymak2015">29</a>]).</li>
         </ul>
         <p>
           Moreover, linguistic summaries have found several real-world applications.
         </p>
         <p>
-          Strykowski et al. [<a href="#ref_">?</a>] described a use case in commerce, where linguistic summaries
+          Strykowski et al. [<a href="#30-strykowski">30</a>] described a use case in commerce, where linguistic summaries
           were used to identify and communicate the patterns in selling computer parts and weather in a B2C setting.
           Based on those patterns, the shop was predicting their sales and required personnel.
         </p>
         <p>
           Linguistic summaries are also used to monitor the status of elderly residents in an eldercare facility,
-          TigerPlace in Columbia, Missouri, USA [<a href="#ref_">?</a>]. In this project, motion sensors
+          TigerPlace in Columbia, Missouri, USA [<a href="#31">31</a>]. In this project, motion sensors
           were placed in the apartments of the elderly residents.
           The sensors measure the activity level of their residents, that later is turned into linguistic description
           of activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
-          the change in behavior or adverse health event [<a href="#ref_">?</a>].
+          the change in behavior or adverse health event [<a href="#32">32</a>].
         </p>
         <p>
           Linguistic summaries are also used in the agri-food industry, to monitor the climate inside a
-          pigsty [<a href="#ref_">?</a>]. The evaluations with the farmers, proved that linguistic summaries can
+          pigsty [<a href="#33">33</a>]. The evaluations with the farmers, proved that linguistic summaries can
           be easily interpreted and understood by non-technically trained people.
         </p>
         <p>
           Last, but not least, linguistic summaries seem to be good mechanisms for explanations. Initial works showed
           that the summaries can be used to find an explanation of an anomaly in the process
-          data [<a href="#ref_">?</a>].
+          data [<a href="#34-ChouhanWilbikDijkman">34</a>].
           Moreover, linguistic summaries score highly in users' evaluations
-          in terms of explanation understandability and usefulness [<a href="#ref_">?</a>].
+          in terms of explanation understandability and usefulness [<a href="#35-BNAICpaper">35</a>].
         </p>
       </section>
 
       <section id="conclusion">
         <h2>VII. Conclusion</h2>
+        <p>
+
+        </p>
       </section>
-
-
-
-      <h3>Acknowledgment</h3>
-      <p id="Acknowledgment" class="inline-math">
-        The preferred spelling of the word "acknowledgment" in America is without
-        an "e" after the "g". Avoid the stilted expression "one of us (R. B.
-        G.) thanks $$\ldots$$". Instead, try "R. B. G. thanks $$\ldots$$". Put sponsor
-        acknowledgments in the acknowledgement section in the appendix.
-      </p>
-
-      <h3 id="References">References</h3>
-      <p class="inline-math">
-        Please number citations consecutively within brackets [<a href="#ref_4">4</a>]. The
-        sentence punctuation follows the bracket [<a href="#ref_4">4</a>]. Refer simply to the reference
-        number, as in [<a href="#ref_4">4</a>]---do not use "Ref. [<a href="#ref_4">4</a>]"
-        or "reference [<a href="#ref_4">4</a>]" except at
-        the beginning of a sentence: "Reference [<a href="#ref_4">4</a>] was the first $$\ldots$$"
-      </p>
 
 
       <section class="references">
         <h2>References</h2>
         <ol>
-          <li id="ref_1">
-            Data-Driven Documents / d3.js
-            <br>
+          <li id="1-Forbes">
+            How Much Data Do We Create Every Day? The Mind-Blowing Stats Everyone Should Read
             <span>
-              <a href="https://d3js.org/" target="_blank">https://d3js.org/</a>
+              B. Marr, Forbes, May 21, 2018.
+              <br>
+              <a href="https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/?sh=4f85010d60ba" target="_blank"> Available at Forbes </a>
             </span>
           </li>
-          <li id="ref_2">
-            three.js / editor
-            <br>
+          <li id="2-Gartner">
+            .
             <span>
-              three.js <a href="https://threejs.org/" target="_blank">https://threejs.org/</a>
+              .
+              <br>
+              <a href="https://" target="_blank"> Available somewhere? </a>
             </span>
           </li>
-          <li id="ref_3">
-            The Technical Writer's Handbook
-            <br>
+          <li id="3-Graphic">
+            4 Levels Of Data Maturity Every Manager Must Know
             <span>
-              Young, M., 1989. University Science Books.
+              P. Schaap, Computd, March 16, 2020.
+              <br>
+              <a href="https://computd.nl/demystification/4-levels-of-data-maturity/" target="_blank"> Available at Computd </a>
             </span>
           </li>
-          <li id="ref_4">
-            Choosing Representation, Mutation, and Crossover in Genetic Algorithms
+
+          <li id="4-FisherIris">
+            The use of multiple measurements in taxonomic problems
             <span>
-              A. Dockhorn and S. Lucas, IEEE Computational Intelligence Magazine, vol. 17, no. 4, pp. 52-53, 1 Nov. 2022. DOI:<a href="https://ieeexplore.ieee.org/document/9942691" target="_blank">
-              10.1109/MCI.2022.3199626</a>
+              R. P. Fisher, Annals of Eugenics, vol. 7, no. 2, pp. 179–188, Sep. 1936.
+              <br>
+              DOI: <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1469-1809.1936.tb02137.x" target="_blank"> 10.1111/j.1469-1809.1936.tb02137.x </a>
             </span>
           </li>
-          <li id="ref_5">
-            Title of paper if known
+          <li id="5-IrisWiki">
+            Iris flower data set
             <span>
-              Elissa, K.. unpublished.
+              Wikipedia, 2023.
+              <br>
+              <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" target="_blank"> Available at Wikipedia. </a>
             </span>
           </li>
-          <li id="ref_6">
-            Title of paper with only first word capitalized
+          <li id="6-Zadeh">
+            A computational approach to fuzzy quantifiers in natural languages
             <span>
-              Nicole, R., (in press). J. Name Stand. Abbrev.
+              L. A. Zadeh, Computers & Mathematics With Applications, vol. 9, no. 1, pp. 149–184, Jan. 1983.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>
             </span>
           </li>
-          <li id="ref_7">
-            Electron spectroscopy studies on magneto-optical media and plastic substrate interface
+          <li id="7-KlirYuan">
+            Fuzzy Sets and Fuzzy Logic: Theory and Applications
             <span>
-              Y. Yorozu, M.H. and Tagawa, Y., 1987. , Vol 2, pp. 740--741. IEEE Transl. J. Magn. Japan.
+              G. J. Klir and B. Yuan, Prentice Hall, 1995.
+              </span>
+          </li>
+
+          <li id="8-Yag82">
+            A New Approach to the Summarization of Data
+            <span>
+              R. R. Yager, Information Sciences, vol. 28, no. 1, pp. 69–86, Oct. 1982.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025582900330" target="_blank"> 10.1016/0020-0255(82)90033-0 </a>
             </span>
           </li>
+          <li id="9-Yag91">
+            On Linguistic Summaries of Data
+            <span>
+              R. R. Yager, Knowledge Discovery in Databases, pp. 347–366, Jan. 1991.
+            </span>
+          </li>
+          <li id="10-SRHY03">
+            Generating English Summaries of Time Series Data Using the Gricean Maxims
+            <span>
+              S. Sripada, E. Reiter, J. Hunter, and J. Yu, Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pp.187-196, Jan. 2003.
+              <br>
+              DOI: <a href="https://dl.acm.org/doi/10.1145/956750.956774" target="_blank"> 10.1145/956755.956774 </a>
+            </span>
+          </li>
+          <li id="11-MS16">
+            On generating linguistic descriptions of time series
+            <span>
+              N. Marín and D. Sánchez, Fuzzy Sets and Systems, vol. 285, pp. 6–30, Feb. 2016.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011415002110" target="_blank"> 10.1016/j.fss.2015.04.014 </a>
+            </span>
+          </li>
+          <li id="12-DRSV14">
+            Fuzzy quantification: a state of the art
+            <span>
+              M. Delgado, M. Ruiz, D. Sánchez, and M.-A. Vila, Fuzzy Sets and Systems, vol. 242, pp. 1–30, May 2014.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011413004247" target="_blank"> 10.1016/j.fss.2013.10.012 </a>
+            </span>
+          </li>
+          <li id="13-DSM00">
+            Fuzzy cardinality based evaluation of quantified sentences
+            <span>
+              M. Delgado, D. Sánchez, and M. C. Vila, International Journal of Approximate Reasoning, vol. 23, no. 1, pp. 23–66, Jan. 2000.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0888613X99000316" target="_blank"> 10.1016/s0888-613x(99)00031-6 </a>
+            </span>
+          </li>
+          <li id="14-RSD18">
+            Level-based fuzzy generalized quantification
+            <span>
+              M. Ruiz, D. Sánchez, and M. Delgado, Fuzzy Sets and Systems, vol. 345, pp. 24–40, Aug. 2018.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011417302749" target="_blank"> 10.1016/j.fss.2017.06.012 </a>
+            </span>
+          </li>
+
+
+          <li id="15-KacprzykZadrozny2005A">
+            Linguistic database summaries and their protoforms: towards natural language based knowledge discovery tools
+            <span>
+              J. Kacprzyk and S. Zadrożny, Information Sciences, vol. 173, no. 4, pp. 281–304, Jun. 2005.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S002002550500085X" target="_blank"> 10.1016/j.ins.2005.03.002 </a>
+            </span>
+          </li>
+          <li id="16-KacprzykYagerZadrozny2001">
+            Fuzzy Linguistic Summaries of Databases for an Efficient Business Data Analysis and Decision Support
+            <span>
+              J. Kacprzyk, R. R. Yager, and S. Zadrożny, Kluwer Academic Publishers eBooks, pp. 129–152, Jan. 2002.
+              <br>
+              DOI: <a href="https://link.springer.com/chapter/10.1007/0-306-46991-X_6" target="_blank"> 10.1007/0-306-46991-x_6 </a>
+            </span>
+          </li>
+          <li id="17-KacprzykWilbikZadrozny2008FuzzySets">
+            Linguistic summarization of time series using a fuzzy quantifier driven aggregation
+            <span>
+              J. Kacprzyk, A. Wilbik, and S. Zadrożny, Fuzzy Sets and Systems, vol. 159, no. 12, pp. 1485–1499, Jun. 2008.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165011408000304" target="_blank"> 10.1016/j.fss.2008.01.025 </a>
+            </span>
+          </li>
+          <li id="18-Castillo-OrtegaMarinSanchez2011a">
+            Linguistic query answering on data cubes with time dimension
+            <span>
+              R. Castillo-Ortega, N. Marín, and D. Sánchez, International Journal of Intelligent Systems, vol. 26, no. 10, pp. 1002–1021, Oct. 2011.
+              <br>
+              DOI: <a href="https://onlinelibrary.wiley.com/doi/10.1002/int.20510" target="_blank"> 10.1002/int.20510 </a>
+            </span>
+          </li>
+          <li id="19-SzczepaniakOchelska2006">
+            Linguistic Summaries of Standardized Documents
+            <span>
+              P. S. Szczepaniak and J. Ochelska, Springer eBooks, pp. 221–232, Jan. 2006.
+              <br>
+              DOI: <a href="https://link.springer.com/chapter/10.1007/3-540-33880-2_23" target="_blank"> 10.1007/3-540-33880-2_23 </a>
+            </span>
+          </li>
+          <li id="20-AndersonLukeKellerSkubicRantzAud2009">
+            Linguistic summarization of video for fall detection using voxel person and fuzzy logic
+            <span>
+              D. T. Anderson, R. G. Luke, J. M. Keller, M. Skubic, M. Rantz, and M. A. Aud, Computer Vision and Image Understanding, vol. 113, no. 1, pp. 80–89, Jan. 2009.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S1077314208001112" target="_blank"> 10.1016/j.cviu.2008.07.006 </a>
+            </span>
+          </li>
+          <li id="21-AndersonLukeKellerSkubicRantzAud2009A">
+            Modeling Human Activity From Voxel Person Using Fuzzy Logic
+            <span>
+              D. Z. Anderson, R. G. Luke, J. S. Keller, M. Skubic, M. Rantz, and M. A. Aud, IEEE Transactions on Fuzzy Systems, vol. 17, no. 1, pp. 39–49, Feb. 2009.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/4607246" target="_blank"> 10.1109/tfuzz.2008.2004498 </a>
+            </span>
+          </li>
+          <li id="22-AndersonLukeKeller2010">
+            Segmentation and linguistic summarization of voxel environments using stereo vision and genetic algorithms
+            <span>
+              D. T. Anderson, R. G. Luke, and J. M. Keller, IEEE International Conference on Fuzzy Systems, Jul. 2010.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/5584282" target="_blank"> 10.1109/fuzzy.2010.5584282 </a>
+            </span>
+          </li>
+          <li id="23-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">
+            Linguistic summarization of long-term trends for understanding change in human behavior
+            <span>
+              M. A. Ros et al., IEEE International Conference on Fuzzy Systems, Jun. 2011.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/6007509" target="_blank"> 10.1109/fuzzy.2011.6007509 </a>
+            </span>
+          </li>
+          <li id="24-WilbikKellerAlexander2011">
+            Linguistic summarization of sensor data for eldercare
+            <span>
+              A. Wilbik, J. M. Keller, and G. L. Alexander, Systems, Man and Cybernetics, Nov. 2011.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/6084067" target="_blank"> 10.1109/icsmc.2011.6084067 </a>
+            </span>
+          </li>
+          <li id="25-WilbikKellerBezdek2013">
+            Linguistic Prototypes for Data From Eldercare Residents
+            <span>
+              A. Wilbik, J. M. Keller, and J. C. Bezdek, IEEE Transactions on Fuzzy Systems, vol. 22, no. 1, pp. 110–123, Feb. 2014.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/6471801" target="_blank"> 10.1109/tfuzz.2013.2249517 </a>
+            </span>
+          </li>
+          <li id="26-ZadroznyKacprzyk2007">
+            Summarizing the Contents of Web Server Logs: A Fuzzy Linguistic Approach
+            <span>
+              S. Zadrożny and J. Kacprzyk, IEEE International Conference on Fuzzy Systems, Jul. 2007.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/4295649" target="_blank"> 10.1109/fuzzy.2007.4295649 </a>
+            </span>
+          </li>
+          <li id="27-WilbikKaymak2014">
+            Gradual Linguistic Summaries
+            <span>
+              A. Wilbik and U. Kaymak, Communications in Computer and Information Science, pp. 405–413, Jul. 2014.
+              <br>
+              DOI: <a href="https://link.springer.com/chapter/10.1007/978-3-319-08855-6_41" target="_blank"> 10.1007/978-3-319-08855-6_41 </a>
+            </span>
+          </li>
+          <li id="28-WilbikDijkman2015">
+            Linguistic summaries of process data
+            <span>
+              A. Wilbik and R. M. Dijkman, IEEE International Conference on Fuzzy Systems, Aug. 2015.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/7337891" target="_blank"> 10.1109/fuzz-ieee.2015.7337891 </a>
+            </span>
+          </li>
+          <li id="29-WilbikKaymak2015">
+            Linguistic Summarization of Processes – a research agenda
+            <span>
+              A. Wilbik and U. Kaymak, Conference of International Fuzzy Systems Association and European Society for Fuzzy Logic and Technology, Jun. 2015.
+              <br>
+              DOI: <a href="https://www.atlantis-press.com/proceedings/ifsa-eusflat-15/23744" target="_blank"> 10.2991/ifsa-eusflat-15.2015.233 </a>
+            </span>
+          </li>
+
+          <li id="30-strykowski">
+            ?
+            <span>
+              ?
+              <br>
+<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+            </span>
+          </li>
+          <li id="31">
+            ?
+            <span>
+              ?
+              <br>
+<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+            </span>
+          </li>
+          <li id="32">
+            ?
+            <span>
+              ?
+              <br>
+<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+            </span>
+          </li>
+          <li id="33">
+            ?
+            <span>
+              ?
+              <br>
+<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+            </span>
+          </li>
+          <li id="34-ChouhanWilbikDijkman">
+            Explanation of Anomalies in Business Process Event Logs with Linguistic Summaries
+            <span>
+              S. Chouhan, A. Wilbik, and R. M. Dijkman, 2022 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE), Jul. 2022.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/9882673" target="_blank"> 10.1109/fuzz-ieee55066.2022.9882673 </a>
+            </span>
+          </li>
+          <li id="35-BNAICpaper">
+            Linguistic Summaries as Explanation Mechanism for Classification Problems
+            <span>
+              C. Wrede, M. Winands, and A. Wilbik, The 34rd Benelux Conference on Artificial Intelligence and the 31th Belgian Dutch Conference on Machine Learning, Nov. 2022.
+              <br>
+              <a href="https://bnaic2022.uantwerpen.be/wp-content/uploads/BNAICBeNeLearn_2022_submission_6085.pdf" target="_blank"> Available at BNAIC/BENELEARN 2022 </a>
+            </span>
+          </li>
+
+<!--          <li id="">-->
+<!--            .-->
+<!--            <span>-->
+<!--              .-->
+<!--              <br>-->
+<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+<!--            </span>-->
+<!--          </li>-->
+
+
+
         </ol>
       </section>
     </div>
