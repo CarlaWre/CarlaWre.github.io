@@ -499,6 +499,12 @@ function add_linguistic_definition(index) {
     // create new div holding all subparts
     var newdiv = document.createElement("div");
     newdiv.className = 'mem_div'
+    // newdiv.style.setProperty('display', 'inline-block');
+    newdiv.style.setProperty('float', 'left'); //x
+    newdiv.style.setProperty('width', '33.33%'); //x
+    // newdiv.style.setProperty('margin-right', '2%');
+    // newdiv.style.setProperty('padding', '15px');
+    // newdiv.style.setProperty('align-items', 'center');
 
     // create text field holding the linguistic variable
     var input = document.createElement("input");

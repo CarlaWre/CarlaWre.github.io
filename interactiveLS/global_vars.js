@@ -170,6 +170,18 @@ var margin = {top: global_top, right: global_right, bottom: global_bottom, left:
 var itemWidth = (global_width-margin.left-margin.right)/3
 var itemHeight = 20
 
+var width = global_width - margin.left - margin.right
+var height = global_height - margin.top - margin.bottom
+var _x = d3.scaleLinear()
+        .domain([0, 100])
+        .range([0, width]);
+var _y = d3.scaleLinear()
+        .domain([0, 1])
+        .range([height, 0]);
+var _lineGenerator = d3.line()
+        .x(function(d) { return _x(d.x);})
+        .y(function(d) { return _y(d.y);});
+
 var standard_ls_text = "Linguistic variable";
 
 var def_count = 0
@@ -192,36 +204,50 @@ var mf_data = [
         get line() {return [{x:0, y:1}, ...this.points, {x:100, y:0}];} } ]
     // {type: "Gaussian", points: [{x:33, y:1}, {x:66, y:1}], get line() {return [{x:0, y:0}, ...this.points, {x:100, y:0}];} }]
 
-function convert(feature, value){
-    f_min = d3.min(iris, d => d[feature])
-    f_max = d3.max(iris, d => d[feature])
-
+function convert(value, f_min, f_max){
     return (value/100)*(f_max-f_min)+f_min
 }
 
 function calc_mf_value_relative(type, feature, param_array) {
+    // console.log('-----')
+    // console.log(type)
+    // console.log(feature)
+    // console.log(param_array)
+
+    if (feature=="Q") {
+        f_min = 0
+        f_max = 1
+    } else {
+        f_min = d3.min(iris, d => d[feature])
+        f_max = d3.max(iris, d => d[feature])
+    }
+
+    // console.log(f_min,f_max)
+
     if (type=="Triangular") {
+
         var z = param_array[0],
-            a = convert(feature, param_array[1]),
-            b = convert(feature, param_array[2]),
-            c = convert(feature, param_array[3]);
+            a = convert(param_array[1], f_min, f_max),
+            b = convert(param_array[2], f_min, f_max),
+            c = convert(param_array[3], f_min, f_max);
+        // console.log(a,b,c)
         return Math.max( Math.min( (z-a)/(b-a), (c-z)/(c-b) ), 0 )
     } else if (type == "Trapezoidal") {
         var z = param_array[0],
-            a = convert(feature, param_array[1]),
-            b = convert(feature, param_array[2]),
-            c = convert(feature, param_array[3]),
-            d = convert(feature, param_array[4]);
+            a = convert(param_array[1], f_min, f_max),
+            b = convert(param_array[2], f_min, f_max),
+            c = convert(param_array[3], f_min, f_max),
+            d = convert(param_array[4], f_min, f_max);
         return Math.max( Math.min( (z-a)/(b-a),1,(d-z)/(d-c)), 0 )
     } else if (type == "S-shaped") {
         var z = param_array[0],
-            a = convert(feature, param_array[1]),
-            b = convert(feature, param_array[2]);
+            a = convert(param_array[1], f_min, f_max),
+            b = convert(param_array[2], f_min, f_max);
         return Math.max( Math.min( (z-a)/(b-a),1), 0 )
     } else if (type == "Z-shaped") {
         var z = param_array[0],
-            c = convert(feature, param_array[1]),
-            d = convert(feature, param_array[2]);
+            c = convert(param_array[1], f_min, f_max),
+            d = convert(param_array[2], f_min, f_max);
         return Math.max( Math.min( 1,(d-z)/(d-c)), 0 )
     }
 }

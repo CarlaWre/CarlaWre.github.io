@@ -64,7 +64,7 @@
             <!-- Published info section -->
             <div class="header-published">
               <h2>Published</h2>
-              <p>Dec. 1, 2023</p>
+              <p>Apr. 1, 2023</p>
             </div>
           </div>
           <!-- Header legend section -->
@@ -88,6 +88,10 @@
             </li>
             <li>
               <a href="#running example">Running Example</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            </li>
+            <li>
+              <a href="#background">Background Fuzzy Sets</a>
               <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             </li>
             <li>
@@ -173,10 +177,18 @@
           An example of each plant type can be seen in Figure 2.
         </p>
         <div class="static">
-          <img src="pics/Iris_setosa.jpg" alt="Iris setosa" style="margin: auto auto; width: 30%; display: inline-flex"/>
-          <img src="pics/Iris_virginica.jpg" alt="Iris virginica" style="margin: auto auto; width: 30%; display: inline-flex"/>
-          <img src="pics/Iris_versicolor.jpg" alt="Iris versicolor" style="margin: auto auto; width: 30%; display: inline-flex"/>
-          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower: Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#5-IrisWiki">5</a>]).
+          <div style="display: flex">
+            <div style="flex: 0.75; margin-right: 1%">
+              <img src="pics/Iris_setosa.jpg" alt="Iris setosa" style="width: 100%"/>
+            </div>
+            <div style="flex: 1.228; margin-right: 1%">
+              <img src="pics/Iris_virginica.jpg" alt="Iris virginica" style="width: 100%"/>
+            </div>
+            <div style="flex: 1.333">
+              <img src="pics/Iris_versicolor.jpg" alt="Iris versicolor" style="width: 100%"/>
+            </div>
+          </div>
+          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower from left to right: Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#5-IrisWiki">5</a>]).
           </div>
         </div>
         <p></p>
@@ -190,17 +202,31 @@
               You can also switch axes.
             </div>
 
-            <i style="color: darkgray"> Select max 2 features: </i>
-            <br>
-            <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>
-            <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>
-            <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>
-            <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>
+
+            <select id="x_axis_feature" onchange="feature_change(this)">
+              <option value="pw" disabled> Petal width </option>
+              <option value="pl"> Petal length </option>
+              <option value="sw"> Sepal width </option>
+              <option value="sl"> Sepal length </option>
+            </select>
+
+            <select id="y_axis_feature" onchange="feature_change(this)">
+              <option value="pw"> Petal width </option>
+              <option value="pl" disabled> Petal length </option>
+              <option value="sw"> Sepal width </option>
+              <option value="sl"> Sepal length </option>
+            </select>
+<!--            <i style="color: darkgray"> Select max 2 features: </i>-->
+<!--            <br>-->
+<!--            <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>-->
+<!--            <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>-->
+<!--            <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>-->
+<!--            <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>-->
 
             <button class="axis_switch" type="button">Switch axes</button>
 
 
-            <div id="irisScatter" style="width: 320px; margin: auto auto 10px;"></div>
+            <div id="irisScatter" style="width: 420px; margin: auto auto 10px;"></div>
 
             <div class="caption"><b>Figure 3:</b><br>Scatterplot of iris data set. Different species are separated by colour. </div>
 
@@ -211,9 +237,15 @@
 
       </section>
 
+      <section id="background">
+        <!-- Section title -->
+        <h2>III. Background Fuzzy Sets</h2>
+        <p>
+        </p>
+      </section>
 
       <section id="linguistic variable">
-        <h2>III. Linguistic Variable</h2>
+        <h2>IV. Linguistic Variable</h2>
         <p class="inline-math">
           The key concepts of the linguistic summaries and fuzzy set theory [<a href="#6-Zadeh">6</a>] are the
           linguistic variable and the linguistic value.
@@ -232,7 +264,7 @@
           variable sepal length.
         </p>
         <div class="static">
-          <div id="static_one" style="width: 320px; margin: auto auto 10px;"></div>
+          <div id="static_one" style="width: 420px; margin: auto auto 10px;"></div>
           <div class="caption"><b>Figure 4:</b><br>Representation of the linguistic variable sepal length.</div>
           <script type="module" src="interactiveLS/static_one.js"></script>
         </div>
@@ -255,10 +287,10 @@
               different features, go back to the previous interaction and adjust the features there.
             </div>
 
-            <div id="linguistic_definitions"></div>
+            <div id="linguistic_definitions" style="display:inline"></div>
             <script>add_linguistic_definition(0)</script>
 
-            <div id="mfDisplay" style="width: 420px; margin: auto auto 10px;"></div>
+            <div id="mfDisplay" style="width: 420px; margin: auto auto 10px; margin-top: 200px;"></div>
 
             <select id="scatter_mf_selector" onchange="update_scatter_display()">
               <option value="0"> Blue membership function </option>
@@ -266,7 +298,7 @@
               <option disabled value="2"> Green membership function </option>
             </select>
 
-            <div id="scatter_mf" style="width: 320px; margin: auto auto 10px;"></div>
+            <div id="scatter_mf" style="width: 420px; margin: auto auto 10px;"></div>
 
             <div class="caption"><b>Figure 5:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
 
@@ -277,7 +309,7 @@
 
 
       <section id="linguistic quantifier">
-        <h2>IV. Linguistic quantifier</h2>
+        <h2>V. Linguistic quantifier</h2>
         <p class="inline-math">
           A special kind of linguistic variable, essential in linguistic summaries is a (linguistic) quantifier.
           Linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
@@ -300,7 +332,7 @@
 
 
       <section id="linguistic summary">
-        <h2>V. Linguistic Summary</h2>
+        <h2>VI. Linguistic Summary</h2>
 
         <h3>What is a linguistic summary?</h3>
 
@@ -408,7 +440,7 @@
           It is easy to see that this method computes $T$ in every case as the matching between the
           quantifier and the appropriate (absolute or relative) cardinality in each case, which is in accordance
           with the semantics of the quantified statement. Cardinality is computed on the basis of the classical
-          sigma-count (sum of membership degrees).
+          sigma-count, which is the sum of membership degrees.
         </p>
         <p class="inline-math">
           Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
@@ -474,8 +506,8 @@
 
             <b>Select the protoform</b>
             <div>
-              <input type="radio" class="protoform" id="simple_form" name="protoform" value="simple protoform" onchange="quantifier_visibility(this)" checked="checked"> Simple protoform <br>
-              <input type="radio" class="protoform" id="extended_form" name="protoform" value="extended protoform" onchange="quantifier_visibility(this)"> Extended protoform <br>
+              <input type="radio" class="protoform" id="simple_form" name="protoform" value="simple" onchange="qualifier_visibility(this)" checked="checked"> Simple protoform <br>
+              <input type="radio" class="protoform" id="extended_form" name="protoform" value="extended" onchange="qualifier_visibility(this)"> Extended protoform <br>
             </div>
 
             <p></p>
@@ -483,27 +515,27 @@
             <div id="div_summarizer">
               <b>Choose your summarizer P:</b>
               <div>
-                <input type="radio" class="summmarizer_radio" id="pw_P" name="summmarizer_radio" value="petal width" onchange="quantifier_options(this)" checked="checked"> Petal width <br>
-                <input type="radio" class="summmarizer_radio" id="pl_P" name="summmarizer_radio" value="petal length" onchange="quantifier_options(this)"> Petal length <br>
-                <input type="radio" class="summmarizer_radio" id="sw_P" name="summmarizer_radio" value="sepal width" onchange="quantifier_options(this)"> Sepal width <br>
-                <input type="radio" class="summmarizer_radio" id="sl_P" name="summmarizer_radio" value="sepal length" onchange="quantifier_options(this)"> Sepal length <br>
+                <input type="radio" class="summmarizer_radio" id="pw_P" name="summmarizer_radio" value="petal width" onchange="qualifier_options(this)" checked="checked"> Petal width <br>
+                <input type="radio" class="summmarizer_radio" id="pl_P" name="summmarizer_radio" value="petal length" onchange="qualifier_options(this)"> Petal length <br>
+                <input type="radio" class="summmarizer_radio" id="sw_P" name="summmarizer_radio" value="sepal width" onchange="qualifier_options(this)"> Sepal width <br>
+                <input type="radio" class="summmarizer_radio" id="sl_P" name="summmarizer_radio" value="sepal length" onchange="qualifier_options(this)"> Sepal length <br>
               </div>
               <div id="P"></div>
               <div id="draw_P" style="width: 420px; margin: auto auto 10px;"></div>
             </div>
 
-            <div id="div_qualifier">
+            <div id="div_quantifier">
               <b>Choose your quantifer Q:</b>
               <div id="Q"></div>
               <div id="draw_Q" style="width: 420px; margin: auto auto 10px;"></div>
             </div>
 
 
-            <div id="div_quantifier" style="display: none">
+            <div id="div_qualifier" style="display: none">
               <b>Choose your qualifier R:</b>
-              <div id="div_quantifier_radio">
+              <div id="div_qualifier_radio">
                 <div id="pw_Q" style="display: none">
-                  <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()" checked="checked">
+                  <input type="radio" class="featureR" id="pw_sum" name="featureR" value="petal width" onchange="update_ls()">
                   <span> Petal width </span>
                 </div>
                 <div id="pl_Q">
@@ -515,7 +547,7 @@
                   <span> Sepal width </span>
                 </div>
                 <div id="sl_Q">
-                  <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()">
+                  <input type="radio" class="featureR" id="sl_sum" name="featureR" value="sepal length" onchange="update_ls()"  checked="checked" >
                   <span> Sepal length </span>
                 </div>
               </div>
@@ -544,7 +576,7 @@
       </section>
 
       <section id="applications">
-        <h2>VI. Applications</h2>
+        <h2>VII. Applications</h2>
         <p>
           Linguistic summaries have been applied to different type of data:
         </p>
@@ -588,7 +620,7 @@
       </section>
 
       <section id="conclusion">
-        <h2>VII. Conclusion</h2>
+        <h2>VIII. Conclusion</h2>
         <p>
 
         </p>
@@ -599,7 +631,7 @@
         <h2>References</h2>
         <ol>
           <li id="1-Forbes">
-            How Much Data Do We Create Every Day? The Mind-Blowing Stats Everyone Should Read
+            How much data do we create every day? The mind-blowing stats everyone should read
             <span>
               B. Marr, Forbes, May 21, 2018.
               <br>
@@ -615,7 +647,7 @@
             </span>
           </li>
           <li id="3-Graphic">
-            4 Levels Of Data Maturity Every Manager Must Know
+            4 levels of data maturity every manager must know
             <span>
               P. Schaap, Computd, March 16, 2020.
               <br>
@@ -648,14 +680,14 @@
             </span>
           </li>
           <li id="7-KlirYuan">
-            Fuzzy Sets and Fuzzy Logic: Theory and Applications
+            Fuzzy sets and fuzzy logic: Theory and applications
             <span>
               G. J. Klir and B. Yuan, Prentice Hall, 1995.
               </span>
           </li>
 
           <li id="8-Yag82">
-            A New Approach to the Summarization of Data
+            A new approach to the summarization of data
             <span>
               R. R. Yager, Information Sciences, vol. 28, no. 1, pp. 69–86, Oct. 1982.
               <br>
@@ -663,13 +695,13 @@
             </span>
           </li>
           <li id="9-Yag91">
-            On Linguistic Summaries of Data
+            On linguistic summaries of data
             <span>
               R. R. Yager, Knowledge Discovery in Databases, pp. 347–366, Jan. 1991.
             </span>
           </li>
           <li id="10-SRHY03">
-            Generating English Summaries of Time Series Data Using the Gricean Maxims
+            Generating english summaries of time series data using the gricean maxims
             <span>
               S. Sripada, E. Reiter, J. Hunter, and J. Yu, Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pp.187-196, Jan. 2003.
               <br>
@@ -685,7 +717,7 @@
             </span>
           </li>
           <li id="12-DRSV14">
-            Fuzzy quantification: a state of the art
+            Fuzzy quantification: A state of the art
             <span>
               M. Delgado, M. Ruiz, D. Sánchez, and M.-A. Vila, Fuzzy Sets and Systems, vol. 242, pp. 1–30, May 2014.
               <br>
@@ -711,7 +743,7 @@
 
 
           <li id="15-KacprzykZadrozny2005A">
-            Linguistic database summaries and their protoforms: towards natural language based knowledge discovery tools
+            Linguistic database summaries and their protoforms: Towards natural language based knowledge discovery tools
             <span>
               J. Kacprzyk and S. Zadrożny, Information Sciences, vol. 173, no. 4, pp. 281–304, Jun. 2005.
               <br>
@@ -719,7 +751,7 @@
             </span>
           </li>
           <li id="16-KacprzykYagerZadrozny2001">
-            Fuzzy Linguistic Summaries of Databases for an Efficient Business Data Analysis and Decision Support
+            Fuzzy linguistic summaries of databases for an efficient business data analysis and decision support
             <span>
               J. Kacprzyk, R. R. Yager, and S. Zadrożny, Kluwer Academic Publishers eBooks, pp. 129–152, Jan. 2002.
               <br>
@@ -743,7 +775,7 @@
             </span>
           </li>
           <li id="19-SzczepaniakOchelska2006">
-            Linguistic Summaries of Standardized Documents
+            Linguistic summaries of standardized documents
             <span>
               P. S. Szczepaniak and J. Ochelska, Springer eBooks, pp. 221–232, Jan. 2006.
               <br>
@@ -759,7 +791,7 @@
             </span>
           </li>
           <li id="21-AndersonLukeKellerSkubicRantzAud2009A">
-            Modeling Human Activity From Voxel Person Using Fuzzy Logic
+            Modeling human activity from voxel person using fuzzy logic
             <span>
               D. Z. Anderson, R. G. Luke, J. S. Keller, M. Skubic, M. Rantz, and M. A. Aud, IEEE Transactions on Fuzzy Systems, vol. 17, no. 1, pp. 39–49, Feb. 2009.
               <br>
@@ -791,7 +823,7 @@
             </span>
           </li>
           <li id="25-WilbikKellerBezdek2013">
-            Linguistic Prototypes for Data From Eldercare Residents
+            Linguistic prototypes for data from eldercare residents
             <span>
               A. Wilbik, J. M. Keller, and J. C. Bezdek, IEEE Transactions on Fuzzy Systems, vol. 22, no. 1, pp. 110–123, Feb. 2014.
               <br>
@@ -799,7 +831,7 @@
             </span>
           </li>
           <li id="26-ZadroznyKacprzyk2007">
-            Summarizing the Contents of Web Server Logs: A Fuzzy Linguistic Approach
+            Summarizing the contents of web server logs: A fuzzy linguistic approach
             <span>
               S. Zadrożny and J. Kacprzyk, IEEE International Conference on Fuzzy Systems, Jul. 2007.
               <br>
@@ -807,7 +839,7 @@
             </span>
           </li>
           <li id="27-WilbikKaymak2014">
-            Gradual Linguistic Summaries
+            Gradual linguistic summaries
             <span>
               A. Wilbik and U. Kaymak, Communications in Computer and Information Science, pp. 405–413, Jul. 2014.
               <br>
@@ -823,7 +855,7 @@
             </span>
           </li>
           <li id="29-WilbikKaymak2015">
-            Linguistic Summarization of Processes – a research agenda
+            Linguistic summarization of processes – A research agenda
             <span>
               A. Wilbik and U. Kaymak, Conference of International Fuzzy Systems Association and European Society for Fuzzy Logic and Technology, Jun. 2015.
               <br>
@@ -832,39 +864,39 @@
           </li>
 
           <li id="30-strykowski">
-            ?
+            Linguistic summaries of sales data at a computer retailer via fuzzy logic and a genetic algorithm
             <span>
-              ?
+              J. Kacprzyk and P. J. Strykowski, Congress on Evolutionary Computation, Jul. 1999.
               <br>
-<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+              DOI: <a href="https://ieeexplore.ieee.org/document/782523" target="_blank"> 10.1109/cec.1999.782523 </a>
             </span>
           </li>
-          <li id="31">
-            ?
+          <li id="31-tigerplace">
+            Linguistic summarization of sensor data for eldercare
             <span>
-              ?
+              A. Wilbik, J. M. Keller, and G. L. Alexander, Systems, Man and Cybernetics, Nov. 2011.
               <br>
-<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+              DOI: <a href="https://ieeexplore.ieee.org/document/6084067" target="_blank"> 10.1109/ICSMC.2011.6084067 </a>
             </span>
           </li>
           <li id="32">
-            ?
+            Anomaly detection from linguistic summaries
             <span>
-              ?
+              A. Wilbik and J. M. Keller, IEEE International Conference on Fuzzy Systems, Jul. 2013.
               <br>
-<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+<!--              DOI: <a href="https://ieeexplore.ieee.org/document/6622481" target="_blank"> 10.1109/fuzz-ieee.2013.6622481 </a>-->
             </span>
           </li>
-          <li id="33">
-            ?
+          <li id="33-pigsty">
+            On relevance of linguistic summaries – A case study from the agro-food domain
             <span>
-              ?
+              A. Wilbik, D. Barreto, and G. B. C. Backus, Communications in Computer and Information Science, pp. 289–300, Jun. 2020.
               <br>
-<!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
+<!--              DOI: <a href="https://link.springer.com/chapter/10.1007/978-3-030-50146-4_22" target="_blank"> 10.1007/978-3-030-50146-4_22 </a>-->
             </span>
           </li>
           <li id="34-ChouhanWilbikDijkman">
-            Explanation of Anomalies in Business Process Event Logs with Linguistic Summaries
+            Explanation of anomalies in business process event logs with linguistic summaries
             <span>
               S. Chouhan, A. Wilbik, and R. M. Dijkman, 2022 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE), Jul. 2022.
               <br>
@@ -872,7 +904,7 @@
             </span>
           </li>
           <li id="35-BNAICpaper">
-            Linguistic Summaries as Explanation Mechanism for Classification Problems
+            Linguistic summaries as explanation mechanism for classification problems
             <span>
               C. Wrede, M. Winands, and A. Wilbik, The 34rd Benelux Conference on Artificial Intelligence and the 31th Belgian Dutch Conference on Machine Learning, Nov. 2022.
               <br>

@@ -69,7 +69,9 @@ var colour = d3.scaleOrdinal(d3.schemeCategory10);
 update_irisScatter()
 
 function update_irisScatter() {
-    svg.selectAll("circle")
+    console.log(x_feat)
+    console.log(iris_x.domain())
+    d3.select("#scatter_svg").selectAll("circle")
         .data(iris)
         .join("circle")
             .attr("cx", function (d) { return iris_x(eval("d." + x_feat)); })
@@ -79,49 +81,66 @@ function update_irisScatter() {
 }
 
 
-
-// checkbox stuff
-$('.feature_checkbox').on('change', function() {
-    // jquery to check whether max 2 checkboxes have been checked
-    var checked_boxes = $('.feature_checkbox:checked')
-    if(checked_boxes.length > 2) {
-        this.checked = false;
+function feature_change(dropdown) {
+    if (dropdown.id == "x_axis_feature") {
+        $("#y_axis_feature").find("option:disabled").prop("disabled", false)
+        $("#y_axis_feature option[value='"+ dropdown.value +"']").prop("disabled", true)
+        // console.log(dropdown.value)
+        // console.log(document.getElementById("y_axis_feature").value)
+        window.x_feat = dropdown.value
+        window.y_feat = document.getElementById("y_axis_feature").value
+    } else {
+        $("#x_axis_feature").find("option:disabled").prop("disabled", false)
+        $("#x_axis_feature option[value='"+ dropdown.value +"']").prop("disabled", true)
+        // console.log(document.getElementById("x_axis_feature").value)
+        // console.log(dropdown.value)
+        window.x_feat = document.getElementById("x_axis_feature").value
+        window.y_feat = dropdown.value
     }
 
-    // now update the graph based on the selected checkboxes
-    if(checked_boxes.length == 2) {
-        // get the two checked values
-        y_feat = checked_boxes[0].id.toString()
-        x_feat = checked_boxes[1].id.toString()
+    console.log(x_feat)
+    console.log(window.x_feat)
+    console.log(y_feat)
+    console.log(window.y_feat)
 
-        // update the axis
-        iris_y.domain([eval(y_feat+"_min"), eval(y_feat+"_max")])
-        iris_x.domain([eval(x_feat+"_min"), eval(x_feat+"_max")])
+    console.log(iris_x.domain())
 
-        // do it for this svg
-        svg.select('.iris_yaxis')
-            .call(d3.axisLeft(iris_y));
-        svg.select('.iris_xaxis')
-            .call(d3.axisBottom(iris_x));
-        svg.select('.iris_yaxis_label')
-            .text(checked_boxes[0].value)
-        svg.select('.iris_xaxis_label')
-            .text(checked_boxes[1].value)
+    // update the axis
+    iris_y.domain([eval(y_feat+"_min"), eval(y_feat+"_max")])
+    iris_x.domain([eval(x_feat+"_min"), eval(x_feat+"_max")])
 
-        // and also for the one of the next interactive part
-        d3.select("#lower").select('.iris_yaxis')
-            .call(d3.axisLeft(iris_y));
-        d3.select("#lower").select('.iris_xaxis')
-            .call(d3.axisBottom(iris_x));
-        d3.select("#lower").select('.iris_yaxis_label')
-            .text(checked_boxes[0].value)
-        d3.select("#lower").select('.iris_xaxis_label')
-            .text(checked_boxes[1].value)
+    console.log(iris_x.domain())
 
-        update_irisScatter()
-        update_scatter_display(iris)
-    }
-});
+    // do it for this svg
+    d3.select("#irisScatter").select('.iris_yaxis')
+        .call(d3.axisLeft(iris_y));
+    d3.select("#irisScatter").select('.iris_xaxis')
+        .call(d3.axisBottom(iris_x));
+    d3.select("#irisScatter").select('.iris_yaxis_label')
+        .text($("#y_axis_feature option:selected").text().slice(1))
+    d3.select("#irisScatter").select('.iris_xaxis_label')
+        .text($("#x_axis_feature option:selected").text().slice(1))
+
+    console.log(d3.select("#lower").select('.iris_yaxis_label').text())
+
+    // and also for the one of the next interactive part
+    d3.select("#lower").select('.iris_yaxis')
+        .call(d3.axisLeft(iris_y));
+    d3.select("#lower").select('.iris_xaxis')
+        .call(d3.axisBottom(iris_x));
+    d3.select("#lower").select('.iris_yaxis_label')
+        .text($("#y_axis_feature option:selected").text().slice(1))
+    d3.select("#lower").select('.iris_xaxis_label')
+        .text($("#x_axis_feature option:selected").text().slice(1))
+
+    console.log(d3.select("#lower").select('.iris_yaxis_label').text().slice(1))
+    console.log(d3.select("#lower"))
+    console.log($("#x_axis_feature option:selected").text().slice(1))
+    console.log("hey>")
+    update_irisScatter()
+    update_scatter_display(iris)
+
+}
 
 $('.axis_switch').click(function () {
 
