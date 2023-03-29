@@ -19,9 +19,10 @@ var width = global_width - margin.left - margin.right;
 var height = global_height - margin.top - margin.bottom;
 
 var texts = [
-    {text: "Sepal length",          x: mf_s1[1].label_pos - 10, y: itemHeight, colour: d3.color("steelblue")},
-    {text: "Linguistic variable",   x: width + margin.right,    y: itemHeight, colour: d3.color("black")},
-    {text: "Semantic rule",         x: width + margin.right,    y: itemHeight/2 + height/5, colour: d3.color("black")},
+    {text: "Sepal length",          x: mf_s1[1].label_pos - 10, y: itemHeight - 60, colour: d3.color("steelblue")},
+    {text: "Linguistic variable",   x: width + margin.right,    y: itemHeight - 60, colour: d3.color("black")},
+    {text: "Linguistic values",     x: width + margin.right,    y: height/8, colour: d3.color("black")},
+    {text: "Semantic rule",         x: width + margin.right,    y: itemHeight/2 + height/6, colour: d3.color("black")},
     {text: "Fuzzy sets",            x: width + margin.right,    y: height/2, colour: d3.color("black")}
 ]
 
@@ -50,7 +51,7 @@ inner_s1.append("text")
     .attr("text-anchor", "end")
     .attr("x", (width / 2) + 5)
     .attr("y", height + margin.top - 10)
-    .text("v")
+    .text("X")
 
 // y axis
 const y_s1 = d3.scaleLinear()
@@ -59,6 +60,14 @@ const y_s1 = d3.scaleLinear()
 
 inner_s1.append("g")
     .call(d3.axisLeft(y_s1));
+
+// y axis label
+inner_s1.append("text")
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -margin.left + 15)
+    .attr("x", -height / 2 + 22)
+    .text("MF(X)")
 
 // method to read the data as line
 var lineGenerator_s1 = d3.line()
@@ -77,13 +86,42 @@ inner_s1.append("g").selectAll("s1_mfs")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
 
+// other lines
+inner_s1.append("g").selectAll("mappings-up")
+    .data(mf_s1)
+    .enter()
+    .append("line")
+    .attr("x1", function (d) { return d.label_pos + 15 })
+    .attr("y1", height/8 - 15)
+    .attr("x2", texts[0].x + 25)
+    .attr("y2", texts[0].y + 15)
+    .attr("fill", "none")
+    .attr("stroke", d3.color("steelblue"))
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+
+inner_s1.append("g").selectAll("mappings-down")
+    .data(mf_s1)
+    .enter()
+    .append("line")
+    .attr("x1", function (d) { return d.label_pos + 15 })
+    .attr("y1", height/8 + 10)
+    .attr("x2", function (d) { return d.label_pos + 15 })
+    .attr("y2", height/8 + 35)
+    .attr("fill", "none")
+    .attr("stroke", d3.color("steelblue"))
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+
 // texts
 inner_s1.selectAll("legend_s1")
     .data(mf_s1)
     .enter()
     .append("text")
     .attr("x", function (d) { return d.label_pos} )
-    .attr("y", itemHeight/2 + height/5)
+    .attr("y", height/8)
     .attr("fill", d3.color("steelblue"))
     .text(function(d) { return d.variable})
     .attr('font-size', 12)

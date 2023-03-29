@@ -55,10 +55,10 @@
             <div class="header-authors">
               <h2>Authors</h2>
               <ul>
-                <li>Anna Wilbik | Maastricht University</li>
-                <li>Carla Wrede | Maastricht University</li>
-                <li>Daniel Sánchez Fernández | Universidad de Granada</li>
-                <li>Nicolás Marín Ruiz | Universidad de Granada</li>
+                <li>Anna Wilbik | Department of Advanced Computing Sciences, Maastricht University</li>
+                <li>Carla Wrede | Department of Advanced Computing Sciences, Maastricht University</li>
+                <li>Daniel Sánchez Fernández | Department of Computer Science and Artificial Intelligence, Universidad de Granada</li>
+                <li>Nicolás Marín Ruiz | Department of Computer Science and Artificial Intelligence, Universidad de Granada</li>
               </ul>
             </div>
             <!-- Published info section -->
@@ -113,6 +113,9 @@
             <li>
               <a href="#conclusion">Conclusion</a>
             </li>
+            <li>
+              <a href="#acknowledgments">Acknowledgments</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -132,9 +135,9 @@
           was generated in the span of only two years.
           The sources of this are varying, with individuals creating parts of this data more as a byproduct
           of social media usage. Contrastingly in industries, the data collection process is purposefully accelerated,
-          especially with the rise of Internet of Things (IoT) technologies. Companies and organizations see
+          especially with the rise of Internet of Things (IoT). Companies and organizations see
           a potential in these large amounts of data to be used to support decision-making processes.
-          For this, more data mining and knowledge discovery methods are deployed in companies.
+          For this, more and more data mining and knowledge discovery methods are deployed in companies.
           The level of insight from this varies per company but can be classified into one of four categories
           that have been proposed by Gartner to distinguish the level of analytics:
           descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics
@@ -198,10 +201,9 @@
         <div class="framed">
           <div class="inside">
             <div class="eyebrow">
-              Deselect one of the options to change with features you want to display on the scatter plot.
+              Select from the dropdown menus which features you want to display on the scatter plot.
               You can also switch axes.
             </div>
-
 
             <select id="x_axis_feature" onchange="feature_change(this)">
               <option value="pw" disabled> Petal width </option>
@@ -216,12 +218,7 @@
               <option value="sw"> Sepal width </option>
               <option value="sl"> Sepal length </option>
             </select>
-<!--            <i style="color: darkgray"> Select max 2 features: </i>-->
-<!--            <br>-->
-<!--            <input class="feature_checkbox" type="checkbox" id="pw" value="Petal width" checked> Petal width <br>-->
-<!--            <input class="feature_checkbox" type="checkbox" id="pl" value="Petal length" checked> Petal length <br>-->
-<!--            <input class="feature_checkbox" type="checkbox" id="sw" value="Sepal width"> Sepal width <br>-->
-<!--            <input class="feature_checkbox" type="checkbox" id="sl" value="Sepal length"> Sepal length <br>-->
+
 
             <button class="axis_switch" type="button">Switch axes</button>
 
@@ -241,7 +238,23 @@
         <!-- Section title -->
         <h2>III. Background Fuzzy Sets</h2>
         <p>
+          Before we elaborate on the topic of linguistic summaries, we need to give a bit of background knowledge.
+          Linguistic summaries are based on the concept of fuzzy sets, which ...
         </p>
+        <div class="static">
+          <div id="crisp_set" style="display: inline-block; width: 50%; float: left"></div>
+          <div id="fuzzy_set" style="display: inline-block; width: 50%; float: right"></div>
+          <div class="caption" style="clear: both"><b>Figure 4:</b><br>Example of crisp set (left) and fuzzy set (right).</div>
+          <script type="module" src="interactiveLS/static_settypes.js"></script>
+        </div>
+        <p></p>
+        <div class="static">
+          <div id="crisp_example" style="width: 420px; margin: auto auto 10px;"></div>
+          <div id="fuzzy_example" style="width: 420px; margin: auto auto 10px;"></div>
+          <div class="caption"><b>Figure 5:</b><br>Comparison of crisp and fuzzy sets for the iris data set.</div>
+          <script type="module" src="interactiveLS/static_crispvsfuzzy.js"></script>
+        </div>
+        <p></p>
       </section>
 
       <section id="linguistic variable">
@@ -265,7 +278,7 @@
         </p>
         <div class="static">
           <div id="static_one" style="width: 420px; margin: auto auto 10px;"></div>
-          <div class="caption"><b>Figure 4:</b><br>Representation of the linguistic variable sepal length.</div>
+          <div class="caption"><b>Figure 5:</b><br>Representation of the linguistic variable sepal length.</div>
           <script type="module" src="interactiveLS/static_one.js"></script>
         </div>
         <p></p>
@@ -300,7 +313,7 @@
 
             <div id="scatter_mf" style="width: 420px; margin: auto auto 10px;"></div>
 
-            <div class="caption"><b>Figure 5:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
+            <div class="caption"><b>Figure 6:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
 
             <script type="module" src="interactiveLS/interaction_two.js"></script>
           </div>
@@ -312,7 +325,7 @@
         <h2>V. Linguistic quantifier</h2>
         <p class="inline-math">
           A special kind of linguistic variable, essential in linguistic summaries is a (linguistic) quantifier.
-          Linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
+          The linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
           absolute quantifiers and relative quantifiers. Absolute quantifiers are defined over numbers,
           $$\mathbb{R}$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
           exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 6 shows examples of both
@@ -321,7 +334,7 @@
         <div class="static">
           <div id="static_two_absolute" style="display: inline-block; width: 50%; float: left"></div>
           <div id="static_two_relative" style="display: inline-block; width: 50%; float: right"></div>
-          <div class="caption" style="clear: both"><b>Figure 6:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
+          <div class="caption" style="clear: both"><b>Figure 7:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
           <script type="module" src="interactiveLS/static_two.js"></script>
         </div>
         <p></p>
@@ -337,7 +350,7 @@
         <h3>What is a linguistic summary?</h3>
 
         <p>
-          The notion of linguistic summary was introduced by R.R. Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>] as a fuzzy logic-based
+          The notion of linguistic summary was introduced by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>] as a fuzzy logic-based
           approach to the summarization of data. It is very frequently used as a synonym for linguistic
           description (or as part of it) in the NLG community, see for instance [<a href="#10-SRHY03">10</a>], [<a href="#11-MS16">11</a>].
         </p>
@@ -392,8 +405,9 @@
           <li class="inline-math">When $Q$ is an absolute quantifier, it refers to the cardinality of the fuzzy set $P$.
             Hence, the way to use the qualifier $R$ (when it appears) for restricting the sentence to the objects satisfying
             $R$ is to combine $R$ and $P$ using a t-norm, obtaining this way the fuzzy set to which $Q$ refers
-            to. In this case, <i>$Q$ [$R$] y’s are $P$</i> becomes <i>$Q$ y’s are $R ∧ P$</i>. For instance, <i>Around 3 young
-            people are tall</i> becomes <i>Around 3 people are young and tall</i>.</li>
+            to. In this case, <i>$Q$ $R$ y’s are $P$</i> becomes <i>$Q$ y’s are $R ∧ P$</i>. For instance, <i>Around 3 young
+            people are tall</i> becomes <i>Around 3 people are young and tall</i>. Note that when R is not employed we
+            have the case $R=Y$ and $Y ∧ P=P$.</li>
           <li class="inline-math">When $Q$ is a relative quantifier, it refers to the so-called relative cardinality of the fuzzy set
             $P$ with respect to the fuzzy set $R$, which is computed by dividing the cardinality of $R ∧ P$
             by the cardinality of $R$ (which requires that $R$ is never empty!). Note that when $R$ is not
@@ -401,8 +415,8 @@
             cardinality of $P=Y ∧ P$ by the cardinality of $Y$.</li>
         </ul>
         <p class="inline-math">
-          One of the most widely employed approaches, proposed by L.A. Zadeh and employed in the
-          original studies by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>], perform the computation as follows. Let us consider
+          One of the most widely employed approaches, proposed by Zadeh [<a href="#6-Zadeh">6</a>] and employed in the
+          original studies by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>], performs the computation as follows. Let us consider
           $$Y = {y_1, . . . , y_n}$$ and the t-norm minimum:
         </p>
         <ul>
@@ -444,7 +458,8 @@
         </p>
         <p class="inline-math">
           Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
-          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#12-DRSV14">12</a>], [<a href="#13-DSM00">13</a>]. Among the several alternatives available in the literature, we use here method GD,
+          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#12-DRSV14">12</a>], [<a href="#13-DSM00">13</a>].
+          Among the several alternatives available in the literature, we use here method GD,
           introduced in [<a href="#13-DSM00">13</a>] and which has been also discussed as a suitable method outside fuzzy
           set theory (Representations by Levels, Gradual Sets) in [<a href="#14-RSD18">14</a>]. Let us consider again $$Y =
           {y_1, . . . , y_n}$$ and $$∧ = min$$ as t-norm. The method works as follows:
@@ -568,7 +583,7 @@
             <p id="truth_value_zadeh">Placeholder</p>
             <p id="truth_value_gd">Placeholder</p>
 
-            <div class="caption"><b>Figure 3:</b><br> Truth value calculation.</div>
+            <div class="caption"><b>Figure 8:</b><br> Truth value calculation.</div>
 
             <script type="module" src="interactiveLS/interaction_three.js"></script>
           </div>
@@ -623,6 +638,13 @@
         <h2>VIII. Conclusion</h2>
         <p>
 
+        </p>
+      </section>
+
+      <section id="acknowledgement">
+        <h2>IX. Acknowledgment</h2>
+        <p>
+          This research has been funded by the Rijksdienst voor Ondernemend Nederland (RVO) in the framework of the project Green Transport Delta - Elektrificatie.
         </p>
       </section>
 
@@ -927,7 +949,7 @@
       </section>
     </div>
 
-  </article><!-- End of aticle -->
+  </article><!-- End of article -->
 
   <!-- Scroll to top button -->
   <a class="scroll-top" href="#">
