@@ -65,7 +65,7 @@
             <!-- Published info section -->
             <div class="header-published">
               <h2>Published</h2>
-              <p>Apr. 1, 2023</p>
+              <p>2023</p>
             </div>
           </div>
           <!-- Header legend section -->
@@ -116,7 +116,7 @@
               <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             </li>
             <li>
-              <a href="#acknowledgments">Acknowledgements</a>
+              <a href="#acknowledgements">Acknowledgements</a>
             </li>
           </ul>
         </div>
@@ -135,19 +135,19 @@
           Recent developments in ICT technology enable more and more data to be collected.
           According to Forbes [<a href="#1-Forbes">1</a>], already back in 2018 around 90% of the world’s data
           was generated in the span of only two years.
-          The sources of this are varying, with individuals creating parts of this data more as a byproduct
-          of social media usage. Contrastingly in industries, the data collection process is purposefully accelerated,
-          especially with the rise of Internet of Things (IoT). Companies and organizations see
-          a potential in these large amounts of data to be used to support decision-making processes.
-          For this, more and more data mining and knowledge discovery methods are deployed in companies.
-          The level of insight from this varies per company but can be classified into one of four categories to
-          distinguish the level of analytics:
-          descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics
-          [<a href="#2-Gartner">2</a>].
+          The sources of data are varying, with individuals creating parts of this data more as a byproduct
+          of social media usage.
+          On the other side, companies, governmental, and non-governmental institutions accelerate the data
+          collection process purposefully, especially with the rise of Internet of Things (IoT).
+          Companies and organizations see a potential in these large amounts of data to be used to support decision-making processes.
+          Because of the rise of both data and potential, more and more data mining and knowledge discovery methods are deployed in companies.
+          The level of insight from this deployment varies per company but can be classified into one of four categories to
+          distinguish the level of analytics, which can be see in Figure 1:
+          descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics.
         </p>
         <div class="static">
           <img src="pics/data_maturity_model.png" alt="Gartner analytics model" style="margin: auto auto; width: max-content; display: block"/>
-          <div class="caption"><b>Figure 1:</b><br> Business analytics maturity model (Picture from [<a href="#3-Graphic">3</a>])</div>
+          <div class="caption"><b>Figure 1:</b><br> Business analytics maturity model (Picture from [<a href="#2-Graphic">2</a>])</div>
         </div>
         <p></p>
         <p>
@@ -175,7 +175,7 @@
       <section id="running example">
         <h2>II. Running Example</h2>
         <p>
-          As the running example, let us use the iris data set [<a href="#4-FisherIris">4</a>]. This data set contains
+          As the running example, let us use the iris data set [<a href="#3-FisherIris">3</a>]. This data set contains
           150 data points, describing one of three possible plant types namely, Iris Setosa, Iris Virginica, and Iris
           Versicolor. Every flower type is represented 50 times, and a single iris flower can be characterized by four
           attributes: the length and the width of both sepals and petals, measured in centimeters. An example of each
@@ -193,12 +193,13 @@
               <img src="pics/Iris_versicolor.jpg" alt="Iris versicolor" style="width: 100%"/>
             </div>
           </div>
-          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower from left to right: Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#5-IrisWiki">5</a>]).
+          <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower from left to right:
+            Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#4-IrisWiki">4</a>]).
           </div>
         </div>
         <p></p>
         <p>
-          The figure below shows the scatter plot of this data set. You may select the variables for the axis.
+          Figure 3 below shows the scatter plot of this data set. You may select the variables for the axis.
         </p>
         <div class="framed">
           <div class="inside">
@@ -239,9 +240,26 @@
       <section id="background">
         <!-- Section title -->
         <h2>III. Background Fuzzy Sets</h2>
+        <p class="inline-math">
+<!--          Before we elaborate on the topic of linguistic summaries, we need to give a bit of background knowledge.-->
+<!--          Linguistic summaries are based on the concept of fuzzy sets, which ...-->
+          Before we elaborate on the topic of linguistic summaries, we will provide some background on sets.
+          In traditional crisp sets, an element $x$ either belong to a set $A$, or it does not, as denoted by $x \in A$ or  $x \notin A$.
+          Crisp sets make use of bi-valued function logic, meaning that a set is a collection of definite,
+          well-definable elements that form a whole. Their characteristic function $f_A$ can be denoted as follows: $f_A: X \rightarrow \{0,1\}$
+        </p>
         <p>
-          Before we elaborate on the topic of linguistic summaries, we need to give a bit of background knowledge.
-          Linguistic summaries are based on the concept of fuzzy sets, which ...
+          However, real-world scenarios can most often not be denoted by simple binary states.
+          Take for example a weather forecast of 18 degree Celsius; would you consider this a warm or a cold day?
+          If there are clouds, one could consider it to be a fresher day, but if it is winter it might be a warm day.
+          Here, the concept of fuzzy sets as introduced by Zadeh [<a href="#5-Zadeh1965">5</a>] comes into play.
+          Fuzzy sets are related to vagueness and make use of infinite valued function logic. An element $x$ can belong
+          to a fuzzy set $A$ to a certain amount, which is denoted by a degree of membership $\mu_A: X \rightarrow [0,1]$.
+          This membership function (later on also denoted as $MF(X)$), can be defined in multiple ways, for example as a
+          triangular function as seen in Figure 4 (right).
+          A fuzzy set $A$ is completely determined by the set of ordered pairs $A=\{(x,\mu_A(x))| x \in X\}$,
+          where $X$ is called the <i>domain</i> or <i>universe of discourse</i>.
+          A visual comparison between the two types of sets can be seen in Figure 5.
         </p>
         <div class="static">
           <div id="crisp_set" style="display: inline-block; width: 50%; float: left"></div>
@@ -253,12 +271,20 @@
         <div class="static">
           <div id="crisp_example" style="width: 420px; margin: auto auto 10px;"></div>
           <div id="fuzzy_example" style="width: 420px; margin: auto auto 10px;"></div>
-          <div class="caption"><b>Figure 5:</b><br>Comparison of crisp (top) and fuzzy sets (bottom) for the iris data set.</div>
+          <div class="caption"><b>Figure 5:</b><br>Comparison of crisp (top) and fuzzy sets (bottom) for the iris data set.
+            (Figure adapted from [<a href="#6-KlirYuan">6</a>].)</div>
           <script type="module" src="interactiveLS/static_crispvsfuzzy.js"></script>
         </div>
         <p></p>
         <p>
-
+          Just like with crisp sets, various operations can be applied on fuzzy sets. Fuzzy operations can be the same
+          as for crisp sets when it comes to <i>union</i>, <i>intersection</i> and <i>complement</i> operations, on the examples of
+          $(A \cup B) = max(A, B)$, $(A \cap B) = min(A, B)$, and $\neg A = 1 - A$, respectively. An example of these operations can be seen in Figure 6.
+          These operations are called the <i>standard fuzzy operations</i> and are one way of generalizing the
+          corresponding classical crisp operations, an example can be seen in Figure 6.
+          However, there are many other ways on creating these generalizations, and such functions for unions and
+          intersections are called <i>t-norms</i> and <i>t-conorms</i>, respectively.
+          For more background information on fuzzy sets and their operations we can recommend reading [<a href="#6-KlirYuan">6</a>].
         </p>
         <div class="static">
           <div id="union" style="float: left; width: 33%"></div>
@@ -277,7 +303,7 @@
 <!--          The key concepts of the linguistic summaries and fuzzy set theory [<a href="#6-Zadeh">6</a>] are the-->
 <!--          linguistic variable and the linguistic value.-->
           Important key concepts of linguistic summaries are linguistic variables and linguistic values. In the words
-          of Zadeh [<a href="#Zadeh75a">?</a>],[<a href="#Zadeh75b">?</a>],[<a href="#Zadeh75c">?</a>],
+          of Zadeh [<a href="#7-Zadeh75a">7</a>],[<a href="#8-Zadeh75b">8</a>],[<a href="#9-Zadeh75c">9</a>],
           a linguistic variable is a variable whose values are words or sentences in a language (natural or artificial).
           Each of these values is called a term and is associated with a semantics that is nothing more than a fuzzy
           restriction defined on a base universal set.
@@ -288,7 +314,7 @@
 <!--          $X$ is the universal set representing the range of $v$, $g$ is a syntactic rule for generating linguistic terms,-->
 <!--          and $m$ is a semantic rule that assigns to each linguistic term $$ t \in T $$ its meaning, $m(t)$,-->
 <!--          which is a fuzzy set on $X$.-->
-          According to [<a href="#Zadeh75a">?</a>],[<a href="#Zadeh75b">?</a>],[<a href="#Zadeh75c">?</a>],[<a href="#7-KlirYuan">?</a>],
+          According to [<a href="#6-KlirYuan">6</a>],[<a href="#7-Zadeh75a">7</a>],[<a href="#8-Zadeh75b">8</a>],[<a href="#9-Zadeh75c">9</a>],
           a linguistic variable is defined as a quintuple $(v, T, X, g, m)$,
           where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$, $X$ is the universal set over which
           fuzzy restrictions are defined, $g$ is a syntactic rule for generating linguistic terms (a so called grammar),
@@ -305,9 +331,9 @@
 <!--          Each of the linguistic terms is mapped to a fuzzy set. Figure 4 illustrates the structure of the linguistic-->
 <!--          variable sepal length.-->
           As an example, let us consider the iris data set and the linguistic variable sepal length. In this case, the
-          set of linguistic terms may be $T={small, medium, large}$. $X$ is the set [4.3, 7.9], as this is the range of
-          the sepal length. Each of the linguistic terms is mapped to a fuzzy set.
-          Figure 4 illustrates the structure of the linguistic variable sepal length.
+          set of linguistic terms may be $T={small, medium, large}$. Here, $X$ is the set [4.3, 7.9], as this is the range of
+          the sepal length in the data set. Each linguistic term is mapped to a fuzzy set.
+          Figure 7 illustrates the structure of the linguistic variable sepal length.
         </p>
         <div class="static">
           <div id="static_one" style="width: 420px; margin: auto auto 10px;"></div>
@@ -337,7 +363,7 @@
 <!--              different features, go back to the previous interaction and adjust the features there.-->
               You can create your own linguistic labels. Name them, change the type of the underlying membership
               function, and play around with its definition by either typing in the new values or dragging the points
-              or lines in the figure. You can add up to 3 labels. See in the figure below what kind of impact the
+              or lines in the figure. You can add up to 3 labels. See in figure 8 below what kind of impact the
               defined linguistic variable has on the iris data set by selecting each of the defined linguistic labels.
             </div>
 
@@ -369,7 +395,7 @@
           The linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
           absolute quantifiers and relative quantifiers. Absolute quantifiers are defined over numbers,
           $$\mathbb{R}$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
-          exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 6 shows examples of both
+          exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 9 shows examples of both
           absolute quantifiers (a) and relative quantifiers (b).
         </p>
         <div class="static">
@@ -391,9 +417,9 @@
         <h3>What is a linguistic summary?</h3>
 
         <p>
-          The notion of linguistic summary was introduced by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>] as a fuzzy logic-based
+          The notion of linguistic summary was introduced by Yager [<a href="#10-Yag82">10</a>], [<a href="#11-Yag91">11</a>] as a fuzzy logic-based
           approach to the summarization of data. It is very frequently used as a synonym for linguistic
-          description (or as part of it) in the NLG community, see for instance [<a href="#10-SRHY03">10</a>], [<a href="#11-MS16">11</a>].
+          description (or as part of it) in the NLG community, see for instance [<a href="#12-SRHY03">12</a>], [<a href="#13-MS16">13</a>].
         </p>
         <p class="inline-math">
           Yager’s approach consider linguistic summaries described by means of quantified statements of
@@ -439,7 +465,7 @@
 
         <p class="inline-math">
           The computation of $T$ for a given quantified statement defined by $Q$, $Y$, $R$, and $P$, has been the
-          object of intense research in the fuzzy set community, see [<a href="#12-DRSV14">12</a>] for a review. Two main cases
+          object of intense research in the fuzzy set community, see [<a href="#14-DRSV14">14</a>] for a review. Two main cases
           can be considered:
         </p>
         <ul>
@@ -456,8 +482,8 @@
             cardinality of $P=Y ∧ P$ by the cardinality of $Y$.</li>
         </ul>
         <p class="inline-math">
-          One of the most widely employed approaches, proposed by Zadeh [<a href="#6-Zadeh">6</a>] and employed in the
-          original studies by Yager [<a href="#8-Yag82">8</a>], [<a href="#9-Yag91">9</a>], performs the computation as follows. Let us consider
+          One of the most widely employed approaches, proposed by Zadeh [<a href="#15-Zadeh">15</a>] and employed in the
+          original studies by Yager [<a href="#10-Yag82">10</a>], [<a href="#11-Yag91">11</a>], performs the computation as follows. Let us consider
           $$Y = {y_1, . . . , y_n}$$ and the t-norm minimum:
         </p>
         <ul>
@@ -498,11 +524,11 @@
           sigma-count, which is the sum of membership degrees.
         </p>
         <p class="inline-math">
-          Before you define your linguistic summaries yourself in Figure ?, let us consider a toy example that
+          Before you define your linguistic summaries yourself in Figure 10, let us consider a toy example that
           illustrates how the truth value is calculated.
           Let $Y={y_1,y_2,y_3,y_4,y_5}$ be a set of five iris flowers, and $R= 1/y_1+0.7/y_2+0.6/y_3+0.4/y_4$ be the set
           of blue flowers and $P=0.95/y_1 +1/y_3+0.7/y_4 + 0.8/y_5$ be the pretty flowers. Let $Q$ be a relative
-          quantifier <i>most</i> as shown in Figure ?. This quantifier is defined by equation:
+          quantifier <i>most</i> as shown in Figure 9. This quantifier is defined by equation:
         </p>
         <p>
           $$
@@ -536,9 +562,9 @@
 
         <p class="inline-math">
           Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
-          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#13-DSM00">13</a>].
-          There are several alternatives (cf. [<a href="#12-DRSV14">12</a>]) available in the literature,
-          one of the most used methods is GD, which you can read up on in [<a href="#13-DSM00">13</a>].
+          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#16-DSM00">16</a>].
+          There are several alternatives (cf. [<a href="#14-DRSV14">14</a>]) available in the literature,
+          one of the most used methods is GD, which you can read up on in [<a href="#16-DSM00">16</a>].
         </p>
 <!--          Among the several alternatives (cf. [<a href="#12-DRSV14">12</a>]) available in the literature, we use here method GD,-->
 <!--          introduced in [<a href="#13-DSM00">13</a>] and which has been also discussed as a suitable method outside fuzzy-->
@@ -676,53 +702,60 @@
           Linguistic summaries have been adapted to summarize different types of data:
         </p>
         <ul>
-          <li>mumeric data from databases (cf. Kacprzyk et al. [<a href="#15-KacprzykZadrozny2005A">15</a>], [<a href="#16-KacprzykYagerZadrozny2001">16</a>]),</li>
-          <li>time series (Kacprzyk et al. [<a href="#17-KacprzykWilbikZadrozny2008FuzzySets">17</a>], Castillo-Ortega et al. [<a href="#18-Castillo-OrtegaMarinSanchez2011a">18</a>]),</li>
-          <li>standardized texts (cf. Szczepaniak [<a href="#19-SzczepaniakOchelska2006">19</a>]),</li>
-          <li>description of images (cf. Castillo-Ortega [<a href="#20-Castillo-OrtegaCMSS10">20</a>]),</li>
-          <li>videos (cf. Anderson et al. [<a href="#20-AndersonLukeKellerSkubicRantzAud2009">20</a>],[<a href="#21-AndersonLukeKellerSkubicRantzAud2009A">21</a>],[<a href="#22-AndersonLukeKeller2010">22</a>]),</li>
-          <li>sensor data (cf. Ros et al. [<a href="#23-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">23</a>], Wilbik et al. [<a href="#24-WilbikKellerAlexander2011">24</a>], [<a href="#25-WilbikKellerBezdek2013">25</a>]),</li>
-          <li>web logs (cf. Zadrozny and Kacprzyk [<a href="#26-ZadroznyKacprzyk2007">26</a>]) and </li>
-          <li>event logs (cf. Wilbik [<a href="#27-WilbikKaymak2014">27</a>],[<a href="#28-WilbikDijkman2015">28</a>],[<a href="#29-WilbikKaymak2015">29</a>]).</li>
+          <li>numeric data from databases (cf. Kacprzyk et al. [<a href="#17-KacprzykZadrozny2005A">17</a>], [<a href="#18-KacprzykYagerZadrozny2001">18</a>]),</li>
+          <li>time series (Kacprzyk et al. [<a href="#19-KacprzykWilbikZadrozny2008FuzzySets">19</a>], Castillo-Ortega et al. [<a href="#20-Castillo-OrtegaMarinSanchez2011a">20</a>]),</li>
+          <li>standardized texts (cf. Szczepaniak [<a href="#21-SzczepaniakOchelska2006">21</a>]),</li>
+          <li>description of images (cf. Castillo-Ortega [<a href="#22-Castillo-OrtegaCMSS10">22</a>]),</li>
+          <li>videos (cf. Anderson et al. [<a href="#23-AndersonLukeKellerSkubicRantzAud2009">23</a>],[<a href="#24-AndersonLukeKellerSkubicRantzAud2009A">24</a>],[<a href="#25-AndersonLukeKeller2010">25</a>]),</li>
+          <li>sensor data (cf. Ros et al. [<a href="#26-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">26</a>], Wilbik et al. [<a href="#27-WilbikKellerAlexander2011">27</a>], [<a href="#28-WilbikKellerBezdek2013">28</a>]),</li>
+          <li>web logs (cf. Zadrozny and Kacprzyk [<a href="#29-ZadroznyKacprzyk2007">29</a>]) and </li>
+          <li>event logs (cf. Wilbik [<a href="#30-WilbikKaymak2014">30</a>],[<a href="#31-WilbikDijkman2015">31</a>],[<a href="#32-WilbikKaymak2015">32</a>]).</li>
         </ul>
         <p>
           Moreover, linguistic summaries have found several real-world applications.
         </p>
         <p>
-          Strykowski et al. [<a href="#30-strykowski">30</a>] described a use case in commerce, where linguistic summaries
+          Strykowski et al. [<a href="#33-strykowski">33</a>] described a use case in commerce, where linguistic summaries
           were used to identify and communicate the patterns in selling computer parts and weather in a B2C setting.
           Based on those patterns, the shop was predicting their sales and required personnel.
         </p>
         <p>
           Linguistic summaries are also used to monitor the status of elderly residents in an eldercare facility,
-          TigerPlace in Columbia, Missouri, USA [<a href="#31">31</a>]. In this project, motion sensors
+          TigerPlace in Columbia, Missouri, USA [<a href="#34-tigerplace">34</a>]. In this project, motion sensors
           were placed in the apartments of the elderly residents.
           The sensors measure the activity level of their residents, that later is turned into linguistic description
           of activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
-          the change in behavior or adverse health events [<a href="#32">32</a>].
+          the change in behavior or adverse health events [<a href="#35">35</a>].
         </p>
         <p>
           Linguistic summaries are also used in the agri-food industry, to monitor the climate inside a
-          pigsty [<a href="#33">33</a>]. The evaluations with the farmers, proved that linguistic summaries can
+          pigsty [<a href="#36-pigsty">36</a>]. The evaluations with the farmers, proved that linguistic summaries can
           be easily interpreted and understood by non-technically trained people.
         </p>
         <p>
           Last, but not least, linguistic summaries seem to be good mechanisms for explanations. Initial works showed
           that the summaries can be used to find an explanation of an anomaly in the process
-          data [<a href="#34-ChouhanWilbikDijkman">34</a>].
+          data [<a href="#37-ChouhanWilbikDijkman">37</a>].
           Moreover, linguistic summaries score highly in users' evaluations
-          in terms of explanation understandability and usefulness [<a href="#35-BNAICpaper">35</a>].
+          in terms of explanation understandability and usefulness [<a href="#38-BNAICpaper">38</a>].
         </p>
       </section>
 
       <section id="conclusion">
         <h2>VIII. Conclusion</h2>
         <p>
-
+          This paper introduced the concept of linguistic summaries as descriptive analytics tool. It is one technique
+          for capturing data in form of natural language, which helps people with a non-technical background to
+          understand the result from data analysis tools.
+          The concept behind linguistic summaries, fuzzy sets, has been introduced, followed by the key concepts of
+          linguistic variables and quantifiers. We have constructed a linguistic summary together and calculated its
+          truth value and have seen some applications were linguistic summaries have been deployed.
+          While this is just a brief introduction, there are many more aspects to linguistic summaries and we can
+          recommend more interested readers a look into the cited references.
         </p>
       </section>
 
-      <section id="acknowledgement">
+      <section id="acknowledgements">
         <h2>IX. Acknowledgement</h2>
         <p>
           This research has been funded by the Rijksdienst voor Ondernemend Nederland (RVO) in the framework of the project Green Transport Delta - Elektrificatie.
@@ -741,8 +774,7 @@
               <a href="https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/?sh=4f85010d60ba" target="_blank"> Available at Forbes </a>
             </span>
           </li>
-
-          <li id="3-Graphic">
+          <li id="2-Graphic">
             4 levels of data maturity every manager must know
             <span>
               P. Schaap, Computd, March 16, 2020.
@@ -750,8 +782,7 @@
               <a href="https://computd.nl/demystification/4-levels-of-data-maturity/" target="_blank"> Available at Computd </a>
             </span>
           </li>
-
-          <li id="4-FisherIris">
+          <li id="3-FisherIris">
             The use of multiple measurements in taxonomic problems
             <span>
               R. P. Fisher, Annals of Eugenics, vol. 7, no. 2, pp. 179–188, Sep. 1936.
@@ -759,7 +790,7 @@
               DOI: <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1469-1809.1936.tb02137.x" target="_blank"> 10.1111/j.1469-1809.1936.tb02137.x </a>
             </span>
           </li>
-          <li id="5-IrisWiki">
+          <li id="4-IrisWiki">
             Iris flower data set
             <span>
               Wikipedia, 2023.
@@ -767,22 +798,45 @@
               <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" target="_blank"> Available at Wikipedia. </a>
             </span>
           </li>
-          <li id="6-Zadeh">
-            A computational approach to fuzzy quantifiers in natural languages
+          <li id="5-Zadeh1965">
+            Fuzzy sets
             <span>
-              L. A. Zadeh, Computers & Mathematics With Applications, vol. 9, no. 1, pp. 149–184, Jan. 1983.
+              L. A. Zadeh, Information and Control, vol. 8, no. 3, pp. 338–353, Jun. 1965.
               <br>
-              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S001999586590241X" target="_blank"> 10.1016/s0019-9958(65)90241-x </a>
             </span>
           </li>
-          <li id="7-KlirYuan">
+          <li id="6-KlirYuan">
             Fuzzy sets and fuzzy logic: Theory and applications
             <span>
               G. J. Klir and B. Yuan, Prentice Hall, 1995.
               </span>
           </li>
-
-          <li id="8-Yag82">
+          <li id="7-Zadeh75a">
+            The concept of a linguistic variable and its application to approximate reasoning - I
+            <span>
+            L. A. Zadeh, Information Sciences, vol. 8, no. 3, pp. 199–249, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900365" target="_blank"> 10.1016/0020-0255(75)90036-5 </a>
+          </span>
+          </li>
+          <li id="8-Zadeh75b">
+            The concept of a linguistic variable and its application to approximate reasoning - II
+            <span>
+            L. A. Zadeh, Information Sciences, vol. 8, no. 4, pp. 301–357, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900468" target="_blank"> 10.1016/0020-0255(75)90046-8 </a>
+          </span>
+          </li>
+          <li id="9-Zadeh75c">
+            The concept of a linguistic variable and its application to approximate reasoning - III
+            <span>
+            L. A. Zadeh, Information Sciences, vol. 9, no. 1, pp. 43–80, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900171" target="_blank"> 10.1016/0020-0255(75)90017-1 </a>
+          </span>
+          </li>
+          <li id="10-Yag82">
             A new approach to the summarization of data
             <span>
               R. R. Yager, Information Sciences, vol. 28, no. 1, pp. 69–86, Oct. 1982.
@@ -790,21 +844,21 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025582900330" target="_blank"> 10.1016/0020-0255(82)90033-0 </a>
             </span>
           </li>
-          <li id="9-Yag91">
+          <li id="11-Yag91">
             On linguistic summaries of data
             <span>
               R. R. Yager, Knowledge Discovery in Databases, pp. 347–366, Jan. 1991.
             </span>
           </li>
-          <li id="10-SRHY03">
+          <li id="12-SRHY03">
             Generating English summaries of time series data using the gricean maxims
             <span>
-              S. Sripada, E. Reiter, J. Hunter, and J. Yu, Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pp.187-196, Jan. 2003.
+              S. Sripada, E. Reiter, J. Hunter, and J. Yu, Proceedings of the Ninth ACM International Conference on Knowledge Discovery and Data Mining, pp.187-196, Jan. 2003.
               <br>
               DOI: <a href="https://dl.acm.org/doi/10.1145/956750.956774" target="_blank"> 10.1145/956755.956774 </a>
             </span>
           </li>
-          <li id="11-MS16">
+          <li id="13-MS16">
             On generating linguistic descriptions of time series
             <span>
               N. Marín and D. Sánchez, Fuzzy Sets and Systems, vol. 285, pp. 6–30, Feb. 2016.
@@ -812,7 +866,7 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011415002110" target="_blank"> 10.1016/j.fss.2015.04.014 </a>
             </span>
           </li>
-          <li id="12-DRSV14">
+          <li id="14-DRSV14">
             Fuzzy quantification: A state of the art
             <span>
               M. Delgado, M. Ruiz, D. Sánchez, and M.-A. Vila, Fuzzy Sets and Systems, vol. 242, pp. 1–30, May 2014.
@@ -820,7 +874,15 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011413004247" target="_blank"> 10.1016/j.fss.2013.10.012 </a>
             </span>
           </li>
-          <li id="13-DSM00">
+          <li id="15-Zadeh">
+            A computational approach to fuzzy quantifiers in natural languages
+            <span>
+              L. A. Zadeh, Computers & Mathematics With Applications, vol. 9, no. 1, pp. 149–184, Jan. 1983.
+              <br>
+              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>
+            </span>
+          </li>
+          <li id="16-DSM00">
             Fuzzy cardinality based evaluation of quantified sentences
             <span>
               M. Delgado, D. Sánchez, and M. C. Vila, International Journal of Approximate Reasoning, vol. 23, no. 1, pp. 23–66, Jan. 2000.
@@ -828,17 +890,7 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0888613X99000316" target="_blank"> 10.1016/s0888-613x(99)00031-6 </a>
             </span>
           </li>
-          <li id="14-RSD18">
-            Level-based fuzzy generalized quantification
-            <span>
-              M. Ruiz, D. Sánchez, and M. Delgado, Fuzzy Sets and Systems, vol. 345, pp. 24–40, Aug. 2018.
-              <br>
-              DOI: <a href="https://www.sciencedirect.com/science/article/pii/S0165011417302749" target="_blank"> 10.1016/j.fss.2017.06.012 </a>
-            </span>
-          </li>
-
-
-          <li id="15-KacprzykZadrozny2005A">
+          <li id="17-KacprzykZadrozny2005A">
             Linguistic database summaries and their protoforms: Towards natural language based knowledge discovery tools
             <span>
               J. Kacprzyk and S. Zadrożny, Information Sciences, vol. 173, no. 4, pp. 281–304, Jun. 2005.
@@ -846,7 +898,7 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S002002550500085X" target="_blank"> 10.1016/j.ins.2005.03.002 </a>
             </span>
           </li>
-          <li id="16-KacprzykYagerZadrozny2001">
+          <li id="18-KacprzykYagerZadrozny2001">
             Fuzzy linguistic summaries of databases for an efficient business data analysis and decision support
             <span>
               J. Kacprzyk, R. R. Yager, and S. Zadrożny, Kluwer Academic Publishers eBooks, pp. 129–152, Jan. 2002.
@@ -854,7 +906,7 @@
               DOI: <a href="https://link.springer.com/chapter/10.1007/0-306-46991-X_6" target="_blank"> 10.1007/0-306-46991-x_6 </a>
             </span>
           </li>
-          <li id="17-KacprzykWilbikZadrozny2008FuzzySets">
+          <li id="19-KacprzykWilbikZadrozny2008FuzzySets">
             Linguistic summarization of time series using a fuzzy quantifier driven aggregation
             <span>
               J. Kacprzyk, A. Wilbik, and S. Zadrożny, Fuzzy Sets and Systems, vol. 159, no. 12, pp. 1485–1499, Jun. 2008.
@@ -862,7 +914,7 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165011408000304" target="_blank"> 10.1016/j.fss.2008.01.025 </a>
             </span>
           </li>
-          <li id="18-Castillo-OrtegaMarinSanchez2011a">
+          <li id="20-Castillo-OrtegaMarinSanchez2011a">
             Linguistic query answering on data cubes with time dimension
             <span>
               R. Castillo-Ortega, N. Marín, and D. Sánchez, International Journal of Intelligent Systems, vol. 26, no. 10, pp. 1002–1021, Oct. 2011.
@@ -870,7 +922,7 @@
               DOI: <a href="https://onlinelibrary.wiley.com/doi/10.1002/int.20510" target="_blank"> 10.1002/int.20510 </a>
             </span>
           </li>
-          <li id="19-SzczepaniakOchelska2006">
+          <li id="21-SzczepaniakOchelska2006">
             Linguistic summaries of standardized documents
             <span>
               P. S. Szczepaniak and J. Ochelska, Springer eBooks, pp. 221–232, Jan. 2006.
@@ -878,8 +930,7 @@
               DOI: <a href="https://link.springer.com/chapter/10.1007/3-540-33880-2_23" target="_blank"> 10.1007/3-540-33880-2_23 </a>
             </span>
           </li>
-
-          <li id="20-Castillo-OrtegaCMSS10">
+          <li id="22-Castillo-OrtegaCMSS10">
             Describing images via linguistic features and hierarchical segmentation
             <span>
               R. Castillo-Ortega, J. Chamorro-Martínez, N. Marín, D. Sánchez, and J. M. Soto-Hidalgo, International Conference on Fuzzy Systems, Jul. 2010.
@@ -887,8 +938,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/5584443" target="_blank"> 10.1109/fuzzy.2010.5584443 </a>
             </span>
           </li>
-
-          <li id="20-AndersonLukeKellerSkubicRantzAud2009">
+          <li id="23-AndersonLukeKellerSkubicRantzAud2009">
             Linguistic summarization of video for fall detection using voxel person and fuzzy logic
             <span>
               D. T. Anderson, R. G. Luke, J. M. Keller, M. Skubic, M. Rantz, and M. A. Aud, Computer Vision and Image Understanding, vol. 113, no. 1, pp. 80–89, Jan. 2009.
@@ -896,7 +946,7 @@
               DOI: <a href="https://www.sciencedirect.com/science/article/abs/pii/S1077314208001112" target="_blank"> 10.1016/j.cviu.2008.07.006 </a>
             </span>
           </li>
-          <li id="21-AndersonLukeKellerSkubicRantzAud2009A">
+          <li id="24-AndersonLukeKellerSkubicRantzAud2009A">
             Modeling human activity from voxel person using fuzzy logic
             <span>
               D. Z. Anderson, R. G. Luke, J. S. Keller, M. Skubic, M. Rantz, and M. A. Aud, IEEE Transactions on Fuzzy Systems, vol. 17, no. 1, pp. 39–49, Feb. 2009.
@@ -904,7 +954,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/4607246" target="_blank"> 10.1109/tfuzz.2008.2004498 </a>
             </span>
           </li>
-          <li id="22-AndersonLukeKeller2010">
+          <li id="25-AndersonLukeKeller2010">
             Segmentation and linguistic summarization of voxel environments using stereo vision and genetic algorithms
             <span>
               D. T. Anderson, R. G. Luke, and J. M. Keller, IEEE International Conference on Fuzzy Systems, Jul. 2010.
@@ -912,7 +962,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/5584282" target="_blank"> 10.1109/fuzzy.2010.5584282 </a>
             </span>
           </li>
-          <li id="23-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">
+          <li id="26-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">
             Linguistic summarization of long-term trends for understanding change in human behavior
             <span>
               M. A. Ros et al., IEEE International Conference on Fuzzy Systems, Jun. 2011.
@@ -920,7 +970,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/6007509" target="_blank"> 10.1109/fuzzy.2011.6007509 </a>
             </span>
           </li>
-          <li id="24-WilbikKellerAlexander2011">
+          <li id="27-WilbikKellerAlexander2011">
             Linguistic summarization of sensor data for eldercare
             <span>
               A. Wilbik, J. M. Keller, and G. L. Alexander, Systems, Man and Cybernetics, Nov. 2011.
@@ -928,7 +978,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/6084067" target="_blank"> 10.1109/icsmc.2011.6084067 </a>
             </span>
           </li>
-          <li id="25-WilbikKellerBezdek2013">
+          <li id="28-WilbikKellerBezdek2013">
             Linguistic prototypes for data from eldercare residents
             <span>
               A. Wilbik, J. M. Keller, and J. C. Bezdek, IEEE Transactions on Fuzzy Systems, vol. 22, no. 1, pp. 110–123, Feb. 2014.
@@ -936,7 +986,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/6471801" target="_blank"> 10.1109/tfuzz.2013.2249517 </a>
             </span>
           </li>
-          <li id="26-ZadroznyKacprzyk2007">
+          <li id="29-ZadroznyKacprzyk2007">
             Summarizing the contents of web server logs: A fuzzy linguistic approach
             <span>
               S. Zadrożny and J. Kacprzyk, IEEE International Conference on Fuzzy Systems, Jul. 2007.
@@ -944,7 +994,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/4295649" target="_blank"> 10.1109/fuzzy.2007.4295649 </a>
             </span>
           </li>
-          <li id="27-WilbikKaymak2014">
+          <li id="30-WilbikKaymak2014">
             Gradual linguistic summaries
             <span>
               A. Wilbik and U. Kaymak, Communications in Computer and Information Science, pp. 405–413, Jul. 2014.
@@ -952,7 +1002,7 @@
               DOI: <a href="https://link.springer.com/chapter/10.1007/978-3-319-08855-6_41" target="_blank"> 10.1007/978-3-319-08855-6_41 </a>
             </span>
           </li>
-          <li id="28-WilbikDijkman2015">
+          <li id="31-WilbikDijkman2015">
             Linguistic summaries of process data
             <span>
               A. Wilbik and R. M. Dijkman, IEEE International Conference on Fuzzy Systems, Aug. 2015.
@@ -960,7 +1010,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/7337891" target="_blank"> 10.1109/fuzz-ieee.2015.7337891 </a>
             </span>
           </li>
-          <li id="29-WilbikKaymak2015">
+          <li id="32-WilbikKaymak2015">
             Linguistic summarization of processes – A research agenda
             <span>
               A. Wilbik and U. Kaymak, Conference of International Fuzzy Systems Association and European Society for Fuzzy Logic and Technology, Jun. 2015.
@@ -968,8 +1018,7 @@
               DOI: <a href="https://www.atlantis-press.com/proceedings/ifsa-eusflat-15/23744" target="_blank"> 10.2991/ifsa-eusflat-15.2015.233 </a>
             </span>
           </li>
-
-          <li id="30-strykowski">
+          <li id="33-strykowski">
             Linguistic summaries of sales data at a computer retailer via fuzzy logic and a genetic algorithm
             <span>
               J. Kacprzyk and P. J. Strykowski, Congress on Evolutionary Computation, Jul. 1999.
@@ -977,7 +1026,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/782523" target="_blank"> 10.1109/cec.1999.782523 </a>
             </span>
           </li>
-          <li id="31-tigerplace">
+          <li id="34-tigerplace">
             Linguistic summarization of sensor data for eldercare
             <span>
               A. Wilbik, J. M. Keller, and G. L. Alexander, Systems, Man and Cybernetics, Nov. 2011.
@@ -985,7 +1034,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/6084067" target="_blank"> 10.1109/ICSMC.2011.6084067 </a>
             </span>
           </li>
-          <li id="32">
+          <li id="35">
             Anomaly detection from linguistic summaries
             <span>
               A. Wilbik and J. M. Keller, IEEE International Conference on Fuzzy Systems, Jul. 2013.
@@ -993,7 +1042,7 @@
 <!--              DOI: <a href="https://ieeexplore.ieee.org/document/6622481" target="_blank"> 10.1109/fuzz-ieee.2013.6622481 </a>-->
             </span>
           </li>
-          <li id="33-pigsty">
+          <li id="36-pigsty">
             On relevance of linguistic summaries – A case study from the agro-food domain
             <span>
               A. Wilbik, D. Barreto, and G. B. C. Backus, Communications in Computer and Information Science, pp. 289–300, Jun. 2020.
@@ -1001,7 +1050,7 @@
 <!--              DOI: <a href="https://link.springer.com/chapter/10.1007/978-3-030-50146-4_22" target="_blank"> 10.1007/978-3-030-50146-4_22 </a>-->
             </span>
           </li>
-          <li id="34-ChouhanWilbikDijkman">
+          <li id="37-ChouhanWilbikDijkman">
             Explanation of anomalies in business process event logs with linguistic summaries
             <span>
               S. Chouhan, A. Wilbik, and R. M. Dijkman, 2022 IEEE International Conference on Fuzzy Systems, Jul. 2022.
@@ -1009,7 +1058,7 @@
               DOI: <a href="https://ieeexplore.ieee.org/document/9882673" target="_blank"> 10.1109/fuzz-ieee55066.2022.9882673 </a>
             </span>
           </li>
-          <li id="35-BNAICpaper">
+          <li id="38-BNAICpaper">
             Linguistic summaries as explanation mechanism for classification problems
             <span>
               C. Wrede, H.M. Winands, and A. Wilbik, The 34th Benelux Conference on Artificial Intelligence and the 31st Belgian Dutch Conference on Machine Learning, Nov. 2022.
@@ -1018,30 +1067,7 @@
             </span>
           </li>
 
-        <li id="Zadeh75a">
-          The concept of a linguistic variable and its application to approximate reasoning - I
-          <span>
-            L. A. Zadeh, Information Sciences, vol. 8, no. 3, pp. 199–249, Jan. 1975.
-            <br>
-            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900365" target="_blank"> 10.1016/0020-0255(75)90036-5 </a>
-          </span>
-        </li>
-        <li id="Zadeh75b">
-          The concept of a linguistic variable and its application to approximate reasoning - II
-          <span>
-            L. A. Zadeh, Information Sciences, vol. 8, no. 4, pp. 301–357, Jan. 1975.
-            <br>
-            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900468" target="_blank"> 10.1016/0020-0255(75)90046-8 </a>
-          </span>
-        </li>
-        <li id="Zadeh75c">
-          The concept of a linguistic variable and its application to approximate reasoning - III
-          <span>
-            L. A. Zadeh, Information Sciences, vol. 9, no. 1, pp. 43–80, Jan. 1975.
-            <br>
-            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900171" target="_blank"> 10.1016/0020-0255(75)90017-1 </a>
-          </span>
-        </li>
+
 
 
 
@@ -1053,6 +1079,7 @@
 <!--              DOI: <a href="https://www.sciencedirect.com/science/article/pii/0898122183900135" target="_blank"> 10.1016/0898-1221(83)90013-5 </a>-->
 <!--            </span>-->
 <!--          </li>-->
+
 
 
 
