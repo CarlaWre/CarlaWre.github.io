@@ -8,12 +8,9 @@ const mapping = (value, min1, max1, min2, max2) => (value - min1) * (max2 - min2
 // map from the percentage to range of the chosen feature, in this case sepal length
 fuzzy_mf.forEach( function (d) {
     d.line.map(function (element) {
-        console.log(element.x)
         element.x = mapping(element.x, 0, 100, sl_min, sl_max)
     })
 })
-console.log(mapping(30, 0, 100, sl_min, sl_max))
-console.log(mapping(70, 0, 100, sl_min, sl_max))
 
 // set the dimensions and margins of the graph
 var width = global_width - margin.left - margin.right;

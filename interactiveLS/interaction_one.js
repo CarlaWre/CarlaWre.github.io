@@ -69,8 +69,7 @@ var colour = d3.scaleOrdinal(d3.schemeCategory10);
 update_irisScatter()
 
 function update_irisScatter() {
-    console.log(x_feat)
-    console.log(iris_x.domain())
+
     d3.select("#scatter_svg").selectAll("circle")
         .data(iris)
         .join("circle")

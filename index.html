@@ -41,11 +41,11 @@
       <div class="container">
         <!-- Page title -->
         <h1>
-          Linguistic Summaries
+          Linguistic summaries as descriptive analytics tool
         </h1>
         <!-- Subheading -->
         <p class="subhead">
-          Possible subtitle
+          Towards a better understanding of data
         </p>
         <!-- Header info general wrapper -->
         <div class="header-info">
@@ -55,10 +55,11 @@
             <div class="header-authors">
               <h2>Authors</h2>
               <ul>
-                <li>Anna Wilbik | Department of Advanced Computing Sciences, Maastricht University</li>
-                <li>Carla Wrede | Department of Advanced Computing Sciences, Maastricht University</li>
-                <li>Daniel Sánchez Fernández | Department of Computer Science and Artificial Intelligence, Universidad de Granada</li>
-                <li>Nicolás Marín Ruiz | Department of Computer Science and Artificial Intelligence, Universidad de Granada</li>
+                <li>Carla Wrede | <br>  Department of Advanced Computing Sciences, <br>  Maastricht University</li>
+                <li>Nicolás Marín Ruiz | <br> Department of Computer Science and Artificial Intelligence, <br>  Universidad de Granada</li>
+                <li>Daniel Sánchez Fernández | <br>  Department of Computer Science and Artificial Intelligence, <br>  Universidad de Granada</li>
+                <li>Anna Wilbik | <br> Department of Advanced Computing Sciences, <br>  Maastricht University</li>
+                <li>Mark H.M. Winands | <br>  Department of Advanced Computing Sciences, <br>  Maastricht University</li>
               </ul>
             </div>
             <!-- Published info section -->
@@ -112,9 +113,10 @@
             </li>
             <li>
               <a href="#conclusion">Conclusion</a>
+              <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             </li>
             <li>
-              <a href="#acknowledgments">Acknowledgments</a>
+              <a href="#acknowledgments">Acknowledgements</a>
             </li>
           </ul>
         </div>
@@ -138,18 +140,18 @@
           especially with the rise of Internet of Things (IoT). Companies and organizations see
           a potential in these large amounts of data to be used to support decision-making processes.
           For this, more and more data mining and knowledge discovery methods are deployed in companies.
-          The level of insight from this varies per company but can be classified into one of four categories
-          that have been proposed by Gartner to distinguish the level of analytics:
+          The level of insight from this varies per company but can be classified into one of four categories to
+          distinguish the level of analytics:
           descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics
           [<a href="#2-Gartner">2</a>].
         </p>
         <div class="static">
-          <img src="pics/gartner-model.png" alt="Gartner analytics model" style="margin: auto auto; width: max-content; display: block"/>
-          <div class="caption"><b>Figure 1:</b><br> Gartner analytics model [<a href="#3-Graphic">3</a>]</div>
+          <img src="pics/data_maturity_model.png" alt="Gartner analytics model" style="margin: auto auto; width: max-content; display: block"/>
+          <div class="caption"><b>Figure 1:</b><br> Business analytics maturity model (Picture from [<a href="#3-Graphic">3</a>])</div>
         </div>
         <p></p>
         <p>
-          The basic level, requiring the least data maturity is descriptive analytics.
+          The basic level, requiring the least data maturity, is descriptive analytics.
           The aim is to provide a description of current or past processes and give an elementary understanding
           of the data, so that the user can make the best decision themselves.
           This data description can include statistics (numbers), visualizations (e.g., plots) and verbalizations
@@ -173,11 +175,11 @@
       <section id="running example">
         <h2>II. Running Example</h2>
         <p>
-          As the running example, let us use the iris data set [<a href="#4-FisherIris">4</a>]. This data set contains 150 data points,
-          describing one of three possible plant types Iris Setosa, Iris Virginica and Iris Versicolor.
-          Every flower type is represented 50 times, and a single iris flower can be characterized by four attributes,
-          namely the length and the width of both sepals and petals, measured in centimeters.
-          An example of each plant type can be seen in Figure 2.
+          As the running example, let us use the iris data set [<a href="#4-FisherIris">4</a>]. This data set contains
+          150 data points, describing one of three possible plant types namely, Iris Setosa, Iris Virginica, and Iris
+          Versicolor. Every flower type is represented 50 times, and a single iris flower can be characterized by four
+          attributes: the length and the width of both sepals and petals, measured in centimeters. An example of each
+          plant type can be seen in Figure 2.
         </p>
         <div class="static">
           <div style="display: flex">
@@ -243,16 +245,28 @@
         </p>
         <div class="static">
           <div id="crisp_set" style="display: inline-block; width: 50%; float: left"></div>
-          <div id="fuzzy_set" style="display: inline-block; width: 50%; float: right"></div>
-          <div class="caption" style="clear: both"><b>Figure 4:</b><br>Example of crisp set (left) and fuzzy set (right).</div>
+          <div id="fuzzy_set" style="display: inline-block; width: 50%; float: left"></div>
+          <div class="caption"><b>Figure 4:</b><br>Example of crisp set (left) and fuzzy set (right).</div>
           <script type="module" src="interactiveLS/static_settypes.js"></script>
         </div>
         <p></p>
         <div class="static">
           <div id="crisp_example" style="width: 420px; margin: auto auto 10px;"></div>
           <div id="fuzzy_example" style="width: 420px; margin: auto auto 10px;"></div>
-          <div class="caption"><b>Figure 5:</b><br>Comparison of crisp and fuzzy sets for the iris data set.</div>
+          <div class="caption"><b>Figure 5:</b><br>Comparison of crisp (top) and fuzzy sets (bottom) for the iris data set.</div>
           <script type="module" src="interactiveLS/static_crispvsfuzzy.js"></script>
+        </div>
+        <p></p>
+        <p>
+
+        </p>
+        <div class="static">
+          <div id="union" style="float: left; width: 33%"></div>
+          <div id="intersection" style="float: left; width: 33%"></div>
+          <div id="negation" style="float: left; width: 33%"></div>
+          <div class="caption"><b>Figure 6:</b>
+            <br>Example of possible operations: union (left), intersection (middle) and negation of A (right).</div>
+          <script type="module" src="interactiveLS/operations.js"></script>
         </div>
         <p></p>
       </section>
@@ -260,44 +274,71 @@
       <section id="linguistic variable">
         <h2>IV. Linguistic Variable</h2>
         <p class="inline-math">
-          The key concepts of the linguistic summaries and fuzzy set theory [<a href="#6-Zadeh">6</a>] are the
-          linguistic variable and the linguistic value.
+<!--          The key concepts of the linguistic summaries and fuzzy set theory [<a href="#6-Zadeh">6</a>] are the-->
+<!--          linguistic variable and the linguistic value.-->
+          Important key concepts of linguistic summaries are linguistic variables and linguistic values. In the words
+          of Zadeh [<a href="#Zadeh75a">?</a>],[<a href="#Zadeh75b">?</a>],[<a href="#Zadeh75c">?</a>],
+          a linguistic variable is a variable whose values are words or sentences in a language (natural or artificial).
+          Each of these values is called a term and is associated with a semantics that is nothing more than a fuzzy
+          restriction defined on a base universal set.
         </p>
         <p class="inline-math">
-          Formally, according to Klir and Yuan [<a href="#7-KlirYuan">7</a>], a linguistic variable is defined as
-          a quintuple $(v,T,X,g,m)$, where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$,
-          $X$ is the universal set representing the range of $v$, $g$ is a syntactic rule for generating linguistic terms,
-          and $m$ is a semantic rule that assigns to each linguistic term $$ t \in T $$ its meaning, $m(t)$,
-          which is a fuzzy set on $X$.
+<!--          Formally, according to Klir and Yuan [<a href="#7-KlirYuan">7</a>], a linguistic variable is defined as-->
+<!--          a quintuple $(v,T,X,g,m)$, where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$,-->
+<!--          $X$ is the universal set representing the range of $v$, $g$ is a syntactic rule for generating linguistic terms,-->
+<!--          and $m$ is a semantic rule that assigns to each linguistic term $$ t \in T $$ its meaning, $m(t)$,-->
+<!--          which is a fuzzy set on $X$.-->
+          According to [<a href="#Zadeh75a">?</a>],[<a href="#Zadeh75b">?</a>],[<a href="#Zadeh75c">?</a>],[<a href="#7-KlirYuan">?</a>],
+          a linguistic variable is defined as a quintuple $(v, T, X, g, m)$,
+          where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$, $X$ is the universal set over which
+          fuzzy restrictions are defined, $g$ is a syntactic rule for generating linguistic terms (a so called grammar),
+          and $m$ is a semantic rule that assigns to each linguistic term its meaning, which is a fuzzy restriction on $X$.
         </p>
         <p class="inline-math">
-          Let us consider the iris data set and the linguistic variable sepal length. In this case, linguistic terms
-          may be small, medium and large. $X$ is a set [4.3, 7.9], as this is the range of the sepal length.
-          Each of the linguistic terms is mapped to a fuzzy set. Figure 4 illustrates the structure of the linguistic
-          variable sepal length.
+          In most cases simple grammars $g$ are used, in which the terms and their associated restrictions are provided
+          directly. However, one could use a more complex, general grammar $g$, which allows to construct terms of the
+          variable from base terms, connectives, and modifiers, for instance, generate <i>very large</i> from <i>large</i>, and <i>quite small</i> from <i>small</i>.
+        </p>
+        <p class="inline-math">
+<!--          Let us consider the iris data set and the linguistic variable sepal length. In this case, linguistic terms-->
+<!--          may be small, medium and large. $X$ is a set [4.3, 7.9], as this is the range of the sepal length.-->
+<!--          Each of the linguistic terms is mapped to a fuzzy set. Figure 4 illustrates the structure of the linguistic-->
+<!--          variable sepal length.-->
+          As an example, let us consider the iris data set and the linguistic variable sepal length. In this case, the
+          set of linguistic terms may be $T={small, medium, large}$. $X$ is the set [4.3, 7.9], as this is the range of
+          the sepal length. Each of the linguistic terms is mapped to a fuzzy set.
+          Figure 4 illustrates the structure of the linguistic variable sepal length.
         </p>
         <div class="static">
           <div id="static_one" style="width: 420px; margin: auto auto 10px;"></div>
-          <div class="caption"><b>Figure 5:</b><br>Representation of the linguistic variable sepal length.</div>
+          <div class="caption"><b>Figure 7:</b><br>Representation of the linguistic variable sepal length.</div>
           <script type="module" src="interactiveLS/static_one.js"></script>
         </div>
         <p></p>
         <p>
-          The linguistic term with a corresponding fuzzy set is called often a linguistic variable.
-          In the interactive part below, you can define linguistic variables for the iris data set.
-          The scatterplot below highlights the points belonging to the set described by the defined linguistic value.
-          Note that you may use different membership functions to define your fuzzy set:
-          namely triangular, trapezoidal, Z-shaped and S-shaped.
+<!--          The linguistic term with a corresponding fuzzy set is called often a linguistic variable.-->
+<!--          In the interactive part below, you can define linguistic variables for the iris data set.-->
+<!--          The scatterplot below highlights the points belonging to the set described by the defined linguistic value.-->
+<!--          Note that you may use different membership functions to define your fuzzy set:-->
+<!--          namely triangular, trapezoidal, Z-shaped and S-shaped.-->
+          In the interactive part below, you can define terms with their associated fuzzy restriction for the iris data
+          set. Each of these pairs is usually called linguistic label. The scatterplot below highlights the points
+          belonging to the set described by the defined linguistic label. Note that you may use different membership
+          functions to define your fuzzy set: namely triangular, trapezoidal, Z-shaped and S-shaped.
         </p>
         <div class="framed">
           <div class="inside">
             <div class="eyebrow">
-              You can create your own linguistic variables. Rename them, change the type of the underlying membership
-              function and play around with its definition by either typing in the new values or dragging the points
-              or lines in the figure. You can add up to 3 variables. See in the figure below what kind of impact the
-              defined linguistic variable has on the iris data set. By selecting which of the active linguistic
-              variables you can see how this changes based on different definitions. If you want to see the impact for
-              different features, go back to the previous interaction and adjust the features there.
+<!--              You can create your own linguistic variables. Rename them, change the type of the underlying membership-->
+<!--              function and play around with its definition by either typing in the new values or dragging the points-->
+<!--              or lines in the figure. You can add up to 3 variables. See in the figure below what kind of impact the-->
+<!--              defined linguistic variable has on the iris data set. By selecting which of the active linguistic-->
+<!--              variables you can see how this changes based on different definitions. If you want to see the impact for-->
+<!--              different features, go back to the previous interaction and adjust the features there.-->
+              You can create your own linguistic labels. Name them, change the type of the underlying membership
+              function, and play around with its definition by either typing in the new values or dragging the points
+              or lines in the figure. You can add up to 3 labels. See in the figure below what kind of impact the
+              defined linguistic variable has on the iris data set by selecting each of the defined linguistic labels.
             </div>
 
             <div id="linguistic_definitions" style="display:inline"></div>
@@ -313,7 +354,7 @@
 
             <div id="scatter_mf" style="width: 420px; margin: auto auto 10px;"></div>
 
-            <div class="caption"><b>Figure 6:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
+            <div class="caption"><b>Figure 8:</b><br> Define your own linguistic variable from several options (top). The scatterplot (bottom) highlights the points belonging to the fuzzy set as described by the blue membership function defined on top.</div>
 
             <script type="module" src="interactiveLS/interaction_two.js"></script>
           </div>
@@ -334,12 +375,12 @@
         <div class="static">
           <div id="static_two_absolute" style="display: inline-block; width: 50%; float: left"></div>
           <div id="static_two_relative" style="display: inline-block; width: 50%; float: right"></div>
-          <div class="caption" style="clear: both"><b>Figure 7:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
+          <div class="caption"><b>Figure 9:</b><br>Example of absolute quantifiers (left) and relative quantifiers (right).</div>
           <script type="module" src="interactiveLS/static_two.js"></script>
         </div>
         <p></p>
         <p>
-          Now, we will define a linguistic summary.
+          Now, we will introduce a linguistic summary.
         </p>
       </section>
 
@@ -394,7 +435,7 @@
           Let’s see how to compute $T$ in the next section.
         </p>
 
-        <h3>Computing the truth value</h3>
+        <h3>How to calculate the truth value</h3>
 
         <p class="inline-math">
           The computation of $T$ for a given quantified statement defined by $Q$, $Y$, $R$, and $P$, has been the
@@ -457,60 +498,100 @@
           sigma-count, which is the sum of membership degrees.
         </p>
         <p class="inline-math">
-          Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
-          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#12-DRSV14">12</a>], [<a href="#13-DSM00">13</a>].
-          Among the several alternatives available in the literature, we use here method GD,
-          introduced in [<a href="#13-DSM00">13</a>] and which has been also discussed as a suitable method outside fuzzy
-          set theory (Representations by Levels, Gradual Sets) in [<a href="#14-RSD18">14</a>]. Let us consider again $$Y =
-          {y_1, . . . , y_n}$$ and $$∧ = min$$ as t-norm. The method works as follows:
+          Before you define your linguistic summaries yourself in Figure ?, let us consider a toy example that
+          illustrates how the truth value is calculated.
+          Let $Y={y_1,y_2,y_3,y_4,y_5}$ be a set of five iris flowers, and $R= 1/y_1+0.7/y_2+0.6/y_3+0.4/y_4$ be the set
+          of blue flowers and $P=0.95/y_1 +1/y_3+0.7/y_4 + 0.8/y_5$ be the pretty flowers. Let $Q$ be a relative
+          quantifier <i>most</i> as shown in Figure ?. This quantifier is defined by equation:
         </p>
-        <ul>
-          <li>
-            <p  class="inline-math">
-              For absolute quantifiers, let $\Lambda=\{\alpha_1,\ldots,\alpha_k\}$ be the set of different membership
-              values of $R \wedge P$ in Y that are greater than 0, plus the value 1 if $R \wedge P$ is not a normal set.
-              Let $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and let $\alpha_i > \alpha_{i+1}$ for every
-              $1 \leq i \leq k$. Then
-            </p>
-            <p>
-              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( Card((R \wedge P)_{\alpha i}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$
-            </p>
-            <p  class="inline-math">
-              where $(R \wedge P)_{\alpha i}$ is the alpha-cut of level $\alpha_i$ of the fuzzy set $(R \wedge P)$.
-            </p>
-            <p class="inline-math">
-              Note that this method computes the matching between the quantifier and the crisp cardinality in each
-              significant alpha-cut of the set $R \wedge P$, defined by $\Lambda$. These are then combined into a final
-              degree by a weighted sum in which the weight is computed as the difference between the value alpha
-              employed and the immediately lesser one in $\Lambda$.
-            </p>
-          </li>
-          <li>
-            <p class="inline-math">
-              For relative quantifiers, working by alpha-cuts requires that $R$ is a normal set so that we avoid
-              divisions by 0. When it is not, we can normalize it and apply the same scaling factor to the set
-              $R \wedge P$, which guarantees that the relative cardinalities in each alpha-cut do not vary.
-              Let $r=\max_{1\leq j \leq n} R(y_j)$. Since $R \neq \emptyset$ it is $r>0$. Let $R^*$ be the normalization
-              of $R$ obtained by dividing each membership degree by $r$, and let $RP^*$ be the scaling of $R \wedge P$
-              obtained by dividing each membership degree by $r$ as well. Now, the set of significant levels $\Lambda$
-              is obtained as the set of membership values to either $R^*$ or $RP^*$ (note that, as $R^*$ is a normal set,
-              the value 1 is already in $\Lambda$). Hence we have again $\Lambda=\{\alpha_1,\ldots,alpha_k\}$ with
-              $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and $\alpha_i > \alpha_{i+1}$ for every $1 \leq i \leq k$.
-              Then
-            </p>
-            <p>
-              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( \frac{Card(RP^*_{\alpha_i})}{Card(R^*_{\alpha_i})}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$
-            </p>
-            <p class="inline-math">
-              where $RP^*_{\alpha_i}$ and $R^*_{\alpha_i}$ are the alpha-cuts of level $\alpha_i$ of $RP^*$ and $R^*$, respectively.
-            </p>
-          </li>
-        </ul>
+        <p>
+          $$
+          Q(x) =
+          \begin{cases}
+            0                              &\quad x \leq 0.5\\
+            3\frac{1}{3}x + 1 \frac{2}{3}  &\quad x \in (0.5, 0.8]\\
+            1                              &\quad x > 0.8\\
+          \end{cases}
+          $$
+        </p>
         <p class="inline-math">
-          In short, method GD can be seen an aggregation of different crisp evaluations of the quantified statement
-          performed in significant alpha-cuts (i.e., those alpha-cuts for which the cardinality may vary). Computation
-          is $O(n\log n)$ in the worst case, corresponding to the ordering of membership degrees in the sets $\Lambda$.
+          Now, let us consider a simple from summary <i>($Q$ y’s are $P$)</i>, namely <i>Most iris flowers are pretty</i>.
+          In order to calculate the truth value, we need to first calculate the number of pretty flowers.
+          For this purpose, we calculate sigma-count of $P$, namely $Σ-count(P)=0.95+1+0.7+0.8=3.45$.
+          Now, we calculate the proportion of pretty flowers in this set, as 3.45/5=0.69.
+          As the last step, we calculate to what degree this proportion is <i>most</i>, i.e. we calculate $Q(0.69)=0.63$.
+          We can indeed say that this sentence is relatively true.
         </p>
+        <p class="inline-math">
+          Now, let us consider a summary in the extended form <i>($Q$ $R$y’s are $P$)</i>, <i>Most blue iris flowers are pretty</i>.
+          In this case we first calculate which flowers are blue and pretty $P \cup R=0.95/y_1+0.6/y_3+0.4/y_4$,
+          and next how many such flowers there are in the data set. The answer is $Σ-count(P \cup R)=0.95+0.6+0.4=1.9$.
+          We also need to calculate how many flowers are blue. For this we also make use of sigma-counts, namely
+          $Σ-count(R)=1+0.7+0.5+0.4=2.6$.
+          Now, we can calculate the proportion of blue and pretty flowers against blue flowers in this set, as $1.95/2.6=0.75$.
+          As the last step, we again calculate to what degree this proportion is <i>most</i>, i.e. we calculate $Q(0.75)=0.83$.
+          We can indeed say that this sentence is (mostly) true.
+
+        </p>
+
+        <p class="inline-math">
+          Though easy to implement and interpret, and efficient (being $$O(n)$$), this method does not
+          satisfy several theoretical properties that are intuitively expected, as shown for instance in [<a href="#13-DSM00">13</a>].
+          There are several alternatives (cf. [<a href="#12-DRSV14">12</a>]) available in the literature,
+          one of the most used methods is GD, which you can read up on in [<a href="#13-DSM00">13</a>].
+        </p>
+<!--          Among the several alternatives (cf. [<a href="#12-DRSV14">12</a>]) available in the literature, we use here method GD,-->
+<!--          introduced in [<a href="#13-DSM00">13</a>] and which has been also discussed as a suitable method outside fuzzy-->
+<!--          set theory (Representations by Levels, Gradual Sets) in [<a href="#14-RSD18">14</a>]. Let us consider again $$Y =-->
+<!--          {y_1, . . . , y_n}$$ and $$∧ = min$$ as t-norm. The method works as follows:-->
+<!--        </p>-->
+<!--        <ul>-->
+<!--          <li>-->
+<!--            <p  class="inline-math">-->
+<!--              For absolute quantifiers, let $\Lambda=\{\alpha_1,\ldots,\alpha_k\}$ be the set of different membership-->
+<!--              values of $R \wedge P$ in Y that are greater than 0, plus the value 1 if $R \wedge P$ is not a normal set.-->
+<!--              Let $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and let $\alpha_i > \alpha_{i+1}$ for every-->
+<!--              $1 \leq i \leq k$. Then-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( Card((R \wedge P)_{\alpha i}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$-->
+<!--            </p>-->
+<!--            <p  class="inline-math">-->
+<!--              where $(R \wedge P)_{\alpha i}$ is the alpha-cut of level $\alpha_i$ of the fuzzy set $(R \wedge P)$.-->
+<!--            </p>-->
+<!--            <p class="inline-math">-->
+<!--              Note that this method computes the matching between the quantifier and the crisp cardinality in each-->
+<!--              significant alpha-cut of the set $R \wedge P$, defined by $\Lambda$. These are then combined into a final-->
+<!--              degree by a weighted sum in which the weight is computed as the difference between the value alpha-->
+<!--              employed and the immediately lesser one in $\Lambda$.-->
+<!--            </p>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <p class="inline-math">-->
+<!--              For relative quantifiers, working by alpha-cuts requires that $R$ is a normal set so that we avoid-->
+<!--              divisions by 0. When it is not, we can normalize it and apply the same scaling factor to the set-->
+<!--              $R \wedge P$, which guarantees that the relative cardinalities in each alpha-cut do not vary.-->
+<!--              Let $r=\max_{1\leq j \leq n} R(y_j)$. Since $R \neq \emptyset$ it is $r>0$. Let $R^*$ be the normalization-->
+<!--              of $R$ obtained by dividing each membership degree by $r$, and let $RP^*$ be the scaling of $R \wedge P$-->
+<!--              obtained by dividing each membership degree by $r$ as well. Now, the set of significant levels $\Lambda$-->
+<!--              is obtained as the set of membership values to either $R^*$ or $RP^*$ (note that, as $R^*$ is a normal set,-->
+<!--              the value 1 is already in $\Lambda$). Hence we have again $\Lambda=\{\alpha_1,\ldots,alpha_k\}$ with-->
+<!--              $\alpha_{k+1}=0 \not\in \Lambda$ by convention, and $\alpha_i > \alpha_{i+1}$ for every $1 \leq i \leq k$.-->
+<!--              Then-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              $$T_{GD}=\sum_{\alpha_i \in \Lambda} Q \left( \frac{Card(RP^*_{\alpha_i})}{Card(R^*_{\alpha_i})}) \right) \times \left( \alpha_i - \alpha_{i+1} \right)$$-->
+<!--            </p>-->
+<!--            <p class="inline-math">-->
+<!--              where $RP^*_{\alpha_i}$ and $R^*_{\alpha_i}$ are the alpha-cuts of level $\alpha_i$ of $RP^*$ and $R^*$, respectively.-->
+<!--            </p>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--        <p class="inline-math">-->
+<!--          In short, method GD can be seen an aggregation of different crisp evaluations of the quantified statement-->
+<!--          performed in significant alpha-cuts (i.e., those alpha-cuts for which the cardinality may vary). Computation-->
+<!--          is $O(n\log n)$ in the worst case, corresponding to the ordering of membership degrees in the sets $\Lambda$.-->
+<!--        </p>-->
 
         <div class="framed">
           <div class="inside">
@@ -521,8 +602,8 @@
 
             <b>Select the protoform</b>
             <div>
-              <input type="radio" class="protoform" id="simple_form" name="protoform" value="simple" onchange="qualifier_visibility(this)" checked="checked"> Simple protoform <br>
-              <input type="radio" class="protoform" id="extended_form" name="protoform" value="extended" onchange="qualifier_visibility(this)"> Extended protoform <br>
+              <input type="radio" class="protoform" id="simple_form" name="protoform" value="simple" onchange="qualifier_visibility(this)" checked="checked"> Simple protoform <i style="color: darkgray">(Q y's are P)</i> <br>
+              <input type="radio" class="protoform" id="extended_form" name="protoform" value="extended" onchange="qualifier_visibility(this)"> Extended protoform <i style="color: darkgray">(Q R y's are P)</i> <br>
             </div>
 
             <p></p>
@@ -581,9 +662,8 @@
             <b>This linguistic summary has a truth value of:</b>
 
             <p id="truth_value_zadeh">Placeholder</p>
-            <p id="truth_value_gd">Placeholder</p>
 
-            <div class="caption"><b>Figure 8:</b><br> Truth value calculation.</div>
+            <div class="caption"><b>Figure 10:</b><br> Truth value calculation.</div>
 
             <script type="module" src="interactiveLS/interaction_three.js"></script>
           </div>
@@ -593,12 +673,13 @@
       <section id="applications">
         <h2>VII. Applications</h2>
         <p>
-          Linguistic summaries have been applied to different type of data:
+          Linguistic summaries have been adapted to summarize different types of data:
         </p>
         <ul>
-          <li>databases (cf. Kacprzyk et al. [<a href="#15-KacprzykZadrozny2005A">15</a>], [<a href="#16-KacprzykYagerZadrozny2001">16</a>]),</li>
+          <li>mumeric data from databases (cf. Kacprzyk et al. [<a href="#15-KacprzykZadrozny2005A">15</a>], [<a href="#16-KacprzykYagerZadrozny2001">16</a>]),</li>
           <li>time series (Kacprzyk et al. [<a href="#17-KacprzykWilbikZadrozny2008FuzzySets">17</a>], Castillo-Ortega et al. [<a href="#18-Castillo-OrtegaMarinSanchez2011a">18</a>]),</li>
           <li>standardized texts (cf. Szczepaniak [<a href="#19-SzczepaniakOchelska2006">19</a>]),</li>
+          <li>description of images (cf. Castillo-Ortega [<a href="#20-Castillo-OrtegaCMSS10">20</a>]),</li>
           <li>videos (cf. Anderson et al. [<a href="#20-AndersonLukeKellerSkubicRantzAud2009">20</a>],[<a href="#21-AndersonLukeKellerSkubicRantzAud2009A">21</a>],[<a href="#22-AndersonLukeKeller2010">22</a>]),</li>
           <li>sensor data (cf. Ros et al. [<a href="#23-RosAndersonKellerPegalajarDelgadoVilaPopescu2011">23</a>], Wilbik et al. [<a href="#24-WilbikKellerAlexander2011">24</a>], [<a href="#25-WilbikKellerBezdek2013">25</a>]),</li>
           <li>web logs (cf. Zadrozny and Kacprzyk [<a href="#26-ZadroznyKacprzyk2007">26</a>]) and </li>
@@ -618,7 +699,7 @@
           were placed in the apartments of the elderly residents.
           The sensors measure the activity level of their residents, that later is turned into linguistic description
           of activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
-          the change in behavior or adverse health event [<a href="#32">32</a>].
+          the change in behavior or adverse health events [<a href="#32">32</a>].
         </p>
         <p>
           Linguistic summaries are also used in the agri-food industry, to monitor the climate inside a
@@ -642,7 +723,7 @@
       </section>
 
       <section id="acknowledgement">
-        <h2>IX. Acknowledgment</h2>
+        <h2>IX. Acknowledgement</h2>
         <p>
           This research has been funded by the Rijksdienst voor Ondernemend Nederland (RVO) in the framework of the project Green Transport Delta - Elektrificatie.
         </p>
@@ -660,14 +741,7 @@
               <a href="https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/?sh=4f85010d60ba" target="_blank"> Available at Forbes </a>
             </span>
           </li>
-          <li id="2-Gartner">
-            .
-            <span>
-              .
-              <br>
-              <a href="https://" target="_blank"> Available somewhere? </a>
-            </span>
-          </li>
+
           <li id="3-Graphic">
             4 levels of data maturity every manager must know
             <span>
@@ -723,7 +797,7 @@
             </span>
           </li>
           <li id="10-SRHY03">
-            Generating english summaries of time series data using the gricean maxims
+            Generating English summaries of time series data using the gricean maxims
             <span>
               S. Sripada, E. Reiter, J. Hunter, and J. Yu, Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pp.187-196, Jan. 2003.
               <br>
@@ -804,6 +878,16 @@
               DOI: <a href="https://link.springer.com/chapter/10.1007/3-540-33880-2_23" target="_blank"> 10.1007/3-540-33880-2_23 </a>
             </span>
           </li>
+
+          <li id="20-Castillo-OrtegaCMSS10">
+            Describing images via linguistic features and hierarchical segmentation
+            <span>
+              R. Castillo-Ortega, J. Chamorro-Martínez, N. Marín, D. Sánchez, and J. M. Soto-Hidalgo, International Conference on Fuzzy Systems, Jul. 2010.
+              <br>
+              DOI: <a href="https://ieeexplore.ieee.org/document/5584443" target="_blank"> 10.1109/fuzzy.2010.5584443 </a>
+            </span>
+          </li>
+
           <li id="20-AndersonLukeKellerSkubicRantzAud2009">
             Linguistic summarization of video for fall detection using voxel person and fuzzy logic
             <span>
@@ -920,7 +1004,7 @@
           <li id="34-ChouhanWilbikDijkman">
             Explanation of anomalies in business process event logs with linguistic summaries
             <span>
-              S. Chouhan, A. Wilbik, and R. M. Dijkman, 2022 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE), Jul. 2022.
+              S. Chouhan, A. Wilbik, and R. M. Dijkman, 2022 IEEE International Conference on Fuzzy Systems, Jul. 2022.
               <br>
               DOI: <a href="https://ieeexplore.ieee.org/document/9882673" target="_blank"> 10.1109/fuzz-ieee55066.2022.9882673 </a>
             </span>
@@ -928,11 +1012,38 @@
           <li id="35-BNAICpaper">
             Linguistic summaries as explanation mechanism for classification problems
             <span>
-              C. Wrede, M. Winands, and A. Wilbik, The 34rd Benelux Conference on Artificial Intelligence and the 31th Belgian Dutch Conference on Machine Learning, Nov. 2022.
+              C. Wrede, H.M. Winands, and A. Wilbik, The 34th Benelux Conference on Artificial Intelligence and the 31st Belgian Dutch Conference on Machine Learning, Nov. 2022.
               <br>
               <a href="https://bnaic2022.uantwerpen.be/wp-content/uploads/BNAICBeNeLearn_2022_submission_6085.pdf" target="_blank"> Available at BNAIC/BENELEARN 2022 </a>
             </span>
           </li>
+
+        <li id="Zadeh75a">
+          The concept of a linguistic variable and its application to approximate reasoning - I
+          <span>
+            L. A. Zadeh, Information Sciences, vol. 8, no. 3, pp. 199–249, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900365" target="_blank"> 10.1016/0020-0255(75)90036-5 </a>
+          </span>
+        </li>
+        <li id="Zadeh75b">
+          The concept of a linguistic variable and its application to approximate reasoning - II
+          <span>
+            L. A. Zadeh, Information Sciences, vol. 8, no. 4, pp. 301–357, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900468" target="_blank"> 10.1016/0020-0255(75)90046-8 </a>
+          </span>
+        </li>
+        <li id="Zadeh75c">
+          The concept of a linguistic variable and its application to approximate reasoning - III
+          <span>
+            L. A. Zadeh, Information Sciences, vol. 9, no. 1, pp. 43–80, Jan. 1975.
+            <br>
+            DOI: <a href="https://www.sciencedirect.com/science/article/pii/0020025575900171" target="_blank"> 10.1016/0020-0255(75)90017-1 </a>
+          </span>
+        </li>
+
+
 
 <!--          <li id="">-->
 <!--            .-->

@@ -6,7 +6,7 @@ var abs_mf = [
 ]
 var rel_mf = [
     {type: "Z-shaped", variable: "at most half", line: [{x:0, y:1}, {x:0.5, y:1}, {x:0.6, y:0}, {x:1, y:0}], label_pos: 50},
-    {type: "S-shaped", variable: "most", line: [{x:0, y:0}, {x:0.7, y:0}, {x:0.85, y:1}, {x:1, y:1}], label_pos: 270}
+    {type: "S-shaped", variable: "most", line: [{x:0, y:0}, {x:0.5, y:0}, {x:0.8, y:1}, {x:1, y:1}], label_pos: 270}
 ]
 
 // set the dimensions and margins of the graph

@@ -114,8 +114,7 @@ class MemChart {
         group.exit().remove();
         merge_enter.exit().remove();
 
-        // update_ls()
-
+        update_ls()
     }
 
     create_params(mftype) {
@@ -159,6 +158,7 @@ class MemChart {
                     this.data.type = JSON.parse(JSON.stringify(new_mf.type))
                     this.data.points = JSON.parse(JSON.stringify(new_mf.points))
                     this.data.line = JSON.parse(JSON.stringify(new_mf.line))
+
                     this.update()
 
                     // replace that (old) one with the new one according to the chosen mf option
@@ -244,6 +244,9 @@ class MemChart {
         this.update()
     }
 
+    get_data() {
+        return this.data;
+    }
 }
 
 var q_chart = new MemChart(mf_Q)
@@ -252,7 +255,9 @@ var p_chart = new MemChart(mf_P)
 update_ls()
 
 function update_ls() {
-    if (d3.select("#variable_Q").node() !== null) {
+    if ((d3.select("#variable_Q").node() !== null) &&
+        (d3.select("#variable_R").node() !== null) &&
+        (d3.select("#variable_P").node() !== null)) {
         var quantifierQ = d3.select("#variable_Q").node().value
         quantifierQ = quantifierQ.charAt(0).toUpperCase() + quantifierQ.slice(1).toLowerCase()
 
@@ -268,7 +273,7 @@ function update_ls() {
         var simple_sentence = quantifierQ + " flowers have " + summarizerP + " " + checked_P + "."
         var extended_sentence = quantifierQ + " flowers with " + qualifierR + " " + checked_R + " have " + summarizerP + " " + checked_P + "."
 
-        var final_sentence = ($("input[name=protoform]:checked").val() == "simple protoform") ? simple_sentence : extended_sentence
+        var final_sentence = ($("input[name=protoform]:checked").val() == "simple") ? simple_sentence : extended_sentence
 
         d3.select('#final_ls').node().innerHTML = final_sentence
 
@@ -301,7 +306,6 @@ function qualifier_options(selection){
 
 function update_truth() {
     calc_Zadeh_truth()
-    // calc_GD_truth()
 }
 
 function calc_Zadeh_truth(){
@@ -314,11 +318,18 @@ function calc_Zadeh_truth(){
     // console.log(selected_summarizer)
     // console.log(selected_feature)
     // console.log(iris)
-    var mu_P = iris.map(e => calc_mf_value_relative(p_chart.data.type, selected_summarizer,[e[selected_summarizer], ...p_chart.data.points.map(p => p.x)]) )
+    // console.log('p chart')
+    // console.log(mf_P.type)
+    // console.log(window.p_chart.data.type)
+    // console.log(window.p_chart.get_data())
+    var mu_P = iris.map(
+        e => calc_mf_value_relative(mf_P.type, selected_summarizer,[e[selected_summarizer], ...mf_P.points.map(p => p.x)]) )
 
     if (protoform=="extended") {
-        // console.log("ËXTENDED")
-        var mu_R = iris.map(e => calc_mf_value_relative(r_chart.data.type, selected_feature,[e[selected_feature], ...r_chart.data.points.map(p => p.x)]) )
+        // console.log('extended')
+
+        // console.log("EXTENDED")
+        var mu_R = iris.map(e => calc_mf_value_relative(mf_R.type, selected_feature,[e[selected_feature], ...mf_R.points.map(p => p.x)]) )
         // console.log(mu_R)
         var sum_mu_R = d3.sum(mu_R)
         var min_RP = d3.min([mu_R, mu_P])
@@ -328,31 +339,13 @@ function calc_Zadeh_truth(){
         // console.log(sum_mu_R)
         // console.log(sum_min/sum_mu_R)
 
-        var mu_Q = calc_mf_value_relative(q_chart.data.type, "Q", [(sum_min/sum_mu_R), ...q_chart.data.points.map(p => p.x)])
+        var mu_Q = calc_mf_value_relative(mf_Q.type, "Q", [(sum_min/sum_mu_R), ...mf_Q.points.map(p => p.x)])
         // console.log(mu_Q)
         d3.select('#truth_value_zadeh').node().innerHTML = "Truth value (Zadeh) - extended protoform: " + mu_Q
     } else {
-        var mu_Q = calc_mf_value_relative(q_chart.data.type, "Q", [(d3.sum(mu_P)/iris.length), ...q_chart.data.points.map(p => p.x)])
+        // console.log('simple')
+        var mu_Q = calc_mf_value_relative(mf_Q.type, "Q", [(d3.sum(mu_P)/iris.length), ...mf_Q.points.map(p => p.x)])
         d3.select('#truth_value_zadeh').node().innerHTML = "Truth value (Zadeh) - simple protoform: " + mu_Q
     }
 }
-//
-// // function calc_GD_truth(extended){
-// //     var protoform = $("input[name=protoform]:checked").val()
-// //     var selected_feature = $("input[name=featureR]:checked").attr('id').slice(0,2)
-// //     var selected_summarizer = $("input[name=summmarizer_radio]:checked").attr('id').slice(0,2)
-// //
-// //     // first, calculalate mu_P like before
-// //     var mu_P = iris.map(e => calc_mf_value_relative(window.mf_P[0].type, selected_summarizer,[e[selected_summarizer], ...window.mf_P[0].points.map(p => p.x)]) )
-// //     // then sort it
-// //     var mu_P_sorted = mu_P.sort((a,b)=>b-a)
-// //     console.log(mu_P_sorted)
-// //
-// //     if (extended) {
-// //
-// //     } else {
-// //
-// //
-// //     }
-// // }
-//
+
