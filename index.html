@@ -142,7 +142,7 @@
           Companies and organizations see a potential in these large amounts of data to be used to support decision-making processes.
           Because of the rise of both data and potential, more and more data mining and knowledge discovery methods are deployed in companies.
           The level of insight from this deployment varies per company but can be classified into one of four categories to
-          distinguish the level of analytics, which can be see in Figure 1:
+          distinguish the level of analytics, which can be seen in Figure 1:
           descriptive analytics, diagnostic analytics, predictive analytics and prescriptive analytics.
         </p>
         <div class="static">
@@ -158,7 +158,7 @@
           (e.g., linguistic summaries).
           The next level of diagnostic analytics then tries to find a reason for the situation as ascertained
           in the previous level.
-          Predictive analytics deals with using the accumulated historical data to make predictions for the future.
+          Predictive analytics deals with using accumulated historical data to make predictions for the future.
           Finally, the last level of prescriptive analytics aims to use the predictions from the previous models
           and apply actions such that a desired outcome can be achieved.
         </p>
@@ -167,7 +167,7 @@
           Linguistic summaries are template-based sentences in (semi-)natural language that capture the essence
           of the data. In the following, we explain the concept of linguistic summaries,
           their building blocks and how they can be evaluated automatically.
-          Moreover, they can not only be used for the descriptive analytics,
+          Moreover, they can not only be used for descriptive analytics,
           but also for the later stages in the analytics model, as showcased in the application section.
         </p>
       </section>
@@ -194,7 +194,7 @@
             </div>
           </div>
           <div class="caption"><b>Figure 2:</b><br> Three species of the iris flower from left to right:
-            Iris setosa, Iris virginica, and Iris versicolor (Pictures from [<a href="#4-IrisWiki">4</a>]).
+            Iris Setosa, Iris Virginica, and Iris Versicolor (Pictures from [<a href="#4-IrisWiki">4</a>]).
           </div>
         </div>
         <p></p>
@@ -245,13 +245,13 @@
 <!--          Before we elaborate on the topic of linguistic summaries, we need to give a bit of background knowledge.-->
 <!--          Linguistic summaries are based on the concept of fuzzy sets, which ...-->
           Before we elaborate on the topic of linguistic summaries, we will provide some background on sets.
-          In traditional crisp sets, an element $x$ either belong to a set $A$, or it does not, as denoted by $x \in A$ or  $x \notin A$.
+          In traditional crisp sets, an element $x$ either belongs to a set $A$, or it does not, as denoted by $x \in A$ or  $x \notin A$.
           Crisp sets make use of bi-valued function logic, meaning that a set is a collection of definite,
           well-definable elements that form a whole. Their characteristic function $f_A$ can be denoted as follows: $f_A: X \rightarrow \{0,1\}$
         </p>
         <p>
           However, real-world scenarios can most often not be denoted by simple binary states.
-          Take for example a weather forecast of 18 degree Celsius; would you consider this a warm or a cold day?
+          Take for example a weather forecast of 18 degrees Celsius; would you consider this a warm or a cold day?
           If there are clouds, one could consider it to be a fresher day, but if it is winter it might be a warm day.
           Here, the concept of fuzzy sets as introduced by Zadeh [<a href="#5-Zadeh1965">5</a>] comes into play.
           Fuzzy sets are related to vagueness and make use of infinite valued function logic. An element $x$ can belong
@@ -318,13 +318,13 @@
           According to [<a href="#6-KlirYuan">6</a>],[<a href="#7-Zadeh75a">7</a>],[<a href="#8-Zadeh75b">8</a>],[<a href="#9-Zadeh75c">9</a>],
           a linguistic variable is defined as a quintuple $(v, T, X, g, m)$,
           where $v$ is the name of the variable, $T$ is the set of linguistic terms of $v$, $X$ is the universal set over which
-          fuzzy restrictions are defined, $g$ is a syntactic rule for generating linguistic terms (a so called grammar),
+          fuzzy restrictions are defined, $g$ is a syntactic rule for generating linguistic terms (a so-called grammar),
           and $m$ is a semantic rule that assigns to each linguistic term its meaning, which is a fuzzy restriction on $X$.
         </p>
         <p class="inline-math">
-          In most cases simple grammars $g$ are used, in which the terms and their associated restrictions are provided
+          In most cases, simple grammars $g$ are used, in which the terms and their associated restrictions are provided
           directly. However, one could use a more complex, general grammar $g$, which allows to construct terms of the
-          variable from base terms, connectives, and modifiers, for instance, generate <i>very large</i> from <i>large</i>, and <i>quite small</i> from <i>small</i>.
+          variable from base terms, connectives, and modifiers, for instance, generating <i>very large</i> from <i>large</i>, and <i>quite small</i> from <i>small</i>.
         </p>
         <p class="inline-math">
 <!--          Let us consider the iris data set and the linguistic variable sepal length. In this case, linguistic terms-->
@@ -393,7 +393,7 @@
         <h2>V. Linguistic quantifier</h2>
         <p class="inline-math">
           A special kind of linguistic variable, essential in linguistic summaries is a (linguistic) quantifier.
-          The linguistic quantifier describe a quantity in linguistic terms. Quantifiers are divided into two main classes:
+          The linguistic quantifier describes a quantity in linguistic terms. Quantifiers are divided into two main classes:
           absolute quantifiers and relative quantifiers. Absolute quantifiers are defined over numbers,
           $$\mathbb{R}$$, and represent absolute quantities, such as “around 5”, “at least 10”. The relative quantifiers,
           exemplified by “at least a half”, “most”, are defined on interval [0,1]. Figure 9 shows examples of both
@@ -423,7 +423,7 @@
           description (or as part of it) in the NLG community, see for instance [<a href="#12-SRHY03">12</a>], [<a href="#13-MS16">13</a>].
         </p>
         <p class="inline-math">
-          Yager’s approach consider linguistic summaries described by means of quantified statements of
+          Yager’s approach considers linguistic summaries described by means of quantified statements of
           the form <i>$Q$ [$R$] y’s are $P$</i>, where:
         </p>
         <ul>
@@ -624,7 +624,7 @@
           <div class="inside">
             <div class="eyebrow">
               Define your own linguistic summary here. Choose which summarizer P, quantifier Q and qualifier R you want
-              and it will display you a possible linguistic summary and corresponding truth value.
+              and it will display a possible linguistic summary and corresponding truth value.
             </div>
 
             <b>Select the protoform</b>
@@ -723,14 +723,14 @@
         <p>
           Linguistic summaries are also used to monitor the status of elderly residents in an eldercare facility,
           TigerPlace in Columbia, Missouri, USA [<a href="#34-tigerplace">34</a>]. In this project, motion sensors
-          were placed in the apartments of the elderly residents.
+          were placed in the apartments of elderly residents.
           The sensors measure the activity level of their residents, that later is turned into linguistic description
-          of activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
+          of the activity of the residents. The linguistic summaries were proven to have sufficient sensitivity to capture
           the change in behavior or adverse health events [<a href="#35">35</a>].
         </p>
         <p>
           Linguistic summaries are also used in the agri-food industry, to monitor the climate inside a
-          pigsty [<a href="#36-pigsty">36</a>]. The evaluations with the farmers, proved that linguistic summaries can
+          pigsty [<a href="#36-pigsty">36</a>]. The evaluations with the farmers proved that linguistic summaries can
           be easily interpreted and understood by non-technically trained people.
         </p>
         <p>
@@ -750,7 +750,7 @@
           understand the result from data analysis tools.
           The concept behind linguistic summaries, fuzzy sets, has been introduced, followed by the key concepts of
           linguistic variables and quantifiers. We have constructed a linguistic summary together and calculated its
-          truth value and have seen some applications were linguistic summaries have been deployed.
+          truth value and have seen some applications where linguistic summaries have been deployed.
           While this is just a brief introduction, there are many more aspects to linguistic summaries and we can
           recommend more interested readers a look into the cited references.
         </p>
