@@ -22,23 +22,30 @@ var svg = d3.select("#irisScatter")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+
+var leg = svg
     .append("g")
-    .attr("id", "scatter_svg")
+    .attr("id", "leg")
+    .attr("transform", "translate(" + margin.left + "," + itemHeight + ")");
+var down = svg
+    .append("g")
+    .attr("id", "down")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 // x Axis
 const iris_x = d3.scaleLinear()
     .domain([eval(x_feat + "_min"), eval(x_feat + "_max")])
     .range([0, width]);
 
-svg.append("g")
+down.append("g")
     .attr('class', 'iris_xaxis')
     .attr('value', 'pl')
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(iris_x))
 
 // x axis label:
-svg.append("text")
+down.append("text")
     .attr('class', 'iris_xaxis_label')
     .attr("text-anchor", "end")
     .attr("x", width / 2 + margin.left)
@@ -50,13 +57,13 @@ const iris_y = d3.scaleLinear()
     .domain([eval(y_feat + "_min"), eval(y_feat + "_max")])
     .range([height, 0]);
 
-svg.append("g")
+down.append("g")
     .attr('class', 'iris_yaxis')
     .attr('value', 'pw')
     .call(d3.axisLeft(iris_y));
 
 // y axis label:
-svg.append("text")
+down.append("text")
     .attr('class', 'iris_yaxis_label')
     .attr("text-anchor", "end")
     .attr("transform", "rotate(-90)")
@@ -66,11 +73,22 @@ svg.append("text")
 
 var colour = d3.scaleOrdinal(d3.schemeCategory10);
 
+leg.selectAll("mylabels")
+    .data([iris[0], iris[50], iris[100]])
+    .enter()
+    .append("text")
+    .attr("x", function(d,i) {return 25 + i*125})
+    .attr("y", 0)
+    .style("fill", function(d) { return colour(d.class)})
+    .text(function(d){ return d.class})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
 update_irisScatter()
 
 function update_irisScatter() {
 
-    d3.select("#scatter_svg").selectAll("circle")
+    d3.select("#down").selectAll("circle")
         .data(iris)
         .join("circle")
             .attr("cx", function (d) { return iris_x(eval("d." + x_feat)); })
